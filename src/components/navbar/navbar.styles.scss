@@ -1,0 +1,75 @@
+/* Global Styles */
+:root {
+  --primary-color: #17a2b8;
+  --dark-color: #343a40;
+  --light-color: #f4f4f4;
+  --danger-color: #dc3545;
+  --success-color: #28a745;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 65px;
+  // position: fixed;
+  // z-index: 1;
+  width: 100%;
+  top: 0;
+  border-bottom: solid 1px var(--primary-color);
+  opacity: 0.9;
+  margin-bottom: 25px;
+
+  ul {
+    display: flex;
+    padding-right: 150px;
+  }
+
+  a {
+    color: #fff;
+    padding: 10px;
+    margin: 0 0.25rem;
+    // background-color: green;
+  }
+
+  a:hover {
+    color: var(--primary-color);
+  }
+}
+
+.navbar .welcome span {
+  margin-right: 0.6rem;
+}
+
+.bg-dark,
+.alert-dark {
+  background: var(--dark-color);
+  color: #fff;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 100%;
+  width: 200px;
+  padding-top: 5px;
+
+  .logo {
+    height: 60px;
+    width: 60px;
+  }
+
+  .logo-text {
+    display: flex;
+    font-size: 24px;
+    align-items: center;
+    height: 70%;
+    font-family: "Raleway", sans-serif;
+  }
+}
