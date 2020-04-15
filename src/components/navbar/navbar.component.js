@@ -12,7 +12,7 @@ const Navbar = ({ currentUser }) => {
   const guestLinks = (
     <ul>
       <li>
-        <Link to="/">PLANS/PRICING</Link>
+        <Link to="/plans-and-pricing">PLANS/PRICING</Link>
       </li>
       <li>
         <Link to="/">CONTACT</Link>
