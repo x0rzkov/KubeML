@@ -1,10 +1,12 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import "./navbar.styles.scss";
+import { connect } from "react-redux";
 
 import { auth } from "../../firebase/firebase.utils";
 
 import { ReactComponent as Logo } from "../../assets/3d.svg";
+
+import "./navbar.styles.scss";
 
 const Navbar = ({ currentUser }) => {
   const guestLinks = (
@@ -31,11 +33,15 @@ const Navbar = ({ currentUser }) => {
         <Link to="/">
           <Logo className="logo" />
         </Link>
-        <text className="logo-text">KubeML</text>
+        <h3 className="logo-text">KubeML</h3>
       </div>
       <Fragment>{guestLinks}</Fragment>
     </nav>
   );
 };
 
-export default Navbar;
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+});
+
+export default connect(mapStateToProps)(Navbar);

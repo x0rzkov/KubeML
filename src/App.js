@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import "./App.css";
 import { Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
+
+import "./App.css";
 
 import Navbar from "./components/navbar/navbar.component";
 import HomePage from "./pages/homepage/homepage.component";
@@ -8,34 +10,27 @@ import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up
 import PlansAndPricingPage from "./pages/plans-and-pricing/plans-and-pricing.component";
 
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import { setCurrentUser } from "./redux/user/user.actions";
 
 class App extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      currentUser: null,
-    };
-  }
-
   unsubscribeFromAuth = null;
 
   componentDidMount() {
+    const { setCurrentUser } = this.props;
+
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot((snapShot) => {
-          this.setState({
-            currentUser: {
-              id: snapShot.id,
-              ...snapShot.data(),
-            },
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data(),
           });
         });
       }
 
-      this.setState({ currentUser: userAuth });
+      setCurrentUser(userAuth);
     });
   }
 
@@ -46,7 +41,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navbar currentUser={this.state.currentUser} />
+        <Navbar />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/signin" component={SignInAndSignUpPage} />
@@ -60,5 +55,8 @@ class App extends Component {
     );
   }
 }
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
 
-export default App;
+export default connect(null, mapDispatchToProps)(App);
