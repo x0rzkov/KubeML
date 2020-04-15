@@ -2,9 +2,11 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.styles.scss";
 
+import { auth } from "../../firebase/firebase.utils";
+
 import { ReactComponent as Logo } from "../../assets/3d.svg";
 
-const Navbar = () => {
+const Navbar = ({ currentUser }) => {
   const guestLinks = (
     <ul>
       <li>
@@ -14,7 +16,11 @@ const Navbar = () => {
         <Link to="/">CONTACT</Link>
       </li>
       <li>
-        <Link to="/signin">SIGN IN</Link>
+        {currentUser ? (
+          <div onClick={() => auth.signOut()}>SIGN OUT</div>
+        ) : (
+          <Link to="/signin">SIGN IN</Link>
+        )}
       </li>
     </ul>
   );
