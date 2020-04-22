@@ -7,10 +7,6 @@
   --success-color: #28a745;
 }
 
-ul {
-  list-style: none;
-}
-
 /* Navbar */
 .navbar {
   display: flex;
@@ -32,7 +28,6 @@ ul {
     color: #fff;
     padding: 10px;
     margin: 0 0.25rem;
-    // background-color: green;
   }
 
   a:hover {
@@ -65,9 +60,7 @@ ul {
 
   .logo-text {
     display: flex;
-    font-size: 24px;
     align-items: center;
     height: 70%;
-    font-family: "Raleway", sans-serif;
   }
 }

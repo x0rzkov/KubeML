@@ -37,7 +37,7 @@ const Navbar = ({ currentUser }) => {
         </Link>
         <h3 className="logo-text">KubeML</h3>
       </div>
-      <Fragment>{guestLinks}</Fragment>
+      <div>{guestLinks}</div>
     </nav>
   );
 };

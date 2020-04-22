@@ -9,18 +9,19 @@ import { ReactComponent as Logo4 } from "../../assets/Scalability.svg";
 const HomePage = () => (
   <div className="homepage">
     <div className="block-one">
-      <text className="header-text">Welcome to KubeML</text>
-      <text className="header-tag">
-        An online platform for hosting machine-learning workloads
-      </text>
+      <h1 className="x-large">Welcome to KubeML</h1>
+      <p className="lead">
+        An online platform for building, training, and testing machine-learning
+        workloads
+      </p>
     </div>
 
     <div className="block-two">
       <div className="left">
-        <text className="info-text">
+        <h3 className="info-text">
           KubeML is a turn-key solution for running data-science workloads
           efficiently, collaboratively, and anywhere anytime.
-        </text>
+        </h3>
         <text className="description-text">
           KubeML provides clients access to a fully-managed cluster hosted on
           cloud infrastructure. The KubeML team provides an online IDE powered
@@ -91,6 +92,10 @@ const HomePage = () => (
           power to different teams within their organization.
         </text>
       </div>
+    </div>
+
+    <div>
+      <img src={require("../../assets/brain.jpg")} />
     </div>
 
     <div className="block-six">

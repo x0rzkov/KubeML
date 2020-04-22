@@ -1,7 +1,9 @@
 .homepage {
-  margin-top: 89px;
+  margin-top: 100px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   .block-one {
     display: flex;
@@ -11,20 +13,6 @@
     background-color: #1a75ff;
     justify-content: center;
     align-items: center;
-
-    .header-text {
-      color: white;
-      font-size: 40px;
-      font-family: "Raleway", sans-serif;
-      font-weight: bold;
-    }
-
-    .header-tag {
-      color: white;
-      font-size: 24px;
-      font-weight: 100;
-      margin-top: 5px;
-    }
   }
 
   .block-two {
@@ -44,13 +32,11 @@
       justify-content: center;
       height: 400px;
       width: 500px;
+      text-align: flex-start;
 
       .info-text {
-        color: black;
-        font-size: 28px;
         margin-bottom: 25px;
-        width: 435px;
-        font-family: "Raleway", sans-serif;
+        // width: 435px;
       }
 
       .description-text {
@@ -229,6 +215,7 @@
     align-items: center;
     height: 125px;
     background-color: #343a40;
+    width: 100%;
 
     .copyright-text {
       color: white;
@@ -238,3 +225,10 @@
     }
   }
 }
+
+// @media (max-width: 700px) {
+//   .homepage {
+//     background-color: indigo;
+//     margin-top: 500px;
+//   }
+// }
