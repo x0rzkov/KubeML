@@ -5,6 +5,7 @@ import CarouselSlide from "../../components/bootstrap-ui/carousel/carousel.compo
 import PricingCard from "../../components/bootstrap-ui/cards/pricing-card.component";
 import SelectForm from "../../components/bootstrap-ui/forms/form-select.component";
 import FormNumberInput from "../../components/bootstrap-ui/forms/form-decimal-input.component";
+import CustomButton from "../../components/custom-button/custom-button.component";
 
 import "./plans-and-pricing.styles.scss";
 
@@ -25,34 +26,29 @@ class PlansAndPricingPage extends Component {
     };
   }
 
-  handleRamChange = (event) => {
-    const { value } = event.target;
-
-    this.setState({ RAM_val: value });
-  };
-
-  handleMaxRamChange = (event) => {
-    const { value } = event.target;
-
-    this.setState({ Max_RAM: value });
+  handleSubmit = () => {
+    console.log("Handle submit clicked");
   };
 
   render() {
     return (
       <Fragment>
-        <Container>
+        <Container style={{ marginBottom: 150 }}>
           <Row style={{ marginBottom: 40 }}>
             <CarouselSlide />
           </Row>
 
           <Row>
-            <Col lg="9">
-              <Form>
+            <Col lg="8">
+              <h2 style={styles.h2}>
+                Let the KubeML pricing tool calculate for you
+              </h2>
+              <Form onSubmit={this.handleSubmit}>
                 <FormNumberInput
                   label="Enter your organizations daily active users (Researches/Data
                     Scientists/ Developers)"
                   controlId="avgUsers"
-                  placeholder="Integer 0-999"
+                  placeholder="Integer"
                 />
                 <FormNumberInput
                   label="Enter average kernels a user utilizes simultaneously for
@@ -82,17 +78,28 @@ class PlansAndPricingPage extends Component {
                   controlId="maxRAM"
                   numArray={ramArray}
                 />
+                <CustomButton
+                  type="submit"
+                  style={{
+                    marginTop: 50,
+                  }}
+                >
+                  Check Price
+                </CustomButton>
               </Form>
+              <div
+                style={{
+                  display: "flex",
+                  alignSelf: "flex-end",
+                }}
+              >
+                <CustomButton type="submit" style={styles.CustomButton}>
+                  Proceed to Checkout
+                </CustomButton>
+              </div>
             </Col>
 
-            <Col
-              style={{
-                backgroundColor: "cyan",
-                justifyContent: "center",
-                display: "flex",
-              }}
-              lg="3"
-            >
+            <Col lg="4" style={styles.col}>
               <PricingCard />
             </Col>
           </Row>
@@ -103,3 +110,17 @@ class PlansAndPricingPage extends Component {
 }
 
 export default PlansAndPricingPage;
+
+const styles = {
+  col: {
+    display: "flex",
+    justifyContent: "flex-end",
+    paddingRight: 0,
+  },
+  h2: {
+    marginBottom: 35,
+  },
+  CustomButton: {
+    marginTop: 150,
+  },
+};

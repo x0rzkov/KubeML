@@ -124,11 +124,8 @@
       margin-left: 25px;
 
       .info-text {
-        color: black;
-        font-size: 28px;
         margin-bottom: 25px;
         width: 375px;
-        font-family: "Raleway", sans-serif;
       }
 
       .description-text {
@@ -195,40 +192,11 @@
       margin-left: 60px;
 
       .info-text {
-        color: black;
-        font-size: 28px;
         margin-bottom: 25px;
-        width: 435px;
-        font-family: "Raleway", sans-serif;
       }
-
       .description-text {
-        color: black;
         font-size: 18px;
       }
     }
   }
-
-  .block-six {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 125px;
-    background-color: #343a40;
-    width: 100%;
-
-    .copyright-text {
-      color: white;
-      font-family: "Raleway", sans-serif;
-      font-size: 18px;
-      margin-bottom: 15px;
-    }
-  }
 }
-
-// @media (max-width: 700px) {
-//   .homepage {
-//     background-color: indigo;
-//     margin-top: 500px;
-//   }
-// }

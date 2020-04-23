@@ -53,9 +53,9 @@ const HomePage = () => (
 
     <div className="block-four">
       <div className="left">
-        <text className="info-text">
+        <h3 className="info-text">
           A familiar IDE environment for your development team
-        </text>
+        </h3>
         <text className="description-text">
           KubeML provides the following kernels:
         </text>
@@ -81,25 +81,21 @@ const HomePage = () => (
         <Logo4 className="logo" />
       </div>
       <div className="right">
-        <text className="info-text">
+        <h3 className="info-text">
           Scale worry-free as your organization grows
-        </text>
-        <text className="description-text">
+        </h3>
+        <p className="description-text">
           As your organization expands and adds more developers to the team,
           KubeML leverages kubernetes to provide Jupyterhub and Enterprise
           gateway as highly-available deployments. KubeML also provides
           resources for clients seeking to provide various levels of compute
           power to different teams within their organization.
-        </text>
+        </p>
       </div>
     </div>
 
     <div>
       <img src={require("../../assets/brain.jpg")} />
-    </div>
-
-    <div className="block-six">
-      <text className="copyright-text"> Copyright your website 2019</text>
     </div>
   </div>
 );

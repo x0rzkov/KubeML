@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import Navbar from "./components/navbar/navbar.component";
+import Footer from "./components/footer/footer.component";
 
 import HomePage from "./pages/homepage/homepage.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
@@ -70,6 +71,7 @@ class App extends Component {
           <Route exact path="/checkout" component={CheckoutPage} />
           <Route exact path="/console" component={ConsolePage} />
         </Switch>
+        <Footer />
       </div>
     );
   }

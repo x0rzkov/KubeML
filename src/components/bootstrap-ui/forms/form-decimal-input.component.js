@@ -7,8 +7,15 @@ const FormNumberInput = ({ label, controlId, placeholder }) => {
       as={Row}
       controlId={controlId}
       style={{
-        paddingTop: 5,
-        paddingBottom: 5,
+        paddingTop: 20,
+        paddingBottom: 20,
+        marginBottom: 0,
+        borderBottom: 1,
+        borderStyle: "solid",
+        borderColor: "#E8E8E8",
+        borderTop: 0,
+        borderRight: 0,
+        borderLeft: 0,
       }}
     >
       <Form.Label column sm="9">
