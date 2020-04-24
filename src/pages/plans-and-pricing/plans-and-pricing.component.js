@@ -15,6 +15,7 @@ import CustomButton from "../../components/custom-button/custom-button.component
 import "./plans-and-pricing.styles.scss";
 
 import { setNewPlanConfig } from "../../redux/plans-and-pricing/plans-and-pricing.actions";
+import { sizeNodeInstance } from "./plans-and-pricing.utils";
 
 const ramArray = [8, 16, 32, 64, 160, 196, 256, 384];
 const hoursArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -47,6 +48,10 @@ class PlansAndPricingPage extends Component {
       maxRAM: this.state.maxRAM,
     });
 
+    sizeNodeInstance(this.state.avgUsers);
+  };
+
+  handleCheckout = () => {
     const { history } = this.props;
     history.push("/checkout");
   };
@@ -68,7 +73,7 @@ class PlansAndPricingPage extends Component {
           <Row>
             <Col lg="8">
               <h2 style={styles.h2}>
-                Let the KubeML pricing tool calculate for you
+                Let the KubeML pricing tool calculate for you!
               </h2>
               <Form onSubmit={this.handleSubmit}>
                 <FormNumberInput
@@ -132,14 +137,21 @@ class PlansAndPricingPage extends Component {
                   Check Price
                 </CustomButton>
               </Form>
-              <div
-                style={{
-                  display: "flex",
-                  alignSelf: "flex-end",
-                }}
-              >
-                <CustomButton type="submit" style={styles.CustomButton}>
-                  Proceed to Checkout
+              <div>
+                <h4>Your cluster specs: </h4>
+                <li>spec 1</li>
+                <li>spec 2</li>
+                <li>spec 3</li>
+                <li>spec 4</li>
+                <li>spec 5</li>
+                <li>spec 6</li>
+              </div>
+              <div>
+                <CustomButton
+                  handlePress={this.handleCheckout}
+                  style={styles.CustomButton}
+                >
+                  Proceed to Checkout handleCheckout
                 </CustomButton>
               </div>
             </Col>
@@ -174,6 +186,6 @@ const styles = {
     marginBottom: 35,
   },
   CustomButton: {
-    marginTop: 150,
+    marginTop: 100,
   },
 };
