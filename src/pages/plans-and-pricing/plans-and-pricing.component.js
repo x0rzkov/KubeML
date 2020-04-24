@@ -1,6 +1,11 @@
 import React, { Component, Fragment } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
 
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+
+import { withRouter } from "react-router-dom";
+
 import CarouselSlide from "../../components/bootstrap-ui/carousel/carousel.component";
 import PricingCard from "../../components/bootstrap-ui/cards/pricing-card.component";
 import SelectForm from "../../components/bootstrap-ui/forms/form-select.component";
@@ -8,6 +13,8 @@ import FormNumberInput from "../../components/bootstrap-ui/forms/form-number-inp
 import CustomButton from "../../components/custom-button/custom-button.component";
 
 import "./plans-and-pricing.styles.scss";
+
+import { setNewPlanConfig } from "../../redux/plans-and-pricing/plans-and-pricing.actions";
 
 const ramArray = [8, 16, 32, 64, 160, 196, 256, 384];
 const hoursArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -29,21 +36,19 @@ class PlansAndPricingPage extends Component {
   handleSubmit = async (event) => {
     event.preventDefault();
 
-    const {
-      avgUsers,
-      avgKernels,
-      percentLongWorkloads,
-      avgShortKernelHrs,
-      minRAM,
-      maxRAM,
-    } = this.state;
+    const { setNewPlanConfig } = this.props;
 
-    console.log("avgUsers is: ", avgUsers);
-    console.log("avgKernels is: ", avgKernels);
-    console.log("percentLongWorkloads is: ", percentLongWorkloads);
-    console.log("avgShortKernelHrs is: ", avgShortKernelHrs);
-    console.log("minRAM is: ", minRAM);
-    console.log("maxRAM is: ", maxRAM);
+    setNewPlanConfig({
+      avgUsers: this.state.avgUsers,
+      avgKernels: this.state.avgKernels,
+      percentLongWorkloads: this.state.percentLongWorkloads,
+      avgShortKernelHrs: this.state.avgShortKernelHrs,
+      minRAM: this.state.minRAM,
+      maxRAM: this.state.maxRAM,
+    });
+
+    const { history } = this.props;
+    history.push("/checkout");
   };
 
   handleChange = (event) => {
@@ -149,7 +154,15 @@ class PlansAndPricingPage extends Component {
   }
 }
 
-export default PlansAndPricingPage;
+const mapStateToProps = createStructuredSelector({});
+
+const mapDispatchToProps = (dispatch) => ({
+  setNewPlanConfig: (planDetails) => dispatch(setNewPlanConfig(planDetails)),
+});
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(PlansAndPricingPage)
+);
 
 const styles = {
   col: {
