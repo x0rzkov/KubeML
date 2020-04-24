@@ -22,12 +22,12 @@ const HomePage = () => (
           KubeML is a turn-key solution for running data-science workloads
           efficiently, collaboratively, and anywhere anytime.
         </h3>
-        <text className="description-text">
+        <p className="p-1">
           KubeML provides clients access to a fully-managed cluster hosted on
           cloud infrastructure. The KubeML team provides an online IDE powered
           by Jupyter Notebooks connected to a gateway which leverages kubernetes
           to efficiently distribute individual kernels across the cluster
-        </text>
+        </p>
       </div>
       <div className="right">
         <Logo className="logo" />
@@ -39,15 +39,15 @@ const HomePage = () => (
         <Logo2 className="logo2" />
       </div>
       <div className="right">
-        <text className="info-text">Powered by Jupyter Notebooks</text>
-        <text className="description-text">
+        <h3 className="info-text">Powered by Jupyter Notebooks</h3>
+        <p className="p-1">
           KubeML utilizes Jupyter's open-source platform and integrates
           JupyterHub with Jupyter Enterprise Gateway. Jupyterhub provides
           clients with a frontend UI to manage users and takes care of
           instantiating notebook server instances for each user. Each individual
           notebook instance is then able to launch multiple kernels distributed
           efficiently across the cluster when connected to Enterprise Gateway
-        </text>
+        </p>
       </div>
     </div>
 
@@ -56,9 +56,7 @@ const HomePage = () => (
         <h3 className="info-text">
           A familiar IDE environment for your development team
         </h3>
-        <text className="description-text">
-          KubeML provides the following kernels:
-        </text>
+        <h5>KubeML provides the following kernels:</h5>
         <ul className="ul-list">
           <li>R</li>
           <li>python</li>
@@ -84,7 +82,7 @@ const HomePage = () => (
         <h3 className="info-text">
           Scale worry-free as your organization grows
         </h3>
-        <p className="description-text">
+        <p className="p-1">
           As your organization expands and adds more developers to the team,
           KubeML leverages kubernetes to provide Jupyterhub and Enterprise
           gateway as highly-available deployments. KubeML also provides
@@ -92,10 +90,6 @@ const HomePage = () => (
           power to different teams within their organization.
         </p>
       </div>
-    </div>
-
-    <div>
-      <img src={require("../../assets/brain.jpg")} />
     </div>
   </div>
 );

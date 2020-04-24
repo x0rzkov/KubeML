@@ -1,7 +1,14 @@
 import React from "react";
 import { Row, Col, Form } from "react-bootstrap";
 
-const SelectForm = ({ label, controlId, numArray }) => {
+const SelectForm = ({
+  label,
+  controlId,
+  placeholder,
+  handleChange,
+  numArray,
+  ...otherprops
+}) => {
   return (
     <Form.Group
       as={Row}
@@ -22,7 +29,12 @@ const SelectForm = ({ label, controlId, numArray }) => {
         {label}
       </Form.Label>
       <Col sm="2">
-        <Form.Control as="select" custom>
+        <Form.Control
+          as="select"
+          onChange={handleChange}
+          {...otherprops}
+          custom
+        >
           {numArray.map((number) => (
             <option key={number}>{number}</option>
           ))}

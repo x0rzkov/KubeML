@@ -1,7 +1,13 @@
 import React from "react";
 import { Row, Col, Form } from "react-bootstrap";
 
-const FormNumberInput = ({ label, controlId, placeholder }) => {
+const FormNumberInput = ({
+  label,
+  controlId,
+  placeholder,
+  handleChange,
+  ...otherprops
+}) => {
   return (
     <Form.Group
       as={Row}
@@ -22,7 +28,11 @@ const FormNumberInput = ({ label, controlId, placeholder }) => {
         {label}
       </Form.Label>
       <Col sm="2">
-        <Form.Control placeholder={placeholder} />
+        <Form.Control
+          placeholder={placeholder}
+          onChange={handleChange}
+          {...otherprops}
+        />
       </Col>
     </Form.Group>
   );

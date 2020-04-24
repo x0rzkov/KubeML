@@ -4,7 +4,7 @@ import { Container, Row, Col, Form } from "react-bootstrap";
 import CarouselSlide from "../../components/bootstrap-ui/carousel/carousel.component";
 import PricingCard from "../../components/bootstrap-ui/cards/pricing-card.component";
 import SelectForm from "../../components/bootstrap-ui/forms/form-select.component";
-import FormNumberInput from "../../components/bootstrap-ui/forms/form-decimal-input.component";
+import FormNumberInput from "../../components/bootstrap-ui/forms/form-number-input.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
 
 import "./plans-and-pricing.styles.scss";
@@ -17,17 +17,39 @@ class PlansAndPricingPage extends Component {
     super(props);
 
     this.state = {
-      avgNumUsers: 0,
-      avgWkldsPerUser: 0,
+      avgUsers: 0,
+      avgKernels: 0,
       percentLongWorkloads: 0,
-      hoursNormalKernel: 0,
+      avgShortKernelHrs: 0,
       minRAM: 0,
       maxRAM: 0,
     };
   }
 
-  handleSubmit = () => {
-    console.log("Handle submit clicked");
+  handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const {
+      avgUsers,
+      avgKernels,
+      percentLongWorkloads,
+      avgShortKernelHrs,
+      minRAM,
+      maxRAM,
+    } = this.state;
+
+    console.log("avgUsers is: ", avgUsers);
+    console.log("avgKernels is: ", avgKernels);
+    console.log("percentLongWorkloads is: ", percentLongWorkloads);
+    console.log("avgShortKernelHrs is: ", avgShortKernelHrs);
+    console.log("minRAM is: ", minRAM);
+    console.log("maxRAM is: ", maxRAM);
+  };
+
+  handleChange = (event) => {
+    const { value, name } = event.target;
+
+    this.setState({ [name]: value });
   };
 
   render() {
@@ -49,34 +71,52 @@ class PlansAndPricingPage extends Component {
                     Scientists/ Developers)"
                   controlId="avgUsers"
                   placeholder="Integer"
+                  name="avgUsers"
+                  value={this.state.avgUsers}
+                  handleChange={this.handleChange}
                 />
                 <FormNumberInput
                   label="Enter average kernels a user utilizes simultaneously for
                   building/training ML models"
-                  controlId="wkldsPerUser"
+                  controlId="avgKernels"
                   placeholder="0.0"
+                  name="avgKernels"
+                  value={this.state.avgKernels}
+                  handleChange={this.handleChange}
                 />
                 <FormNumberInput
                   label=" Enter percentage of kernels running for 10+ hrs/day"
-                  controlId="percentLongWklds"
+                  controlId="percentLongWorkloads"
                   placeholder="0.0"
+                  name="percentLongWorkloads"
+                  value={this.state.percentLongWorkloads}
+                  handleChange={this.handleChange}
                 />
                 <SelectForm
                   label="Enter average runtime (hrs) for kernels running less than
                 10hrs/day"
-                  controlId="hoursNormalKernel"
+                  controlId="avgShortKernelHrs"
                   numArray={hoursArray}
+                  name="avgShortKernelHrs"
+                  value={this.state.avgShortKernelHrs}
+                  handleChange={this.handleChange}
                 />
                 <SelectForm
                   label="   Enter minimum RAM (GB) desired per kernel"
                   controlId="minRAM"
                   numArray={ramArray}
+                  name="minRAM"
+                  value={this.state.minRAM}
+                  handleChange={this.handleChange}
                 />
                 <SelectForm
                   label=" Enter maximum RAM desired (GB) per kernel when no other
                   workloads are running"
                   controlId="maxRAM"
                   numArray={ramArray}
+                  name="maxRAM"
+                  value={this.state.maxRAM}
+                  handleChange={this.handleChange}
                 />
                 <CustomButton
                   type="submit"
