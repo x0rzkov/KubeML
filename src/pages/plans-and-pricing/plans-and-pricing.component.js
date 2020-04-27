@@ -17,7 +17,7 @@ import "./plans-and-pricing.styles.scss";
 import { setNewPlanConfig } from "../../redux/plans-and-pricing/plans-and-pricing.actions";
 import { sizeNodeInstance } from "./plans-and-pricing.utils";
 
-const ramArray = [8, 16, 32, 64, 160, 196, 256, 384];
+const ramArray = [8, 16, 32, 64, 160, 196];
 const hoursArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 class PlansAndPricingPage extends Component {
@@ -48,7 +48,7 @@ class PlansAndPricingPage extends Component {
       maxRAM: this.state.maxRAM,
     });
 
-    sizeNodeInstance(this.state.avgUsers);
+    sizeNodeInstance(this.state);
   };
 
   handleCheckout = () => {

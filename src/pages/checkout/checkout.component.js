@@ -9,7 +9,7 @@ import "./checkout.styles.scss";
 const CheckoutPage = ({ planDetails }) => {
   useEffect(() => {
     if (planDetails) {
-      console.log("Plan details is: ", planDetails);
+      console.log("Plan details on checkoutpage is: ", planDetails);
     }
   }, []);
 
