@@ -48,7 +48,9 @@ class PlansAndPricingPage extends Component {
       maxRAM: this.state.maxRAM,
     });
 
-    sizeNodeInstance(this.state);
+    const returnobject = sizeNodeInstance(this.state);
+    console.log("final return object: ");
+    console.log(returnobject);
   };
 
   handleCheckout = () => {
@@ -131,13 +133,13 @@ class PlansAndPricingPage extends Component {
                 <CustomButton
                   type="submit"
                   style={{
-                    marginTop: 50,
+                    marginTop: 75,
                   }}
                 >
                   Check Price
                 </CustomButton>
               </Form>
-              <div>
+              <div style={styles.buttonDiv}>
                 <CustomButton
                   handlePress={this.handleCheckout}
                   style={styles.CustomButton}
@@ -174,6 +176,10 @@ const styles = {
   },
   h2: {
     marginBottom: 35,
+  },
+  buttonDiv: {
+    display: "flex",
+    justifyContent: "center",
   },
   CustomButton: {
     marginTop: 100,

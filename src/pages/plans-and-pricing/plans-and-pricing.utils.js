@@ -1,5 +1,7 @@
 import PRICE_DATA from "./price-data";
 
+// function that takes in client usage parameters and returns
+// ec2 Nodes needed long-term and cost of KubeML vs competitors
 export const sizeNodeInstance = (configDetails) => {
   const {
     avgUsers,
@@ -9,36 +11,62 @@ export const sizeNodeInstance = (configDetails) => {
     minRAM,
   } = configDetails;
 
-  const totalStableMinRAM =
-    avgUsers * avgKernels * percentLongWorkloads * minRAM;
-
-  console.log("total stable min ram:  ", totalStableMinRAM);
-  var totalStableMinRAM2 = totalStableMinRAM;
+  var totalStableMinRAM = avgUsers * avgKernels * percentLongWorkloads * minRAM;
 
   const customerNodes = {
     ec2: PRICE_DATA.ec2,
   };
 
+  const longTermNodes = [];
+  var KubeML = 0;
+  var SageMaker = 0;
+
   // Begin algorithm
-  while (totalStableMinRAM2 >= 0) {
+  // while loop which calculates needed node types and quantity
+  while (totalStableMinRAM >= 0) {
     for (var i = 0; i <= 7; i++) {
-      if (totalStableMinRAM2 > customerNodes.ec2[7].RAM) {
-        totalStableMinRAM2 = totalStableMinRAM2 - customerNodes.ec2[7].RAM;
+      if (totalStableMinRAM > customerNodes.ec2[7].RAM) {
+        totalStableMinRAM = totalStableMinRAM - customerNodes.ec2[7].RAM;
         customerNodes.ec2[7].quantity = customerNodes.ec2[7].quantity + 1;
         break;
       }
 
-      if (totalStableMinRAM2 <= customerNodes.ec2[i].RAM) {
-        totalStableMinRAM2 = totalStableMinRAM2 - customerNodes.ec2[i].RAM;
+      if (totalStableMinRAM <= customerNodes.ec2[i].RAM) {
+        totalStableMinRAM = totalStableMinRAM - customerNodes.ec2[i].RAM;
         customerNodes.ec2[i].quantity = customerNodes.ec2[i].quantity + 1;
         break;
       }
 
-      if (totalStableMinRAM2 <= 0) {
+      if (totalStableMinRAM <= 0) {
         break;
       }
     }
   }
 
-  console.log(customerNodes);
+  // adds nodes to array where node quantity is greater than 1
+  customerNodes.ec2.forEach((data) => {
+    if (data.quantity > 0) {
+      longTermNodes.push({
+        type: data.type,
+        quantity: data.quantity,
+        KubeML_price: 24 * 31 * data.quantity * data.Long_Term,
+        SageMaker_price: 24 * 31 * data.quantity * data.SageMaker,
+      });
+      console.log(data);
+    }
+  });
+
+  // aggregates price for all long-term node instances
+  longTermNodes.forEach((item) => {
+    KubeML = KubeML + item.KubeML_price;
+    SageMaker = SageMaker + item.SageMaker_price;
+  });
+
+  const returnObject = {
+    nodesArray: longTermNodes,
+    KubeML,
+    SageMaker,
+  };
+
+  return returnObject;
 };
