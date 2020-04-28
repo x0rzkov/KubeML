@@ -138,15 +138,6 @@ class PlansAndPricingPage extends Component {
                 </CustomButton>
               </Form>
               <div>
-                <h4>Your cluster specs: </h4>
-                <li>spec 1</li>
-                <li>spec 2</li>
-                <li>spec 3</li>
-                <li>spec 4</li>
-                <li>spec 5</li>
-                <li>spec 6</li>
-              </div>
-              <div>
                 <CustomButton
                   handlePress={this.handleCheckout}
                   style={styles.CustomButton}
@@ -155,7 +146,6 @@ class PlansAndPricingPage extends Component {
                 </CustomButton>
               </div>
             </Col>
-
             <Col lg="4" style={styles.col}>
               <PricingCard />
             </Col>

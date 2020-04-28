@@ -3,24 +3,30 @@ import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
 
 const PricingCard = () => {
   return (
-    <Card style={{ width: "80%", paddingRight: 0 }}>
-      <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
-      <Card.Body>
-        <Card.Title>Card Titles</Card.Title>
-        <Card.Text>
-          Based on specifications you selected this is your determined usage and
-          what KubeML calculates your usage to be
-        </Card.Text>
+    <Card style={{ width: "85%", paddingRight: 0 }}>
+      <Card.Img
+        variant="top"
+        src={require("../../../assets/3d.svg")}
+        style={{ width: "25%", alignSelf: "center", marginTop: 10 }}
+      />
+      <Card.Body
+        style={{
+          height: 0,
+          paddingTop: 0,
+          paddingBottom: 0,
+          display: "flex",
+          alignItems: "flex-end",
+        }}
+      >
+        <h4>Your cluster configuration:</h4>
       </Card.Body>
       <ListGroup className="list-group-flush">
-        <ListGroupItem>Number of Average Users Daily: </ListGroupItem>
-        <ListGroupItem>Consistent workloads of 10+ hrs yields: </ListGroupItem>
-        <ListGroupItem>Minimum RAM per consistent Workload: </ListGroupItem>
-        <ListGroupItem>Long term cluster EC2 NODE: m4.12xlarge </ListGroupItem>
-        <ListGroupItem>Number of Average Users Daily: </ListGroupItem>
-        <ListGroupItem>Consistent workloads of 10+ hrs yields: </ListGroupItem>
-        <ListGroupItem>Minimum RAM per consistent Workload: </ListGroupItem>
-        <ListGroupItem>Long term cluster EC2 NODE: m4.12xlarge </ListGroupItem>
+        <ListGroupItem>Number of Daily Active Users:</ListGroupItem>
+        <ListGroupItem>Avg kernels per user: </ListGroupItem>
+        <ListGroupItem>% of long-running kernels: </ListGroupItem>
+        <ListGroupItem>Avg runtime for short kernels: </ListGroupItem>
+        <ListGroupItem>Min RAM desired: </ListGroupItem>
+        <ListGroupItem>Max RAM desired: </ListGroupItem>
       </ListGroup>
       <Card.Body>
         <Card.Title>AWS Sagemaker pricing</Card.Title>
