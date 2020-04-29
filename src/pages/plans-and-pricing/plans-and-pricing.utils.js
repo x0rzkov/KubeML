@@ -11,62 +11,77 @@ export const sizeNodeInstance = (configDetails) => {
     minRAM,
   } = configDetails;
 
-  var totalStableMinRAM = avgUsers * avgKernels * percentLongWorkloads * minRAM;
+  var minLongTermRAM = avgUsers * avgKernels * percentLongWorkloads * minRAM;
 
-  const customerNodes = {
-    ec2: PRICE_DATA.ec2,
-  };
+  var longTermNodes = [];
+  var KubeML_Price = 0;
+  var SageMaker_Price = 0;
 
-  const longTermNodes = [];
-  var KubeML = 0;
-  var SageMaker = 0;
+  const array1 = [];
+  var quantity = 0;
+  var secondNodeType = "";
 
   // Begin algorithm
-  // while loop which calculates needed node types and quantity
-  while (totalStableMinRAM >= 0) {
+  while (minLongTermRAM >= 384) {
+    minLongTermRAM = minLongTermRAM - 384;
+    quantity = quantity + 1;
+  }
+
+  while (minLongTermRAM >= 0) {
     for (var i = 0; i <= 7; i++) {
-      if (totalStableMinRAM > customerNodes.ec2[7].RAM) {
-        totalStableMinRAM = totalStableMinRAM - customerNodes.ec2[7].RAM;
-        customerNodes.ec2[7].quantity = customerNodes.ec2[7].quantity + 1;
+      if (i == 7 && minLongTermRAM > 256) {
+        quantity = quantity + 1;
+        minLongTermRAM = minLongTermRAM - 384;
         break;
       }
-
-      if (totalStableMinRAM <= customerNodes.ec2[i].RAM) {
-        totalStableMinRAM = totalStableMinRAM - customerNodes.ec2[i].RAM;
-        customerNodes.ec2[i].quantity = customerNodes.ec2[i].quantity + 1;
-        break;
+      if (minLongTermRAM <= PRICE_DATA.ec2[i].RAM) {
+        minLongTermRAM = minLongTermRAM - PRICE_DATA.ec2[i].RAM;
+        secondNodeType = PRICE_DATA.ec2[i].type;
       }
-
-      if (totalStableMinRAM <= 0) {
+      if (minLongTermRAM <= 0) {
         break;
       }
     }
   }
 
-  // adds nodes to array where node quantity is greater than 1
-  customerNodes.ec2.forEach((data) => {
-    if (data.quantity > 0) {
-      longTermNodes.push({
-        type: data.type,
-        quantity: data.quantity,
-        KubeML_price: 24 * 31 * data.quantity * data.Long_Term,
-        SageMaker_price: 24 * 31 * data.quantity * data.SageMaker,
-      });
-      console.log(data);
+  array1.push(
+    {
+      type: "m5.24xlarge",
+      quantity,
+    },
+    {
+      type: secondNodeType,
+      quantity: 1,
     }
-  });
+  );
 
-  // aggregates price for all long-term node instances
-  longTermNodes.forEach((item) => {
-    KubeML = KubeML + item.KubeML_price;
-    SageMaker = SageMaker + item.SageMaker_price;
-  });
+  // // adds nodes to array where node quantity is greater than 1
+  // console.log("point B");
+  // customerNodes.ec2.map((data) => {
+  //   if (data.quantity > 0) {
+  //     longTermNodes.push({
+  //       type: data.type,
+  //       quantity: data.quantity,
+  //       KubeML_price: 24 * 31 * data.quantity * data.Long_Term,
+  //       SageMaker_price: 24 * 31 * data.quantity * data.SageMaker,
+  //     });
+  //   }
+  // });
 
-  const returnObject = {
-    nodesArray: longTermNodes,
-    KubeML,
-    SageMaker,
-  };
+  // // aggregates price for all long-term node instances
+  // console.log("point C");
+  // longTermNodes.forEach((item) => {
+  //   KubeML = KubeML + item.KubeML_price;
+  //   SageMaker = SageMaker + item.SageMaker_price;
+  // });
 
-  return returnObject;
+  // var returnObject = {
+  //   nodesArray: longTermNodes,
+  //   KubeML: KubeML.toFixed(2),
+  //   SageMaker,
+  // };
+
+  // console.log("inside the function return object --> ", returnObject);
+
+  // return returnObject;
 };

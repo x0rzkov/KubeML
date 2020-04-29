@@ -8,7 +8,6 @@ const PRICE_DATA = {
       SageMaker: 0.1165,
       On_Demand: 0.0752,
       Long_Term: 0.047,
-      quantity: 0,
     },
     {
       _id: 1,
@@ -18,7 +17,6 @@ const PRICE_DATA = {
       SageMaker: 0.269,
       On_Demand: 0.172,
       Long_Term: 0.109,
-      quantity: 0,
     },
     {
       _id: 2,
@@ -28,7 +26,6 @@ const PRICE_DATA = {
       SageMaker: 0.538,
       On_Demand: 0.344,
       Long_Term: 0.219,
-      quantity: 0,
     },
     {
       _id: 3,
@@ -38,7 +35,6 @@ const PRICE_DATA = {
       SageMaker: 1.075,
       On_Demand: 0.688,
       Long_Term: 0.438,
-      quantity: 0,
     },
     {
       _id: 4,
@@ -48,7 +44,6 @@ const PRICE_DATA = {
       SageMaker: 2.8,
       On_Demand: 2.0,
       Long_Term: 1.239,
-      quantity: 0,
     },
     {
       _id: 5,
@@ -58,7 +53,6 @@ const PRICE_DATA = {
       SageMaker: 3.226,
       On_Demand: 2.064,
       Long_Term: 1.313,
-      quantity: 0,
     },
     {
       _id: 6,
@@ -68,7 +62,6 @@ const PRICE_DATA = {
       SageMaker: 4.48,
       On_Demand: 3.2,
       Long_Term: 1.982,
-      quantity: 0,
     },
     {
       _id: 7,
@@ -78,7 +71,6 @@ const PRICE_DATA = {
       SageMaker: 6.451,
       On_Demand: 4.128,
       Long_Term: 2.627,
-      quantity: 0,
     },
   ],
 };

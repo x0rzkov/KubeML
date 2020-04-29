@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
 
-const PricingCard = () => {
+const PricingCard = ({ KubeML, SageMaker, longTermNodes }) => {
   return (
     <Card style={{ width: "85%", paddingRight: 0 }}>
       <Card.Img
@@ -10,10 +10,13 @@ const PricingCard = () => {
         style={{ width: "25%", alignSelf: "center", marginTop: 10 }}
       />
       <div style={styles.h5}>
-        <h5>Based on your specifications: </h5>
+        <h5>Based on your usage needss: </h5>
       </div>
       <ListGroup className="list-group-flush">
         <ListGroupItem>Continuous running nodes:</ListGroupItem>
+        {longTermNodes.map((item) => (
+          <h3 key={item.type}>{item.type}</h3>
+        ))}
         <ListGroupItem>Number of Daily Active Users:</ListGroupItem>
         <ListGroupItem>Avg kernels per user: </ListGroupItem>
         <ListGroupItem>% of long-running kernels: </ListGroupItem>
@@ -24,12 +27,12 @@ const PricingCard = () => {
 
       <Card.Body>
         <Card.Title>KubeML pricing: </Card.Title>
-        <h3>$2,194/mo.</h3>
+        {KubeML ? <h3>${KubeML}</h3> : <h3>$--,----.---</h3>}
       </Card.Body>
 
       <Card.Body>
         <Card.Title>AWS Sagemaker pricing</Card.Title>
-        <h3>$2,194/mo.</h3>
+        {SageMaker ? <h3>${SageMaker}</h3> : <h3>$--,----.---</h3>}
       </Card.Body>
     </Card>
   );

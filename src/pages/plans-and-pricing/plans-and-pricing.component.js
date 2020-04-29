@@ -30,13 +30,14 @@ class PlansAndPricingPage extends Component {
       percentLongWorkloads: 0,
       avgShortKernelHrs: 0,
       minRAM: 0,
-      maxRAM: 0,
+      KubeML_Price: "",
+      SageMaker_Price: "",
+      longTermNodes: [],
     };
   }
 
   handleSubmit = async (event) => {
     event.preventDefault();
-
     const { setNewPlanConfig } = this.props;
 
     setNewPlanConfig({
@@ -45,12 +46,9 @@ class PlansAndPricingPage extends Component {
       percentLongWorkloads: this.state.percentLongWorkloads,
       avgShortKernelHrs: this.state.avgShortKernelHrs,
       minRAM: this.state.minRAM,
-      maxRAM: this.state.maxRAM,
     });
 
-    const returnobject = sizeNodeInstance(this.state);
-    console.log("final return object: ");
-    console.log(returnobject);
+    sizeNodeInstance(this.state);
   };
 
   handleCheckout = () => {
@@ -106,7 +104,7 @@ class PlansAndPricingPage extends Component {
                 />
                 <SelectForm
                   label="Enter average runtime (hrs) for kernels running less than
-                10hrs/day"
+                  10hrs/day"
                   controlId="avgShortKernelHrs"
                   numArray={hoursArray}
                   name="avgShortKernelHrs"
@@ -114,22 +112,14 @@ class PlansAndPricingPage extends Component {
                   handleChange={this.handleChange}
                 />
                 <SelectForm
-                  label="   Enter minimum RAM (GB) desired per kernel"
+                  label="Enter minimum RAM (GB) desired per kernel"
                   controlId="minRAM"
                   numArray={ramArray}
                   name="minRAM"
                   value={this.state.minRAM}
                   handleChange={this.handleChange}
                 />
-                <SelectForm
-                  label=" Enter maximum RAM desired (GB) per kernel when no other
-                  workloads are running"
-                  controlId="maxRAM"
-                  numArray={ramArray}
-                  name="maxRAM"
-                  value={this.state.maxRAM}
-                  handleChange={this.handleChange}
-                />
+
                 <CustomButton
                   type="submit"
                   style={{
@@ -148,8 +138,13 @@ class PlansAndPricingPage extends Component {
                 </CustomButton>
               </div>
             </Col>
+
             <Col lg="4" style={styles.col}>
-              <PricingCard />
+              <PricingCard
+                KubeML={this.state.KubeML_Price}
+                SageMaker={this.state.SageMaker_Price}
+                longTermNodes={this.state.longTermNodes}
+              />
             </Col>
           </Row>
         </Container>
