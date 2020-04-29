@@ -48,7 +48,13 @@ class PlansAndPricingPage extends Component {
       minRAM: this.state.minRAM,
     });
 
-    sizeNodeInstance(this.state);
+    const res = sizeNodeInstance(this.state);
+    const { nodesArray, KubeML, SageMaker } = res;
+
+    this.setState({
+      KubeML_Price: KubeML,
+      SageMaker_Price: SageMaker,
+    });
   };
 
   handleCheckout = () => {
