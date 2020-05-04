@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
+import NodeAccordion from "../list-item/node-list-item.component";
 
 const PricingCard = ({ KubeML, SageMaker, longTermNodes }) => {
   return (
@@ -10,12 +11,12 @@ const PricingCard = ({ KubeML, SageMaker, longTermNodes }) => {
         style={{ width: "25%", alignSelf: "center", marginTop: 10 }}
       />
       <div style={styles.h5}>
-        <h5>Based on your usage needss: </h5>
+        <h5>Based on your usage needs: </h5>
       </div>
       <ListGroup className="list-group-flush">
         <ListGroupItem>Continuous running nodes:</ListGroupItem>
         {longTermNodes.map((item) => (
-          <h3 key={item.type}>{item.type}</h3>
+          <NodeAccordion />
         ))}
         <ListGroupItem>Number of Daily Active Users:</ListGroupItem>
         <ListGroupItem>Avg kernels per user: </ListGroupItem>

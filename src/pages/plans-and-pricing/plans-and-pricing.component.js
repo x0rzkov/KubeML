@@ -54,7 +54,10 @@ class PlansAndPricingPage extends Component {
     this.setState({
       KubeML_Price: KubeML,
       SageMaker_Price: SageMaker,
+      longTermNodes: nodesArray,
     });
+
+    console.log("nodesArray: ", nodesArray);
   };
 
   handleCheckout = () => {
