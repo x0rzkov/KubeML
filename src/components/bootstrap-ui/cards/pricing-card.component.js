@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, ListGroup, ListGroupItem, Accordion } from "react-bootstrap";
 import NodeAccordion from "../list-item/node-list-item.component";
+import PricingListItem from "../list-item/pricing-listitem.component";
 
 const PricingCard = ({
   KubeML,
@@ -17,35 +18,29 @@ const PricingCard = ({
         style={{ width: "25%", alignSelf: "center", marginTop: 10 }}
       />
       <div style={styles.h5}>
-        <h5 style={{ fontWeight: 600 }}>Based on your usage needs</h5>
+        <h5 style={styles.thick}>Based on your usage needs</h5>
       </div>
       <ListGroup>
-        <ListGroupItem style={{ fontWeight: 600 }}>
+        <ListGroupItem style={styles.thick}>
           Continuous running nodes:
         </ListGroupItem>
 
-        <Accordion style={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
+        <Accordion style={styles.dropdown}>
           {longTermNodes.map((item) => (
             <NodeAccordion key={item.type} item={item} />
           ))}
         </Accordion>
 
-        <ListGroupItem style={{ fontWeight: 600 }}>
-          On Demand Nodes:
-        </ListGroupItem>
+        <ListGroupItem style={styles.thick}>On Demand Nodes:</ListGroupItem>
 
-        <Accordion style={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
+        <Accordion style={styles.dropdown}>
           {shortTermNodes.map((item) => (
             <NodeAccordion key={item.type} item={item} />
           ))}
         </Accordion>
 
-        <ListGroupItem style={{ fontWeight: 600 }}>
-          Long-term node pricing:
-        </ListGroupItem>
-        <ListGroupItem style={{ fontWeight: 600 }}>
-          On-demand node pricing:
-        </ListGroupItem>
+        <PricingListItem type={"KubeML"} eventNum={1} />
+        <PricingListItem type={"AWS SageMaker"} eventNum={2} />
       </ListGroup>
 
       <Card.Body>
@@ -71,5 +66,12 @@ const styles = {
     paddingLeft: 15,
     justifyContent: "center",
     marginBottom: 15,
+  },
+  dropdown: {
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+  },
+  thick: {
+    fontWeight: 600,
   },
 };

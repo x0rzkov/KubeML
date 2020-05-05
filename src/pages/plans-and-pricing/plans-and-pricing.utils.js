@@ -106,17 +106,18 @@ export const sizeNodeInstance = (configDetails) => {
   var SageMaker_total = longSagePrice + shortSagePrice;
 
   const priceArray = {
-    KubeMLShortTermPrice: shortKubePrice,
-    SageMakerShortTermPrice: shortSagePrice,
-    KubeMLLongTermPrice: longKubePrice,
-    SageMakerLongTermPrice: longSagePrice,
+    KubeMLShortTermPrice: shortKubePrice.toFixed(2),
+    SageMakerShortTermPrice: shortSagePrice.toFixed(2),
+    KubeMLLongTermPrice: longKubePrice.toFixed(2),
+    SageMakerLongTermPrice: longSagePrice.toFixed(2),
   };
+
+  console.log("KubeMLLongTermPrice:  ", priceArray.KubeMLLongTermPrice);
 
   var res = {
     nodesArray: array1,
     KubeML: KubeML_total.toFixed(2),
     SageMaker: SageMaker_total.toFixed(2),
-    KubeShortTermPrice: shortKubePrice,
     priceArray,
     array2,
   };

@@ -14,8 +14,8 @@ const SelectForm = ({
       as={Row}
       controlId={controlId}
       style={{
-        paddingTop: 20,
-        paddingBottom: 20,
+        paddingTop: 25,
+        paddingBottom: 25,
         marginBottom: 0,
         borderBottom: 1,
         borderStyle: "solid",
