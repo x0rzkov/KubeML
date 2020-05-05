@@ -39,8 +39,18 @@ const PricingCard = ({
           ))}
         </Accordion>
 
-        <PricingListItem type={"KubeML"} eventNum={1} />
-        <PricingListItem type={"AWS SageMaker"} eventNum={2} />
+        <PricingListItem
+          type={"KubeML"}
+          eventNum={1}
+          longTermNodes={longTermNodes}
+          shortTermNodes={shortTermNodes}
+        />
+        <PricingListItem
+          type={"AWS SageMaker"}
+          eventNum={2}
+          longTermNodes={longTermNodes}
+          shortTermNodes={shortTermNodes}
+        />
       </ListGroup>
 
       <Card.Body>
