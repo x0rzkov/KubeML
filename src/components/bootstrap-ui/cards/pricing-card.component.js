@@ -1,29 +1,51 @@
 import React from "react";
-import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Card, ListGroup, ListGroupItem, Accordion } from "react-bootstrap";
 import NodeAccordion from "../list-item/node-list-item.component";
 
-const PricingCard = ({ KubeML, SageMaker, longTermNodes, shortTermNodes }) => {
+const PricingCard = ({
+  KubeML,
+  SageMaker,
+  longTermNodes,
+  shortTermNodes,
+  prices,
+}) => {
   return (
-    <Card style={{ width: "85%", paddingRight: 0 }}>
+    <Card style={{ width: "85%" }}>
       <Card.Img
         variant="top"
         src={require("../../../assets/3d.svg")}
         style={{ width: "25%", alignSelf: "center", marginTop: 10 }}
       />
       <div style={styles.h5}>
-        <h5>Based on your usage needs: </h5>
+        <h5 style={{ fontWeight: 600 }}>Based on your usage needs</h5>
       </div>
-      <ListGroup className="list-group-flush">
-        <ListGroupItem>Continuous running nodes:</ListGroupItem>
-        {longTermNodes.map((item) => (
-          <NodeAccordion key={item.type} item={item} />
-        ))}
-        <ListGroupItem>On Demand Nodes:</ListGroupItem>
-        {shortTermNodes.map((item) => (
-          <NodeAccordion key={item.type} item={item} />
-        ))}
-        <ListGroupItem>Long-term node pricing: </ListGroupItem>
-        <ListGroupItem>On-demand node pricing: </ListGroupItem>
+      <ListGroup>
+        <ListGroupItem style={{ fontWeight: 600 }}>
+          Continuous running nodes:
+        </ListGroupItem>
+
+        <Accordion style={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
+          {longTermNodes.map((item) => (
+            <NodeAccordion key={item.type} item={item} />
+          ))}
+        </Accordion>
+
+        <ListGroupItem style={{ fontWeight: 600 }}>
+          On Demand Nodes:
+        </ListGroupItem>
+
+        <Accordion style={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
+          {shortTermNodes.map((item) => (
+            <NodeAccordion key={item.type} item={item} />
+          ))}
+        </Accordion>
+
+        <ListGroupItem style={{ fontWeight: 600 }}>
+          Long-term node pricing:
+        </ListGroupItem>
+        <ListGroupItem style={{ fontWeight: 600 }}>
+          On-demand node pricing:
+        </ListGroupItem>
       </ListGroup>
 
       <Card.Body>
@@ -47,5 +69,7 @@ const styles = {
     alignItems: "center",
     paddingTop: 15,
     paddingLeft: 15,
+    justifyContent: "center",
+    marginBottom: 15,
   },
 };
