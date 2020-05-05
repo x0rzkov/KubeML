@@ -28,11 +28,12 @@ class PlansAndPricingPage extends Component {
       avgUsers: 0,
       avgKernels: 0,
       percentLongWorkloads: 0,
-      avgShortKernelHrs: 0,
+      shortKernelHrs: 0,
       minRAM: 0,
       KubeML_Price: "",
       SageMaker_Price: "",
       longTermNodes: [],
+      shortTermNodes: [],
     };
   }
 
@@ -44,17 +45,18 @@ class PlansAndPricingPage extends Component {
       avgUsers: this.state.avgUsers,
       avgKernels: this.state.avgKernels,
       percentLongWorkloads: this.state.percentLongWorkloads,
-      avgShortKernelHrs: this.state.avgShortKernelHrs,
+      shortKernelHrs: this.state.shortKernelHrs,
       minRAM: this.state.minRAM,
     });
 
     const res = sizeNodeInstance(this.state);
-    const { nodesArray, KubeML, SageMaker } = res;
+    const { nodesArray, KubeML, SageMaker, array2 } = res;
 
     this.setState({
       KubeML_Price: KubeML,
       SageMaker_Price: SageMaker,
       longTermNodes: nodesArray,
+      shortTermNodes: array2,
     });
 
     console.log("nodesArray: ", nodesArray);
@@ -74,13 +76,17 @@ class PlansAndPricingPage extends Component {
   render() {
     return (
       <Fragment>
-        <Container style={{ marginBottom: 150 }}>
+        <Container
+          style={{
+            marginBottom: 150,
+          }}
+        >
           <Row style={{ marginBottom: 40 }}>
             <CarouselSlide />
           </Row>
 
           <Row>
-            <Col lg="8">
+            <Col lg="8" style={styles.col}>
               <h2 style={styles.h2}>
                 Let the KubeML pricing tool calculate for you!
               </h2>
@@ -114,10 +120,10 @@ class PlansAndPricingPage extends Component {
                 <SelectForm
                   label="Enter average runtime (hrs) for kernels running less than
                   10hrs/day"
-                  controlId="avgShortKernelHrs"
+                  controlId="shortKernelHrs"
                   numArray={hoursArray}
-                  name="avgShortKernelHrs"
-                  value={this.state.avgShortKernelHrs}
+                  name="shortKernelHrs"
+                  value={this.state.shortKernelHrs}
                   handleChange={this.handleChange}
                 />
                 <SelectForm
@@ -148,11 +154,12 @@ class PlansAndPricingPage extends Component {
               </div>
             </Col>
 
-            <Col lg="4" style={styles.col}>
+            <Col lg="4" style={styles.col2}>
               <PricingCard
                 KubeML={this.state.KubeML_Price}
                 SageMaker={this.state.SageMaker_Price}
                 longTermNodes={this.state.longTermNodes}
+                shortTermNodes={this.state.shortTermNodes}
               />
             </Col>
           </Row>
@@ -174,6 +181,11 @@ export default withRouter(
 
 const styles = {
   col: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  },
+  col2: {
     display: "flex",
     justifyContent: "flex-end",
     paddingRight: 0,
