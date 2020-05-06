@@ -1,5 +1,4 @@
 import PRICE_DATA from "./price-data";
-
 // function that takes in client usage parameters and returns
 // ec2 Nodes needed long-term and cost of KubeML vs competitors
 export const sizeNodeInstance = (configDetails) => {
@@ -15,11 +14,10 @@ export const sizeNodeInstance = (configDetails) => {
   const array2 = [];
   var longKubePrice = 0;
   var longSagePrice = 0;
-
   var shortKubePrice = 0;
   var shortSagePrice = 0;
-
   var quantity = 0; // quantity for m5.24xlarge node (largest node offered)
+
   var minLongTermRAM = avgUsers * avgKernels * percentLongWorkloads * minRAM;
   var shortTermKernels = Math.ceil(
     avgUsers * avgKernels * (1 - percentLongWorkloads)
@@ -28,15 +26,8 @@ export const sizeNodeInstance = (configDetails) => {
   for (var j = 0; j <= 7; j++) {
     if (minRAM <= PRICE_DATA.ec2[j].RAM) {
       array2.push({
-        type: PRICE_DATA.ec2[j].type,
+        node: PRICE_DATA.ec2[j],
         quantity: shortTermKernels,
-        vCPU: PRICE_DATA.ec2[j].vCPU,
-        RAM: PRICE_DATA.ec2[j].RAM,
-        Processor_Name: PRICE_DATA.ec2[j].Processor_Name,
-        Clock_Speed: PRICE_DATA.ec2[j].Clock_Speed,
-        SageMaker: PRICE_DATA.ec2[j].SageMaker,
-        On_Demand: PRICE_DATA.ec2[j].On_Demand,
-        Long_Term: PRICE_DATA.ec2[j].Long_Term,
       });
       shortKubePrice =
         shortTermKernels * shortKernelHrs * PRICE_DATA.ec2[j].On_Demand * 744;
@@ -62,15 +53,8 @@ export const sizeNodeInstance = (configDetails) => {
       if (minLongTermRAM <= PRICE_DATA.ec2[i].RAM) {
         minLongTermRAM = minLongTermRAM - PRICE_DATA.ec2[i].RAM;
         array1.push({
-          type: PRICE_DATA.ec2[i].type,
+          node: PRICE_DATA.ec2[i],
           quantity: 1,
-          vCPU: PRICE_DATA.ec2[i].vCPU,
-          RAM: PRICE_DATA.ec2[i].RAM,
-          Processor_Name: PRICE_DATA.ec2[i].Processor_Name,
-          Clock_Speed: PRICE_DATA.ec2[i].Clock_Speed,
-          SageMaker: PRICE_DATA.ec2[i].SageMaker,
-          On_Demand: PRICE_DATA.ec2[i].On_Demand,
-          Long_Term: PRICE_DATA.ec2[i].Long_Term,
         });
       }
       if (minLongTermRAM <= 0) {
@@ -79,21 +63,16 @@ export const sizeNodeInstance = (configDetails) => {
     }
   }
 
-  array1.push({
-    type: quantity > 0 ? "m5.24xlarge" : null,
-    quantity,
-    vCPU: 96,
-    RAM: 384,
-    Processor_Name: "Intel Xeon Platinum 8175",
-    Clock_Speed: 3.1,
-    SageMaker: 6.451,
-    On_Demand: 4.128,
-    Long_Term: 2.627,
-  });
+  if (quantity > 0) {
+    array1.push({
+      quantity,
+      node: PRICE_DATA.ec2[7],
+    });
+  }
 
   array1.map((data) => {
     PRICE_DATA.ec2.map((item) => {
-      if (data.type === item.type) {
+      if (data.node.type === item.type) {
         longKubePrice =
           longKubePrice + 31 * 24 * data.quantity * item.Long_Term;
         longSagePrice =
@@ -104,22 +83,15 @@ export const sizeNodeInstance = (configDetails) => {
 
   var KubeML_total = longKubePrice + shortKubePrice;
   var SageMaker_total = longSagePrice + shortSagePrice;
-
-  const priceArray = {
-    KubeMLShortTermPrice: shortKubePrice.toFixed(2),
-    SageMakerShortTermPrice: shortSagePrice.toFixed(2),
-    KubeMLLongTermPrice: longKubePrice.toFixed(2),
-    SageMakerLongTermPrice: longSagePrice.toFixed(2),
+  var prices = {
+    KubeML_total: KubeML_total.toFixed(2),
+    SageMaker_total: SageMaker_total.toFixed(2),
   };
 
-  console.log("KubeMLLongTermPrice:  ", priceArray.KubeMLLongTermPrice);
-
   var res = {
-    nodesArray: array1,
-    KubeML: KubeML_total.toFixed(2),
-    SageMaker: SageMaker_total.toFixed(2),
-    priceArray,
-    array2,
+    continuousNodes: array1,
+    onDemandNodes: array2,
+    prices,
   };
 
   return res;

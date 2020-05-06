@@ -7,33 +7,34 @@ const NodeAccordion = ({ item }) => {
     <Card>
       <Accordion.Toggle
         as={Card.Header}
-        eventKey={item.type}
+        eventKey={item.node.type}
         style={styles.header}
       >
-        ({item.quantity}) {item.type} <i className="fas fa-plus-circle"></i>
+        ({item.quantity}) {item.node.type}{" "}
+        <i className="fas fa-plus-circle"></i>
       </Accordion.Toggle>
-      <Accordion.Collapse eventKey={item.type}>
+      <Accordion.Collapse eventKey={item.node.type}>
         <Card.Body style={styles.cardBody}>
           <div style={styles.columnDiv}>
             <div style={styles.upperRow}>
               <div style={styles.vCPU}>
                 <h6>vCPU</h6>
-                <h6>{item.vCPU}</h6>
+                <h6>{item.node.vCPU}</h6>
               </div>
               <div style={styles.details}>
                 <h6>Clock Speed</h6>
-                <h6>{item.Clock_Speed} GHz</h6>
+                <h6>{item.node.Clock_Speed} GHz</h6>
               </div>
             </div>
 
             <div style={styles.rowDiv}>
               <div style={styles.details}>
                 <h6>Processor Family</h6>
-                <h6>{item.Processor_Name}</h6>
+                <h6>{item.node.Processor_Name}</h6>
               </div>
               <div style={styles.RAM}>
                 <h6>RAM</h6>
-                <h6>{item.RAM} GB</h6>
+                <h6>{item.node.RAM} GB</h6>
               </div>
             </div>
           </div>

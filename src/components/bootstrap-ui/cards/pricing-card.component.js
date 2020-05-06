@@ -3,19 +3,13 @@ import { Card, ListGroup, ListGroupItem, Accordion } from "react-bootstrap";
 import NodeAccordion from "../list-item/node-list-item.component";
 import PricingListItem from "../list-item/pricing-listitem.component";
 
-const PricingCard = ({
-  KubeML,
-  SageMaker,
-  longTermNodes,
-  shortTermNodes,
-  prices,
-}) => {
+const PricingCard = ({ prices, longTermNodes, shortTermNodes }) => {
   return (
     <Card style={{ width: "85%" }}>
       <Card.Img
         variant="top"
         src={require("../../../assets/3d.svg")}
-        style={{ width: "25%", alignSelf: "center", marginTop: 10 }}
+        style={styles.cardImage}
       />
       <div style={styles.h5}>
         <h5 style={styles.thick}>Based on your usage needs</h5>
@@ -24,18 +18,15 @@ const PricingCard = ({
         <ListGroupItem style={styles.thick}>
           Continuous running nodes:
         </ListGroupItem>
-
         <Accordion style={styles.dropdown}>
           {longTermNodes.map((item) => (
-            <NodeAccordion key={item.type} item={item} />
+            <NodeAccordion key={item.node._id} item={item} />
           ))}
         </Accordion>
-
         <ListGroupItem style={styles.thick}>On Demand Nodes:</ListGroupItem>
-
         <Accordion style={styles.dropdown}>
           {shortTermNodes.map((item) => (
-            <NodeAccordion key={item.type} item={item} />
+            <NodeAccordion key={item.node._id} item={item} />
           ))}
         </Accordion>
 
@@ -55,12 +46,12 @@ const PricingCard = ({
 
       <Card.Body>
         <Card.Title>KubeML pricing: </Card.Title>
-        {KubeML ? <h3>${KubeML}</h3> : <h3>$--,----.---</h3>}
+        {prices ? <h3>${prices.KubeML_total}</h3> : <h3>$--,----.---</h3>}
       </Card.Body>
 
       <Card.Body>
         <Card.Title>AWS Sagemaker pricing</Card.Title>
-        {SageMaker ? <h3>${SageMaker}</h3> : <h3>$--,----.---</h3>}
+        {prices ? <h3>${prices.SageMaker_total}</h3> : <h3>$--,----.---</h3>}
       </Card.Body>
     </Card>
   );
@@ -83,5 +74,10 @@ const styles = {
   },
   thick: {
     fontWeight: 600,
+  },
+  cardImage: {
+    width: "25%",
+    alignSelf: "center",
+    marginTop: 10,
   },
 };

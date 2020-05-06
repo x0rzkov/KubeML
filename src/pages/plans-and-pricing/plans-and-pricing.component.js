@@ -30,18 +30,15 @@ class PlansAndPricingPage extends Component {
       percentLongWorkloads: 0,
       shortKernelHrs: 0,
       minRAM: 0,
-      KubeML_total_Price: "",
-      SageMaker_total_Price: "",
       longTermNodes: [],
       shortTermNodes: [],
-      priceList: [],
+      prices: "",
     };
   }
 
   handleSubmit = async (event) => {
     event.preventDefault();
     const { setNewPlanConfig } = this.props;
-
     setNewPlanConfig({
       avgUsers: this.state.avgUsers,
       avgKernels: this.state.avgKernels,
@@ -49,16 +46,11 @@ class PlansAndPricingPage extends Component {
       shortKernelHrs: this.state.shortKernelHrs,
       minRAM: this.state.minRAM,
     });
-
     const res = sizeNodeInstance(this.state);
-    const { nodesArray, KubeML, SageMaker, array2, priceArray } = res;
-
     this.setState({
-      KubeML_total_Price: KubeML,
-      SageMaker_total_Price: SageMaker,
-      longTermNodes: nodesArray,
-      shortTermNodes: array2,
-      priceList: priceArray,
+      longTermNodes: res.continuousNodes,
+      shortTermNodes: res.onDemandNodes,
+      prices: res.prices,
     });
   };
 
@@ -69,22 +61,16 @@ class PlansAndPricingPage extends Component {
 
   handleChange = (event) => {
     const { value, name } = event.target;
-
     this.setState({ [name]: value });
   };
 
   render() {
     return (
       <Fragment>
-        <Container
-          style={{
-            marginBottom: 250,
-          }}
-        >
+        <Container style={styles.container}>
           <Row style={{ marginBottom: 40 }}>
             <CarouselSlide />
           </Row>
-
           <Row>
             <Col lg="8">
               <h2 style={styles.h2}>
@@ -134,20 +120,14 @@ class PlansAndPricingPage extends Component {
                   value={this.state.minRAM}
                   handleChange={this.handleChange}
                 />
-
-                <CustomButton
-                  type="submit"
-                  style={{
-                    marginTop: 75,
-                  }}
-                >
+                <CustomButton type="submit" style={styles.CustomButton}>
                   Check Price
                 </CustomButton>
               </Form>
               <div style={styles.buttonDiv}>
                 <CustomButton
                   handlePress={this.handleCheckout}
-                  style={styles.CustomButton}
+                  style={styles.CustomButton2}
                 >
                   Proceed to Checkout handleCheckout
                 </CustomButton>
@@ -156,11 +136,9 @@ class PlansAndPricingPage extends Component {
 
             <Col lg="4" style={styles.col2}>
               <PricingCard
-                KubeML={this.state.KubeML_total_Price}
-                SageMaker={this.state.SageMaker_total_Price}
+                prices={this.state.prices}
                 longTermNodes={this.state.longTermNodes}
                 shortTermNodes={this.state.shortTermNodes}
-                prices={this.state.priceList}
               />
             </Col>
           </Row>
@@ -181,6 +159,9 @@ export default withRouter(
 );
 
 const styles = {
+  container: {
+    marginBottom: 250,
+  },
   col2: {
     display: "flex",
     justifyContent: "flex-end",
@@ -194,6 +175,9 @@ const styles = {
     justifyContent: "center",
   },
   CustomButton: {
+    marginTop: 100,
+  },
+  CustomButton2: {
     marginTop: 100,
   },
 };
