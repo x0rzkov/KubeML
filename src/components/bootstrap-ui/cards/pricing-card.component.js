@@ -3,7 +3,12 @@ import { Card, ListGroup, ListGroupItem, Accordion } from "react-bootstrap";
 import NodeAccordion from "../list-item/node-list-item.component";
 import PricingListItem from "../list-item/pricing-listitem.component";
 
-const PricingCard = ({ prices, longTermNodes, shortTermNodes }) => {
+const PricingCard = ({
+  prices,
+  longTermNodes,
+  shortTermNodes,
+  shortKernelHrs,
+}) => {
   return (
     <Card style={{ width: "85%" }}>
       <Card.Img
@@ -35,12 +40,14 @@ const PricingCard = ({ prices, longTermNodes, shortTermNodes }) => {
           eventNum={1}
           longTermNodes={longTermNodes}
           shortTermNodes={shortTermNodes}
+          shortKernelHrs={shortKernelHrs}
         />
         <PricingListItem
           type={"AWS SageMaker"}
           eventNum={2}
           longTermNodes={longTermNodes}
           shortTermNodes={shortTermNodes}
+          shortKernelHrs={shortKernelHrs}
         />
       </ListGroup>
 

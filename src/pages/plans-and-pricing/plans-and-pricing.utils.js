@@ -30,9 +30,9 @@ export const sizeNodeInstance = (configDetails) => {
         quantity: shortTermKernels,
       });
       shortKubePrice =
-        shortTermKernels * shortKernelHrs * PRICE_DATA.ec2[j].On_Demand * 744;
+        shortTermKernels * shortKernelHrs * PRICE_DATA.ec2[j].On_Demand * 31;
       shortSagePrice =
-        shortTermKernels * shortKernelHrs * PRICE_DATA.ec2[j].SageMaker * 744;
+        shortTermKernels * shortKernelHrs * PRICE_DATA.ec2[j].SageMaker * 31;
       break;
     }
   }

@@ -37,6 +37,10 @@ class PlansAndPricingPage extends Component {
   }
 
   handleSubmit = async (event) => {
+    console.log(
+      "on Submission avg short kernel hrs: ",
+      this.state.shortKernelHrs
+    );
     event.preventDefault();
     const { setNewPlanConfig } = this.props;
     setNewPlanConfig({
@@ -139,6 +143,7 @@ class PlansAndPricingPage extends Component {
                 prices={this.state.prices}
                 longTermNodes={this.state.longTermNodes}
                 shortTermNodes={this.state.shortTermNodes}
+                shortKernelHrs={this.state.shortKernelHrs}
               />
             </Col>
           </Row>

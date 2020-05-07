@@ -3,7 +3,12 @@ import { Card } from "react-bootstrap";
 
 import PricingModal from "../modals/pricing-modal.component";
 
-const PricingListItem = ({ type, longTermNodes, shortTermNodes }) => {
+const PricingListItem = ({
+  type,
+  longTermNodes,
+  shortTermNodes,
+  shortKernelHrs,
+}) => {
   const [modalShow, setModalShow] = useState(false);
 
   return (
@@ -15,7 +20,14 @@ const PricingListItem = ({ type, longTermNodes, shortTermNodes }) => {
           onClick={() => setModalShow(true)}
         ></i>
       </Card.Header>
-      <PricingModal show={modalShow} onHide={() => setModalShow(false)} />
+      <PricingModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        type={type}
+        longTermNodes={longTermNodes}
+        shortTermNodes={shortTermNodes}
+        shortKernelHrs={shortKernelHrs}
+      />
     </Card>
   );
 };
