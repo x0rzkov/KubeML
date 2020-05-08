@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, ListGroup, ListGroupItem, Accordion } from "react-bootstrap";
 import NodeAccordion from "../list-item/node-list-item.component";
-import PricingListItem from "../list-item/pricing-listitem.component";
+import PricingBreakdown from "./pricing-breakdown.component";
 
 const PricingCard = ({
   prices,
@@ -35,14 +35,14 @@ const PricingCard = ({
           ))}
         </Accordion>
 
-        <PricingListItem
+        <PricingBreakdown
           type={"KubeML"}
           eventNum={1}
           longTermNodes={longTermNodes}
           shortTermNodes={shortTermNodes}
           shortKernelHrs={shortKernelHrs}
         />
-        <PricingListItem
+        <PricingBreakdown
           type={"AWS SageMaker"}
           eventNum={2}
           longTermNodes={longTermNodes}

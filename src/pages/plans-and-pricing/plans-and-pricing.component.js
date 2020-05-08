@@ -7,7 +7,7 @@ import { createStructuredSelector } from "reselect";
 import { withRouter } from "react-router-dom";
 
 import CarouselSlide from "../../components/bootstrap-ui/carousel/carousel.component";
-import PricingCard from "../../components/bootstrap-ui/cards/pricing-card.component";
+import PricingCard from "../../components/bootstrap-ui/pricing-card/pricing-card.component";
 import SelectForm from "../../components/bootstrap-ui/forms/form-select.component";
 import FormNumberInput from "../../components/bootstrap-ui/forms/form-number-input.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
