@@ -7,6 +7,7 @@ const PricingCard = ({
   prices,
   longTermNodes,
   shortTermNodes,
+  longKernelHrs,
   shortKernelHrs,
 }) => {
   return (
@@ -47,6 +48,7 @@ const PricingCard = ({
           eventNum={2}
           longTermNodes={longTermNodes}
           shortTermNodes={shortTermNodes}
+          longKernelHrs={longKernelHrs}
           shortKernelHrs={shortKernelHrs}
         />
       </ListGroup>

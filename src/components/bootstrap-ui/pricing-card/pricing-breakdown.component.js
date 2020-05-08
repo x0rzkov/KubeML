@@ -7,6 +7,7 @@ const PricingBreakdown = ({
   type,
   longTermNodes,
   shortTermNodes,
+  longKernelHrs,
   shortKernelHrs,
 }) => {
   const [modalShow, setModalShow] = useState(false);
@@ -54,14 +55,14 @@ const PricingBreakdown = ({
                     </p>
                   </Col>
                   <Col md={3}>
-                    <p>31 * 24</p>
+                    <p>31 * {longKernelHrs ? longKernelHrs : 24}</p>
                   </Col>
                   <Col md={2}>
                     <p>
                       $
                       {(
                         31 *
-                        24 *
+                        (longKernelHrs ? longKernelHrs : 24) *
                         (type === "KubeML"
                           ? item.node.Long_Term
                           : item.node.SageMaker) *

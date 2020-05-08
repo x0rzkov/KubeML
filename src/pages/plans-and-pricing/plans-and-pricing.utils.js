@@ -6,6 +6,7 @@ export const sizeNodeInstance = (configDetails) => {
     avgUsers,
     avgKernels,
     percentLongWorkloads,
+    longKernelHrs,
     shortKernelHrs,
     minRAM,
   } = configDetails;
@@ -76,7 +77,7 @@ export const sizeNodeInstance = (configDetails) => {
         longKubePrice =
           longKubePrice + 31 * 24 * data.quantity * item.Long_Term;
         longSagePrice =
-          longSagePrice + 31 * 24 * data.quantity * item.SageMaker;
+          longSagePrice + 31 * longKernelHrs * data.quantity * item.SageMaker;
       }
     });
   });

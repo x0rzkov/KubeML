@@ -1,9 +1,10 @@
 import { PlansAndPricingTypes } from "./plans-and-pricing.action-types";
 
-const { SET_NEW_PLAN_CONFIG } = PlansAndPricingTypes;
+const { SET_NEW_PLAN_CONFIG, SET_CLIENT_NODE_INFO } = PlansAndPricingTypes;
 
 const INITIAL_STATE = {
   newPlanConfig: null,
+  clientsRequiredNodes: null,
 };
 
 const plansAndPricingReducer = (state = INITIAL_STATE, action) => {
@@ -12,6 +13,11 @@ const plansAndPricingReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         newPlanConfig: action.payload,
+      };
+    case SET_CLIENT_NODE_INFO:
+      return {
+        ...state,
+        clientsRequiredNodes: action.payload,
       };
     default:
       return state;

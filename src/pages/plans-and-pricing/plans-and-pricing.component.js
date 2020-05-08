@@ -3,7 +3,6 @@ import { Container, Row, Col, Form } from "react-bootstrap";
 
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-
 import { withRouter } from "react-router-dom";
 
 import CarouselSlide from "../../components/bootstrap-ui/carousel/carousel.component";
@@ -13,12 +12,15 @@ import FormNumberInput from "../../components/bootstrap-ui/forms/form-number-inp
 import CustomButton from "../../components/custom-button/custom-button.component";
 
 import "./plans-and-pricing.styles.scss";
-
-import { setNewPlanConfig } from "../../redux/plans-and-pricing/plans-and-pricing.actions";
+import {
+  setNewPlanConfig,
+  setClientsNodeInfo,
+} from "../../redux/plans-and-pricing/plans-and-pricing.actions";
 import { sizeNodeInstance } from "./plans-and-pricing.utils";
 
 const ramArray = [8, 16, 32, 64, 160, 196];
 const hoursArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const longhoursArray = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
 
 class PlansAndPricingPage extends Component {
   constructor(props) {
@@ -28,6 +30,7 @@ class PlansAndPricingPage extends Component {
       avgUsers: 0,
       avgKernels: 0,
       percentLongWorkloads: 0,
+      longKernelHrs: 0,
       shortKernelHrs: 0,
       minRAM: 0,
       longTermNodes: [],
@@ -37,16 +40,14 @@ class PlansAndPricingPage extends Component {
   }
 
   handleSubmit = async (event) => {
-    console.log(
-      "on Submission avg short kernel hrs: ",
-      this.state.shortKernelHrs
-    );
     event.preventDefault();
+    // saving client org usage info to redux store
     const { setNewPlanConfig } = this.props;
     setNewPlanConfig({
       avgUsers: this.state.avgUsers,
       avgKernels: this.state.avgKernels,
       percentLongWorkloads: this.state.percentLongWorkloads,
+      longKernelHrs: this.state.longKernelHrs,
       shortKernelHrs: this.state.shortKernelHrs,
       minRAM: this.state.minRAM,
     });
@@ -59,6 +60,8 @@ class PlansAndPricingPage extends Component {
   };
 
   handleCheckout = () => {
+    const { setClientsNodeInfo } = this.props;
+    setClientsNodeInfo(this.state.longTermNodes);
     const { history } = this.props;
     history.push("/checkout");
   };
@@ -108,6 +111,15 @@ class PlansAndPricingPage extends Component {
                   handleChange={this.handleChange}
                 />
                 <SelectForm
+                  label="Enter average runtime (hrs) for kernels running more than
+                  10hrs/day"
+                  controlId="longKernelHrs"
+                  numArray={longhoursArray}
+                  name="longKernelHrs"
+                  value={this.state.longKernelHrs}
+                  handleChange={this.handleChange}
+                />
+                <SelectForm
                   label="Enter average runtime (hrs) for kernels running less than
                   10hrs/day"
                   controlId="shortKernelHrs"
@@ -133,7 +145,7 @@ class PlansAndPricingPage extends Component {
                   handlePress={this.handleCheckout}
                   style={styles.CustomButton2}
                 >
-                  Proceed to Checkout handleCheckout
+                  Proceed to Checkout
                 </CustomButton>
               </div>
             </Col>
@@ -143,6 +155,7 @@ class PlansAndPricingPage extends Component {
                 prices={this.state.prices}
                 longTermNodes={this.state.longTermNodes}
                 shortTermNodes={this.state.shortTermNodes}
+                longKernelHrs={this.state.longKernelHrs}
                 shortKernelHrs={this.state.shortKernelHrs}
               />
             </Col>
@@ -155,12 +168,10 @@ class PlansAndPricingPage extends Component {
 
 const mapStateToProps = createStructuredSelector({});
 
-const mapDispatchToProps = (dispatch) => ({
-  setNewPlanConfig: (planDetails) => dispatch(setNewPlanConfig(planDetails)),
-});
-
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(PlansAndPricingPage)
+  connect(mapStateToProps, { setNewPlanConfig, setClientsNodeInfo })(
+    PlansAndPricingPage
+  )
 );
 
 const styles = {

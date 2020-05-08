@@ -2,16 +2,20 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
-import { selectNewPlanConfig } from "../../redux/plans-and-pricing/plans-and-pricing.selectors";
+import {
+  selectNewPlanConfig,
+  selectNewNodeDetails,
+} from "../../redux/plans-and-pricing/plans-and-pricing.selectors";
 
 import "./checkout.styles.scss";
 
-const CheckoutPage = ({ planDetails }) => {
+const CheckoutPage = ({ planDetails, nodeDetails }) => {
   useEffect(() => {
     if (planDetails) {
-      console.log("Plan details on checkoutpage is: ", planDetails);
+      console.log(planDetails);
+      console.log(nodeDetails);
     }
-  }, []);
+  }, [planDetails, nodeDetails]);
 
   return (
     <div className="checkout-page">
@@ -39,6 +43,7 @@ const CheckoutPage = ({ planDetails }) => {
 
 const mapStateToProps = createStructuredSelector({
   planDetails: selectNewPlanConfig,
+  nodeDetails: selectNewNodeDetails,
 });
 
 export default connect(mapStateToProps)(CheckoutPage);
