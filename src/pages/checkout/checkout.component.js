@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
-import { Container, Row, Col, Form } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Container, Row } from "react-bootstrap";
 
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
+import StripeCheckoutButton from "../../components/stripe-button/stripe-button.component";
 
 import {
   selectNewPlanConfig,
@@ -13,6 +14,7 @@ import {
 import styles from "./checkout.styles.js";
 
 const CheckoutPage = ({ planDetails, nodeDetails }) => {
+  const [total] = useState(4399);
   useEffect(() => {
     if (planDetails) {
     }
@@ -37,17 +39,18 @@ const CheckoutPage = ({ planDetails, nodeDetails }) => {
           <span>Remove</span>
         </div>
       </Row>
+
       {nodeDetails.map((item) => (
         <CheckoutItem key={item.node._id} cartItem={item} />
       ))}
 
-      <div className="total">TOTAL: $total</div>
-      <div className="test-warning">
+      <Row style={styles.row2}>TOTAL: $total</Row>
+      <div style={styles.row3}>
         *Please use the following test credit card for payments*
         <br />
         4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
       </div>
-      {/* <StripeCheckoutButton price={total} /> */}
+      <StripeCheckoutButton price={total} />
     </Container>
   );
 };
