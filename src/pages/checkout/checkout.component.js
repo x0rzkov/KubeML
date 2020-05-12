@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Container, Row } from "react-bootstrap";
 
 import { connect } from "react-redux";
@@ -13,12 +13,8 @@ import {
 
 import styles from "./checkout.styles.js";
 
-const CheckoutPage = ({ planDetails, nodeDetails }) => {
+const CheckoutPage = ({ nodeDetails }) => {
   const [total] = useState(4399);
-  useEffect(() => {
-    if (planDetails) {
-    }
-  }, [planDetails, nodeDetails]);
 
   return (
     <Container style={styles.container}>

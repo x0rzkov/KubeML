@@ -57,7 +57,7 @@ class App extends Component {
             path="/signin"
             render={() =>
               this.props.currentUser ? (
-                <Redirect to="/" />
+                <Redirect to="/console" />
               ) : (
                 <SignInAndSignUpPage />
               )
@@ -69,7 +69,13 @@ class App extends Component {
             component={PlansAndPricingPage}
           />
           <Route exact path="/checkout" component={CheckoutPage} />
-          <Route exact path="/console" component={ConsolePage} />
+          <Route
+            exact
+            path="/console"
+            render={() =>
+              this.props.currentUser ? <ConsolePage /> : <Redirect to="/" />
+            }
+          />
         </Switch>
         <Footer />
       </div>
