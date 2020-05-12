@@ -73,7 +73,11 @@ class App extends Component {
             exact
             path="/console"
             render={() =>
-              this.props.currentUser ? <ConsolePage /> : <Redirect to="/" />
+              this.props.currentUser ? (
+                <ConsolePage />
+              ) : (
+                <Redirect to="/signin" />
+              )
             }
           />
         </Switch>

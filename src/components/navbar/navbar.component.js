@@ -17,7 +17,7 @@ const Navbar = ({ currentUser }) => {
         <Link to="/plans-and-pricing">PLANS/PRICING</Link>
       </li>
       <li>
-        <Link to="/">CONTACT</Link>
+        <Link to="/console">CONTACT</Link>
       </li>
       <li>
         {currentUser ? (
