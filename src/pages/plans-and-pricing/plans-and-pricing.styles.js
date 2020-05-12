@@ -9,6 +9,7 @@ const styles = {
     display: "flex",
     justifyContent: "flex-end",
     paddingRight: 0,
+    paddingBottom: 5,
   },
   h2: {
     marginBottom: 35,

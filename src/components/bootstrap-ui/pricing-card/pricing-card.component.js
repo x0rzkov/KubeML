@@ -3,6 +3,8 @@ import { Card, ListGroup, ListGroupItem, Accordion } from "react-bootstrap";
 import NodeAccordion from "../list-item/node-list-item.component";
 import PricingBreakdown from "./pricing-breakdown.component";
 
+import "./pricing-card.styles.scss";
+
 const PricingCard = ({
   prices,
   longTermNodes,
@@ -11,7 +13,7 @@ const PricingCard = ({
   shortKernelHrs,
 }) => {
   return (
-    <Card style={{ width: "85%" }}>
+    <Card as="div" className="card1">
       <Card.Img
         variant="top"
         src={require("../../../assets/3d.svg")}
