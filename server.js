@@ -18,6 +18,7 @@ app.use(cors()); //allows for making requests from localhost:3000 to localhost:5
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
 
+  // express server doing buildpack for us
   app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "client/build", "index.html"));
     //sending back static files (HTML,CSS,JS files)
