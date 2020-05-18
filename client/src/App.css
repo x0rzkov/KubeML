@@ -14,8 +14,8 @@
 }
 
 body {
-  font-family: "Raleway", sans-serif;
-  font-size: 1rem;
+  font-family: "RaleWay", sans-serif;
+  font-size: 18px;
   line-height: 1.6;
   background-color: #fff;
   color: #333;
@@ -41,6 +41,28 @@ img {
   overflow: hidden;
   margin-top: 100px;
   margin-bottom: 3rem;
+}
+
+.container-fluid {
+  margin: auto;
+  overflow: hidden;
+  margin-top: 100px;
+}
+
+.row {
+  justify-content: center;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.inner-row {
+  max-width: 1200px;
 }
 
 /* Text Styles*/
@@ -88,6 +110,16 @@ img {
 .p-3 {
   padding: 3rem;
 }
+.p-row-2 {
+  padding: 2rem;
+}
+.p-row-3 {
+  padding: 3rem;
+}
+.py-row-4 {
+  padding: 4rem 2rem;
+}
+
 .py {
   padding: 0.5rem 0;
 }
