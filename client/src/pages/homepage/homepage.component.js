@@ -27,7 +27,7 @@ const HomePage = () => (
             KubeML is a turn-key solution for running data-science workloads
             efficiently, collaboratively, and anywhere anytime.
           </h2>
-          <p>
+          <p className="home">
             KubeML provides clients access to a fully-managed cluster hosted on
             cloud infrastructure. The KubeML team provides an online IDE powered
             by Jupyter Notebooks connected to a gateway which leverages
@@ -48,7 +48,7 @@ const HomePage = () => (
         </Col>
         <Col className="col" xl={8}>
           <h3>Powered by Jupyter Notebooks</h3>
-          <p>
+          <p className="home">
             KubeML utilizes Jupyter's open-source platform and integrates
             JupyterHub with Jupyter Enterprise Gateway. Jupyterhub provides
             clients with a frontend UI to manage users and takes care of
@@ -90,7 +90,7 @@ const HomePage = () => (
           <h3 style={{ marginBottom: 10 }}>
             Scale worry-free as your organization grows
           </h3>
-          <p>
+          <p className="home">
             As your organization expands and adds more developers to the team,
             KubeML leverages kubernetes to provide Jupyterhub and Enterprise
             gateway as highly-available deployments. KubeML also provides
