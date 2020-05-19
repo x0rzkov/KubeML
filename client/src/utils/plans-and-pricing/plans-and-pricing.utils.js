@@ -1,4 +1,4 @@
-import PRICE_DATA from "./price-data";
+import PRICE_DATA from "../../redux/plans-and-pricing/price-data";
 // function that takes in client usage parameters and returns
 // ec2 Nodes needed long-term and cost of KubeML vs competitors
 export const sizeNodeInstance = (configDetails) => {

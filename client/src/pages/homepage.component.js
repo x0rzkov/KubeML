@@ -1,16 +1,19 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
-import { ReactComponent as Logo } from "../../assets/Latest-diagram.svg";
-import { ReactComponent as Logo2 } from "../../assets/JupyterHub.svg";
-import { ReactComponent as Logo3 } from "../../assets/Jupyter-Notebook.svg";
-import { ReactComponent as Logo4 } from "../../assets/Scalability.svg";
+import { ReactComponent as Logo } from "../assets/Latest-diagram.svg";
+import { ReactComponent as Logo2 } from "../assets/JupyterHub.svg";
+import { ReactComponent as Logo3 } from "../assets/Jupyter-Notebook.svg";
+import { ReactComponent as Logo4 } from "../assets/Scalability.svg";
 
 const HomePage = () => (
   <Container fluid>
     <Row style={{ backgroundColor: "#1a75ff" }}>
       <Row className="row-inner p-row-2">
-        <Col className="my-3" style={{ alignItems: "center", height: 300 }}>
+        <Col
+          className="center my-3"
+          style={{ alignItems: "center", height: 300 }}
+        >
           <h1 className="x-large">Welcome to KubeML</h1>
           <p className="lead">
             An online platform for building, training, and testing
@@ -22,7 +25,7 @@ const HomePage = () => (
 
     <Row style={{ backgroundColor: "#f8f8f8" }}>
       <Row className="row-inner p-row-2">
-        <Col className="col my-3" lg={5} xl={6}>
+        <Col className="col center my-3" lg={5} xl={6}>
           <h2>
             KubeML is a turn-key solution for running data-science workloads
             efficiently, collaboratively, and anywhere anytime.
@@ -43,7 +46,7 @@ const HomePage = () => (
 
     <Row style={{ backgroundColor: "#e8e8e8" }}>
       <Row className="row-inner py-row-4">
-        <Col className="col my-3" xl={4}>
+        <Col className="col center my-3" xl={4}>
           <Logo2 style={{ width: "100%", paddingRight: 15 }} />
         </Col>
         <Col className="col my-3" xl={8}>
@@ -63,7 +66,7 @@ const HomePage = () => (
 
     <Row>
       <Row className="row-inner p-row-2">
-        <Col className="col my-3" xl={4}>
+        <Col className="col center my-3" xl={4}>
           <h3>A familiar IDE environment for your development team</h3>
           <h5>KubeML provides the following kernels:</h5>
           <ul>

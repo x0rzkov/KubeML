@@ -2,9 +2,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 150px;
+  height: 125px;
   background-color: #343a40;
   width: 100%;
+  z-index: 2000;
 
   .copyright-text {
     color: white;

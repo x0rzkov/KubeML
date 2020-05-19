@@ -5,17 +5,17 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { withRouter } from "react-router-dom";
 
-import CarouselSlide from "../../components/bootstrap-ui/carousel/carousel.component";
-import PricingCard from "../../components/bootstrap-ui/pricing-card/pricing-card.component";
-import SelectForm from "../../components/bootstrap-ui/forms/form-select.component";
-import FormNumberInput from "../../components/bootstrap-ui/forms/form-number-input.component";
-import CustomButton from "../../components/custom-button/custom-button.component";
+import CarouselSlide from "../components/bootstrap-ui/carousel/carousel.component";
+import PricingCard from "../components/bootstrap-ui/pricing-card/pricing-card.component";
+import SelectForm from "../components/bootstrap-ui/forms/form-select.component";
+import FormNumberInput from "../components/bootstrap-ui/forms/form-number-input.component";
+import CustomButton from "../components/custom-button/custom-button.component";
 
 import {
   setNewPlanConfig,
   setClientsNodeInfo,
-} from "../../redux/plans-and-pricing/plans-and-pricing.actions";
-import { sizeNodeInstance } from "./plans-and-pricing.utils";
+} from "../redux/plans-and-pricing/plans-and-pricing.actions";
+import { sizeNodeInstance } from "../utils/plans-and-pricing/plans-and-pricing.utils";
 
 const ramArray = [8, 16, 32, 64, 160, 196];
 const hoursArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -134,12 +134,15 @@ class PlansAndPricingPage extends Component {
                 handleChange={this.handleChange}
               />
 
-              <CustomButton type="submit" style={{ marginTop: 80 }}>
+              <CustomButton type="submit" style={{ marginTop: 50 }}>
                 Check Price
               </CustomButton>
             </Form>
-            <div className="row" style={{ marginTop: 80 }}>
-              <CustomButton handlePress={this.handleCheckout}>
+            <div className="row">
+              <CustomButton
+                handlePress={this.handleCheckout}
+                style={{ marginTop: 50 }}
+              >
                 Proceed to Checkout
               </CustomButton>
             </div>

@@ -15,10 +15,11 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
-    zIndex: -1,
+    zIndex: -1000,
   },
   drawerPaper: {
     width: drawerWidth,
+    marginTop: 100,
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
@@ -37,8 +38,8 @@ export default function PermanentDrawerLeft() {
       anchor="left"
     >
       <div className={classes.toolbar} />
-      <Divider />
-      <List style={{ marginTop: 25 }}>
+
+      <List style={{ marginTop: -50 }}>
         {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>

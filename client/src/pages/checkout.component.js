@@ -3,22 +3,20 @@ import { Container, Row } from "react-bootstrap";
 
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import CheckoutItem from "../../components/checkout-item/checkout-item.component";
-import StripeCheckoutButton from "../../components/stripe-button/stripe-button.component";
+import CheckoutItem from "../components/checkout-item/checkout-item.component";
+import StripeCheckoutButton from "../components/stripe-button/stripe-button.component";
 
 import {
   selectNewPlanConfig,
   selectNewNodeDetails,
-} from "../../redux/plans-and-pricing/plans-and-pricing.selectors";
-
-import styles from "./checkout.styles.js";
+} from "../redux/plans-and-pricing/plans-and-pricing.selectors";
 
 const CheckoutPage = ({ nodeDetails }) => {
   const [total] = useState(4399);
 
   return (
-    <Container style={styles.container}>
-      <Row style={styles.row1}>
+    <Container>
+      <Row style={styles.titleRow}>
         <div>
           <span>Product</span>
         </div>
@@ -37,11 +35,13 @@ const CheckoutPage = ({ nodeDetails }) => {
       </Row>
 
       {nodeDetails.map((item) => (
-        <CheckoutItem key={item.node._id} cartItem={item} />
+        <Row>
+          <CheckoutItem key={item.node._id} cartItem={item} />
+        </Row>
       ))}
 
-      <Row style={styles.row2}>TOTAL: $total</Row>
-      <div style={styles.row3}>
+      <Row style={styles.total}>TOTAL: $total</Row>
+      <div style={styles.card}>
         *Please use the following test credit card for payments*
         <br />
         4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
@@ -57,3 +57,24 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export default connect(mapStateToProps)(CheckoutPage);
+
+const styles = {
+  titleRow: {
+    justifyContent: "space-between",
+    marginTop: 25,
+    padding: 10,
+    fontSize: 18,
+    borderColor: "darkgrey",
+    borderBottomWidth: 1,
+    borderBottomStyle: "solid",
+  },
+  total: {
+    marginTop: 50,
+    fontSize: 24,
+  },
+  card: {
+    marginTop: 40,
+    fontSize: 18,
+    textAlign: "center",
+  },
+};
