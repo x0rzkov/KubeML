@@ -54,16 +54,22 @@ img {
   justify-content: center;
 }
 
+.row-inner {
+  max-width: 1200px;
+}
+
+/* default behavior unless col width specified*/
+/* using props lg={8} etc*/
 .col {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
 }
 
-.inner-row {
-  max-width: 1200px;
+.col-align-end {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 0px;
 }
 
 /* Text Styles*/
@@ -116,11 +122,16 @@ img {
 .p-3 {
   padding: 3rem;
 }
+
 .p-row-2 {
   padding: 2rem;
 }
 .p-row-3 {
   padding: 3rem;
+}
+
+.py-row-2 {
+  padding: 2rem 0rem;
 }
 .py-row-4 {
   padding: 4rem 2rem;

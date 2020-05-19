@@ -11,7 +11,6 @@ import SelectForm from "../../components/bootstrap-ui/forms/form-select.componen
 import FormNumberInput from "../../components/bootstrap-ui/forms/form-number-input.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
 
-import styles from "./plans-and-pricing.styles.js";
 import {
   setNewPlanConfig,
   setClientsNodeInfo,
@@ -73,15 +72,14 @@ class PlansAndPricingPage extends Component {
 
   render() {
     return (
-      <Container style={styles.container}>
-        <Row style={styles.row1}>
+      <Container>
+        <Row>
           <CarouselSlide />
         </Row>
-        <Row>
-          <Col lg="8">
-            <h2 style={styles.h2}>
-              Let the KubeML pricing tool calculate for you!
-            </h2>
+        <Row className="py-row-2">
+          <Col lg={8}>
+            <h2>Let the KubeML pricing tool calculate for you!</h2>
+            <br></br>
             <Form onSubmit={this.handleSubmit}>
               <FormNumberInput
                 label="Enter your organizations daily active users (Researches/Data
@@ -135,21 +133,19 @@ class PlansAndPricingPage extends Component {
                 value={this.state.minRAM}
                 handleChange={this.handleChange}
               />
-              <CustomButton type="submit" style={styles.CustomButton}>
+
+              <CustomButton type="submit" style={{ marginTop: 80 }}>
                 Check Price
               </CustomButton>
             </Form>
-            <div style={styles.buttonDiv}>
-              <CustomButton
-                handlePress={this.handleCheckout}
-                style={styles.CustomButton2}
-              >
+            <div className="row" style={{ marginTop: 80 }}>
+              <CustomButton handlePress={this.handleCheckout}>
                 Proceed to Checkout
               </CustomButton>
             </div>
           </Col>
 
-          <Col lg="4" style={styles.col2}>
+          <Col className="col-align-end" lg={4}>
             <PricingCard
               prices={this.state.prices}
               longTermNodes={this.state.longTermNodes}
@@ -159,6 +155,9 @@ class PlansAndPricingPage extends Component {
             />
           </Col>
         </Row>
+        <br></br>
+        <br></br>
+        <br></br>
       </Container>
     );
   }
