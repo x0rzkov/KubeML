@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, Form } from "react-bootstrap";
 
-const SelectForm = ({
+const NumberSelect = ({
   label,
   controlId,
   placeholder,
@@ -10,25 +10,11 @@ const SelectForm = ({
   ...otherprops
 }) => {
   return (
-    <Form.Group
-      as={Row}
-      controlId={controlId}
-      style={{
-        paddingTop: 25,
-        paddingBottom: 25,
-        marginBottom: 0,
-        borderBottom: 1,
-        borderStyle: "solid",
-        borderColor: "#E8E8E8",
-        borderTop: 0,
-        borderRight: 0,
-        borderLeft: 0,
-      }}
-    >
+    <Form.Row controlId={controlId} style={styles.row}>
       <Form.Label column sm="9">
         {label}
       </Form.Label>
-      <Col sm="2">
+      <Col sm="3" style={styles.col}>
         <Form.Control
           as="select"
           onChange={handleChange}
@@ -40,8 +26,26 @@ const SelectForm = ({
           ))}
         </Form.Control>
       </Col>
-    </Form.Group>
+    </Form.Row>
   );
 };
 
-export default SelectForm;
+export default NumberSelect;
+
+const styles = {
+  row: {
+    paddingTop: 25,
+    paddingBottom: 25,
+    marginBottom: 0,
+    borderBottom: 1,
+    borderStyle: "solid",
+    borderColor: "#E8E8E8",
+    borderTop: 0,
+    borderRight: 0,
+    borderLeft: 0,
+  },
+  col: {
+    paddingLeft: 45,
+    paddingRight: 45,
+  },
+};

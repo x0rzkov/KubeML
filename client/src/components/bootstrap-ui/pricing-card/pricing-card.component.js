@@ -13,14 +13,14 @@ const PricingCard = ({
   shortKernelHrs,
 }) => {
   return (
-    <Card as="div" className="card1">
+    <Card className="pricing-card">
       <Card.Img
         variant="top"
         src={require("../../../assets/3d.svg")}
         style={styles.cardImage}
       />
       <div style={styles.h5}>
-        <h5 style={styles.thick}>Based on your usage needs</h5>
+        <h5>Based on your usage needs</h5>
       </div>
       <ListGroup>
         <ListGroupItem style={styles.thick}>
@@ -82,9 +82,6 @@ const styles = {
   dropdown: {
     borderTopWidth: 0,
     borderBottomWidth: 0,
-  },
-  thick: {
-    fontWeight: 600,
   },
   cardImage: {
     width: "25%",

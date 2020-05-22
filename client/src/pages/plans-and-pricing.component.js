@@ -7,8 +7,8 @@ import { withRouter } from "react-router-dom";
 
 import CarouselSlide from "../components/bootstrap-ui/carousel/carousel.component";
 import PricingCard from "../components/bootstrap-ui/pricing-card/pricing-card.component";
-import SelectForm from "../components/bootstrap-ui/forms/form-select.component";
-import FormNumberInput from "../components/bootstrap-ui/forms/form-number-input.component";
+import NumberSelect from "../components/bootstrap-ui/form-inputs/number-select.component";
+import NumberInput from "../components/bootstrap-ui/form-inputs/number-input.component";
 import CustomButton from "../components/custom-button/custom-button.component";
 
 import {
@@ -77,11 +77,11 @@ class PlansAndPricingPage extends Component {
           <CarouselSlide />
         </Row>
         <Row className="py-row-2">
-          <Col lg={8}>
+          <Col lg={9} className="p-row-right">
             <h2>Let the KubeML pricing tool calculate for you!</h2>
             <br></br>
             <Form onSubmit={this.handleSubmit}>
-              <FormNumberInput
+              <NumberInput
                 label="Enter your organizations daily active users (Researches/Data
                     Scientists/ Developers)"
                 controlId="avgUsers"
@@ -90,7 +90,8 @@ class PlansAndPricingPage extends Component {
                 value={this.state.avgUsers}
                 handleChange={this.handleChange}
               />
-              <FormNumberInput
+
+              <NumberInput
                 label="Enter average kernels a user utilizes simultaneously for
                   building/training ML models"
                 controlId="avgKernels"
@@ -99,7 +100,7 @@ class PlansAndPricingPage extends Component {
                 value={this.state.avgKernels}
                 handleChange={this.handleChange}
               />
-              <FormNumberInput
+              <NumberInput
                 label=" Enter percentage of kernels running for 10+ hrs/day"
                 controlId="percentLongWorkloads"
                 placeholder="0.0"
@@ -107,7 +108,7 @@ class PlansAndPricingPage extends Component {
                 value={this.state.percentLongWorkloads}
                 handleChange={this.handleChange}
               />
-              <SelectForm
+              <NumberSelect
                 label="Enter average runtime (hrs) for kernels running more than
                   10hrs/day"
                 controlId="longKernelHrs"
@@ -116,7 +117,7 @@ class PlansAndPricingPage extends Component {
                 value={this.state.longKernelHrs}
                 handleChange={this.handleChange}
               />
-              <SelectForm
+              <NumberSelect
                 label="Enter average runtime (hrs) for kernels running less than
                   10hrs/day"
                 controlId="shortKernelHrs"
@@ -125,7 +126,7 @@ class PlansAndPricingPage extends Component {
                 value={this.state.shortKernelHrs}
                 handleChange={this.handleChange}
               />
-              <SelectForm
+              <NumberSelect
                 label="Enter minimum RAM (GB) desired per kernel"
                 controlId="minRAM"
                 numArray={ramArray}
@@ -134,21 +135,21 @@ class PlansAndPricingPage extends Component {
                 handleChange={this.handleChange}
               />
 
-              <CustomButton type="submit" style={{ marginTop: 50 }}>
+              <CustomButton type="submit" style={{ marginTop: 75 }}>
                 Check Price
               </CustomButton>
             </Form>
             <div className="row">
               <CustomButton
                 handlePress={this.handleCheckout}
-                style={{ marginTop: 50 }}
+                style={{ marginTop: 75 }}
               >
                 Proceed to Checkout
               </CustomButton>
             </div>
           </Col>
 
-          <Col className="col-align-end" lg={4}>
+          <Col lg={3} className="p-row-0">
             <PricingCard
               prices={this.state.prices}
               longTermNodes={this.state.longTermNodes}

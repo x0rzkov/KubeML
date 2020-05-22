@@ -80,12 +80,6 @@ img {
   justify-content: center;
 }
 
-.col-align-end {
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 0px;
-}
-
 /* Text Styles*/
 .x-large {
   font-size: 4rem;
@@ -137,11 +131,19 @@ img {
   padding: 3rem;
 }
 
+.p-row-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
 .p-row-2 {
   padding: 2rem;
 }
 .p-row-3 {
   padding: 3rem;
+}
+
+.p-row-right {
+  padding-right: 50px;
 }
 
 .py-row-2 {
