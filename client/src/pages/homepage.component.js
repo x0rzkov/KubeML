@@ -9,11 +9,8 @@ import { ReactComponent as Logo4 } from "../assets/Scalability.svg";
 const HomePage = () => (
   <Container fluid>
     <Row style={{ backgroundColor: "#1a75ff" }}>
-      <Row className="row-inner p-row-2">
-        <Col
-          className="center my-3"
-          style={{ alignItems: "center", height: 300 }}
-        >
+      <Row className="row-inner py-row-2">
+        <Col className="center my-3" style={{ alignItems: "center" }}>
           <h1 className="x-large">Welcome to KubeML</h1>
           <p className="lead">
             An online platform for building, training, and testing
@@ -39,13 +36,13 @@ const HomePage = () => (
           </p>
         </Col>
         <Col className="col  my-3" lg={7} xl={6}>
-          <Logo style={{ height: 400, width: "100%" }} />
+          <Logo style={{ height: "100%", width: "100%" }} />
         </Col>
       </Row>
     </Row>
 
     <Row style={{ backgroundColor: "#e8e8e8" }}>
-      <Row className="row-inner py-row-4">
+      <Row className="row-inner p-row-2">
         <Col className="col center my-3" xl={4}>
           <Logo2 style={{ width: "100%", paddingRight: 15 }} />
         </Col>
@@ -66,7 +63,7 @@ const HomePage = () => (
 
     <Row>
       <Row className="row-inner p-row-2">
-        <Col className="col center my-3" xl={4}>
+        <Col className="col center" xl={4}>
           <h3>A familiar IDE environment for your development team</h3>
           <h5>KubeML provides the following kernels:</h5>
           <ul>
@@ -81,15 +78,15 @@ const HomePage = () => (
           </ul>
         </Col>
 
-        <Col className="col my-3" xl={8}>
-          <Logo3 style={{ width: "100%", height: 530 }} />
+        <Col className="col" xl={8}>
+          <Logo3 style={{ width: "100%", height: 500 }} />
         </Col>
       </Row>
     </Row>
 
     <Row style={{ backgroundColor: "#e8e8e8" }}>
-      <Row className="row-inner p-row-2">
-        <Col className="my-3">
+      <Row className="row-inner py-row-4">
+        <Col>
           <h3>Scale worry-free as your organization grows</h3>
           <p className="home my-2">
             As your organization expands and adds more developers to the team,
@@ -98,7 +95,7 @@ const HomePage = () => (
             resources for clients seeking to provide various levels of compute
             power to different teams within their organization.
           </p>
-          <Logo4 style={{ width: "100%", height: 530 }} />
+          <Logo4 style={{ width: "100%", height: 500 }} />
         </Col>
       </Row>
     </Row>

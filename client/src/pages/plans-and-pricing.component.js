@@ -135,18 +135,10 @@ class PlansAndPricingPage extends Component {
                 handleChange={this.handleChange}
               />
 
-              <CustomButton type="submit" style={{ marginTop: 75 }}>
+              <CustomButton type="submit" style={{ marginTop: 40 }}>
                 Check Price
               </CustomButton>
             </Form>
-            <div className="row">
-              <CustomButton
-                handlePress={this.handleCheckout}
-                style={{ marginTop: 75 }}
-              >
-                Proceed to Checkout
-              </CustomButton>
-            </div>
           </Col>
 
           <Col lg={3} className="p-row-0">
@@ -159,8 +151,19 @@ class PlansAndPricingPage extends Component {
             />
           </Col>
         </Row>
-        <br></br>
-        <br></br>
+        <div className="row">
+          <CustomButton
+            handlePress={this.handleCheckout}
+            style={{
+              marginTop: 75,
+              backgroundColor: "#4285f4",
+              width: 350,
+              borderRadius: 10,
+            }}
+          >
+            Proceed to Checkout
+          </CustomButton>
+        </div>
         <br></br>
       </Container>
     );

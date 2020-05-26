@@ -118,7 +118,7 @@ img {
 }
 
 /* Padding */
-.p {
+/* .p {
   padding: 0.5rem;
 }
 .p-1 {
@@ -129,7 +129,7 @@ img {
 }
 .p-3 {
   padding: 3rem;
-}
+} */
 
 .p-row-0 {
   padding-left: 0px;
@@ -153,7 +153,7 @@ img {
   padding: 4rem 2rem;
 }
 
-.py {
+/* .py {
   padding: 0.5rem 0;
 }
 .py-1 {
@@ -164,10 +164,10 @@ img {
 }
 .py-3 {
   padding: 3rem 0;
-}
+} */
 
 /* Margin */
-.m {
+/* .m {
   margin: 0.5rem;
 }
 .m-1 {
@@ -182,15 +182,16 @@ img {
 .my {
   margin: 0.5rem 0;
 }
-.my-1 {
+.my-col-1 {
   margin: 1rem 0;
+  background-color: aqua;
 }
 .my-2 {
   margin: 2rem 0;
 }
 .my-3 {
   margin: 3rem 0;
-}
+} */
 
 .btn {
   display: inline-block;

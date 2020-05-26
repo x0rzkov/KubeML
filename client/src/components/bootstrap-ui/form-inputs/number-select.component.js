@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Form } from "react-bootstrap";
+import { Col, Form } from "react-bootstrap";
 
 const NumberSelect = ({
   label,
@@ -10,7 +10,7 @@ const NumberSelect = ({
   ...otherprops
 }) => {
   return (
-    <Form.Row controlId={controlId} style={styles.row}>
+    <Form.Row style={styles.row}>
       <Form.Label column sm="9">
         {label}
       </Form.Label>

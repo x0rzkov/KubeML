@@ -9,7 +9,7 @@ const NumberInput = ({
   ...otherprops
 }) => {
   return (
-    <Form.Row controlId={controlId} style={styles.row}>
+    <Form.Row style={styles.row}>
       <Form.Label column sm="9">
         {label}
       </Form.Label>

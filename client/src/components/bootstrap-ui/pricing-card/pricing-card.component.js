@@ -1,6 +1,6 @@
 import React from "react";
-import { Card, ListGroup, ListGroupItem, Accordion } from "react-bootstrap";
-import NodeAccordion from "../list-item/node-list-item.component";
+import { Card, ListGroup } from "react-bootstrap";
+import NodeBreakdown from "./node-breakdown.component";
 import PricingBreakdown from "./pricing-breakdown.component";
 
 import "./pricing-card.styles.scss";
@@ -23,21 +23,11 @@ const PricingCard = ({
         <h5>Based on your usage needs</h5>
       </div>
       <ListGroup>
-        <ListGroupItem style={styles.thick}>
-          Continuous running nodes:
-        </ListGroupItem>
-        <Accordion style={styles.dropdown}>
-          {longTermNodes.map((item) => (
-            <NodeAccordion key={item.node._id} item={item} />
-          ))}
-        </Accordion>
-        <ListGroupItem style={styles.thick}>On Demand Nodes:</ListGroupItem>
-        <Accordion style={styles.dropdown}>
-          {shortTermNodes.map((item) => (
-            <NodeAccordion key={item.node._id} item={item} />
-          ))}
-        </Accordion>
-
+        <NodeBreakdown
+          type={"Continuous Running Nodes"}
+          nodes={longTermNodes}
+        />
+        <NodeBreakdown type={"On Demand Nodes"} nodes={shortTermNodes} />
         <PricingBreakdown
           type={"KubeML"}
           eventNum={1}
