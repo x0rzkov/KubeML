@@ -6,7 +6,7 @@ import { createStructuredSelector } from "reselect";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import Navbar from "./components/navbar/navbar.component";
+import NavBar from "./components/navbar/navbar.component";
 import Footer from "./components/footer/footer.component";
 
 import HomePage from "./pages/homepage.component";
@@ -49,7 +49,7 @@ class App extends Component {
   render() {
     return (
       <div className="wrapper">
-        <Navbar />
+        <NavBar />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route

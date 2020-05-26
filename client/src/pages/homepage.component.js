@@ -35,7 +35,7 @@ const HomePage = () => (
             cluster
           </p>
         </Col>
-        <Col className="col  my-3" lg={7} xl={6}>
+        <Col className="col my-3" lg={7} xl={6}>
           <Logo style={{ height: "100%", width: "100%" }} />
         </Col>
       </Row>
@@ -85,7 +85,7 @@ const HomePage = () => (
     </Row>
 
     <Row style={{ backgroundColor: "#e8e8e8" }}>
-      <Row className="row-inner py-row-4">
+      <Row className="row-inner py-row-2">
         <Col>
           <h3>Scale worry-free as your organization grows</h3>
           <p className="home my-2">

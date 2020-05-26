@@ -1,4 +1,5 @@
 import React from "react";
+import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -8,37 +9,40 @@ import { selectCurrentUser } from "../../redux/user/user.selectors";
 
 import { ReactComponent as Logo } from "../../assets/3d.svg";
 
-import "./navbar.styles.scss";
-
-const Navbar = ({ currentUser }) => {
-  const guestLinks = (
-    <ul>
-      <li>
-        <Link to="/plans-and-pricing">PLANS/PRICING</Link>
-      </li>
-      <li>
-        <Link to="/console">CONTACT</Link>
-      </li>
-      <li>
-        {currentUser ? (
-          <div onClick={() => auth.signOut()}>SIGN OUT</div>
-        ) : (
-          <Link to="/signin">SIGN IN</Link>
-        )}
-      </li>
-    </ul>
-  );
-
+const NavBar = ({ currentUser }) => {
   return (
-    <nav className="navbar bg-dark">
-      <div className="logo-container">
-        <Link to="/">
-          <Logo className="logo" />
-        </Link>
-        <h3 className="logo-text">KubeML</h3>
-      </div>
-      <div>{guestLinks}</div>
-    </nav>
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      bg="dark"
+      variant="dark"
+      style={{ paddingTop: 10, paddingBottom: 10 }}
+    >
+      <Link to="/" className="mx-1">
+        <Logo style={styles.logo} />
+        <Navbar.Brand>KubeML</Navbar.Brand>
+      </Link>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="ml-auto m-right-3" style={{ alignItems: "center" }}>
+          <Link to="/plans-and-pricing" className="p-2">
+            PLANS/PRICING
+          </Link>
+          <Link to="/console" className="p-2">
+            CONTACT
+          </Link>
+          {currentUser ? (
+            <div onClick={() => auth.signOut()} className="p-2">
+              SIGN OUT
+            </div>
+          ) : (
+            <Link to="/signin" className="p-2">
+              SIGN IN
+            </Link>
+          )}
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
 
@@ -46,4 +50,13 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps)(NavBar);
+
+const styles = {
+  logo: {
+    height: 30,
+    width: 30,
+    marginBottom: 5,
+    marginRight: 5,
+  },
+};
