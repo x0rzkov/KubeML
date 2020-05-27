@@ -29,9 +29,9 @@ class PlansAndPricingPage extends Component {
       avgUsers: 0,
       avgKernels: 0,
       percentLongWorkloads: 0,
-      longKernelHrs: 0,
-      shortKernelHrs: 0,
-      minRAM: 0,
+      longKernelHrs: 11,
+      shortKernelHrs: 1,
+      minRAM: 8,
       longTermNodes: [],
       shortTermNodes: [],
       prices: "",
@@ -87,6 +87,8 @@ class PlansAndPricingPage extends Component {
                 controlId="avgUsers"
                 placeholder="Integer"
                 name="avgUsers"
+                min={1}
+                step={1}
                 value={this.state.avgUsers}
                 handleChange={this.handleChange}
               />
@@ -97,6 +99,8 @@ class PlansAndPricingPage extends Component {
                 controlId="avgKernels"
                 placeholder="0.0"
                 name="avgKernels"
+                min={1}
+                step={0.1}
                 value={this.state.avgKernels}
                 handleChange={this.handleChange}
               />
@@ -105,6 +109,8 @@ class PlansAndPricingPage extends Component {
                 controlId="percentLongWorkloads"
                 placeholder="0.0"
                 name="percentLongWorkloads"
+                min={0.01}
+                step={0.01}
                 value={this.state.percentLongWorkloads}
                 handleChange={this.handleChange}
               />

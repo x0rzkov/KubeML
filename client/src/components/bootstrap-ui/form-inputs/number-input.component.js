@@ -6,6 +6,8 @@ const NumberInput = ({
   controlId,
   placeholder,
   handleChange,
+  min,
+  step,
   ...otherprops
 }) => {
   return (
@@ -15,6 +17,9 @@ const NumberInput = ({
       </Form.Label>
       <Col sm="3" style={styles.col}>
         <Form.Control
+          type="number"
+          min={min}
+          step={step}
           placeholder={placeholder}
           onChange={handleChange}
           {...otherprops}

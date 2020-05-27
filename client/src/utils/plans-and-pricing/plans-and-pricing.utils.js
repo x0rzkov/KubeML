@@ -20,6 +20,7 @@ export const sizeNodeInstance = (configDetails) => {
   var quantity = 0; // quantity for m5.24xlarge node (largest node offered)
 
   var minLongTermRAM = avgUsers * avgKernels * percentLongWorkloads * minRAM;
+  console.log("mingLongTermRAM is: ", minLongTermRAM);
   var shortTermKernels = Math.ceil(
     avgUsers * avgKernels * (1 - percentLongWorkloads)
   );

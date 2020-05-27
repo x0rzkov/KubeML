@@ -4,6 +4,7 @@ const { SET_NEW_PLAN_CONFIG, SET_CLIENT_NODE_INFO } = PlansAndPricingTypes;
 
 export const setNewPlanConfig = (planDetails) => async (dispatch) => {
   try {
+    console.log("this setNewPlanConfig hit");
     dispatch({
       type: SET_NEW_PLAN_CONFIG,
       payload: planDetails,

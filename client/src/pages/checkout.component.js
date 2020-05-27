@@ -34,11 +34,13 @@ const CheckoutPage = ({ nodeDetails }) => {
         </div>
       </Row>
 
-      {nodeDetails.map((item) => (
-        <Row>
-          <CheckoutItem key={item.node._id} cartItem={item} />
-        </Row>
-      ))}
+      {nodeDetails
+        ? nodeDetails.map((item) => (
+            <Row>
+              <CheckoutItem key={item.node._id} cartItem={item} />
+            </Row>
+          ))
+        : null}
 
       <Row style={styles.total}>TOTAL: $total</Row>
       <div style={styles.card}>

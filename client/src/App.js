@@ -8,6 +8,7 @@ import "./App.css";
 
 import NavBar from "./components/navbar/navbar.component";
 import Footer from "./components/footer/footer.component";
+import AlertPopUp from "./components/bootstrap-ui/alert/alert.component";
 
 import HomePage from "./pages/homepage.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up.component";
@@ -50,6 +51,7 @@ class App extends Component {
     return (
       <div className="wrapper">
         <NavBar />
+        <AlertPopUp />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route
