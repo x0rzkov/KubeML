@@ -40,16 +40,6 @@ class PlansAndPricingPage extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    // saving client org usage info to redux store
-    const { setNewPlanConfig } = this.props;
-    setNewPlanConfig({
-      avgUsers: this.state.avgUsers,
-      avgKernels: this.state.avgKernels,
-      percentLongWorkloads: this.state.percentLongWorkloads,
-      longKernelHrs: this.state.longKernelHrs,
-      shortKernelHrs: this.state.shortKernelHrs,
-      minRAM: this.state.minRAM,
-    });
     const res = sizeNodeInstance(this.state);
     this.setState({
       longTermNodes: res.continuousNodes,
@@ -61,6 +51,16 @@ class PlansAndPricingPage extends Component {
   handleCheckout = () => {
     const { setClientsNodeInfo } = this.props;
     setClientsNodeInfo(this.state.longTermNodes);
+    const { setNewPlanConfig } = this.props;
+    setNewPlanConfig({
+      avgUsers: this.state.avgUsers,
+      avgKernels: this.state.avgKernels,
+      percentLongWorkloads: this.state.percentLongWorkloads,
+      longKernelHrs: this.state.longKernelHrs,
+      shortKernelHrs: this.state.shortKernelHrs,
+      minRAM: this.state.minRAM,
+      KubeML_LongTerm: this.state.prices.KubeML_LongTerm,
+    });
     const { history } = this.props;
     history.push("/checkout");
   };

@@ -11,9 +11,7 @@ import {
   selectNewNodeDetails,
 } from "../redux/plans-and-pricing/plans-and-pricing.selectors";
 
-const CheckoutPage = ({ nodeDetails }) => {
-  const [total] = useState(4399);
-
+const CheckoutPage = ({ nodeDetails, planDetails }) => {
   return (
     <Container>
       <Row>
@@ -57,13 +55,21 @@ const CheckoutPage = ({ nodeDetails }) => {
           ))
         : null}
 
-      <Row style={styles.total}>TOTAL: $total</Row>
-      <div style={styles.card}>
+      <Row>
+        <Col className="my-col-2">
+          <h5>TOTAL: ${planDetails.KubeML_LongTerm}</h5>
+        </Col>
+      </Row>
+      <Row>
+        <Col className="align-center">
+          <StripeCheckoutButton price={planDetails.KubeML_LongTerm} />
+        </Col>
+      </Row>
+      <Row className="my-col-2">
         *Please use the following test credit card for payments*
         <br />
         4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
-      </div>
-      <StripeCheckoutButton price={total} />
+      </Row>
     </Container>
   );
 };
@@ -76,15 +82,6 @@ const mapStateToProps = createStructuredSelector({
 export default connect(mapStateToProps)(CheckoutPage);
 
 const styles = {
-  titleRow: {
-    justifyContent: "space-between",
-    marginTop: 25,
-    padding: 10,
-    fontSize: 18,
-    borderColor: "darkgrey",
-    borderBottomWidth: 1,
-    borderBottomStyle: "solid",
-  },
   rowTwo: {
     justifyContent: "space-between",
     marginTop: 20,
@@ -98,14 +95,5 @@ const styles = {
     display: "flex",
     justifyContent: "flex-start",
     paddingLeft: 25,
-  },
-  total: {
-    marginTop: 50,
-    fontSize: 24,
-  },
-  card: {
-    marginTop: 40,
-    fontSize: 18,
-    textAlign: "center",
   },
 };

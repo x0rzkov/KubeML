@@ -86,6 +86,8 @@ export const sizeNodeInstance = (configDetails) => {
   var KubeML_total = longKubePrice + shortKubePrice;
   var SageMaker_total = longSagePrice + shortSagePrice;
   var prices = {
+    KubeML_LongTerm: longKubePrice.toFixed(2),
+    SageMaker_LongTerm: longSagePrice.toFixed(2),
     KubeML_total: KubeML_total.toFixed(2),
     SageMaker_total: SageMaker_total.toFixed(2),
   };
