@@ -22,7 +22,7 @@ const HomePage = () => (
 
     <Row style={{ backgroundColor: "#f8f8f8" }}>
       <Row className="row-inner p-row-2">
-        <Col className="col center my-3" lg={5} xl={6}>
+        <Col className="my-3" lg={5} xl={6}>
           <h2>
             KubeML is a turn-key solution for running data-science workloads
             efficiently, collaboratively, and anywhere anytime.
@@ -35,18 +35,18 @@ const HomePage = () => (
             cluster
           </p>
         </Col>
-        <Col className="col my-3" lg={7} xl={6}>
-          <Logo style={{ height: "100%", width: "100%" }} />
+        <Col className="my-3" lg={7} xl={6}>
+          <Logo style={{ height: 400, width: "100%" }} />
         </Col>
       </Row>
     </Row>
 
     <Row style={{ backgroundColor: "#e8e8e8" }}>
       <Row className="row-inner p-row-2">
-        <Col className="col center my-3" xl={4}>
+        <Col className="my-3" xl={4}>
           <Logo2 style={{ width: "100%", paddingRight: 15 }} />
         </Col>
-        <Col className="col my-3" xl={8}>
+        <Col className="my-2" xl={8}>
           <h3>Powered by Jupyter Notebooks</h3>
           <p className="home">
             KubeML utilizes Jupyter's open-source platform and integrates
@@ -63,7 +63,7 @@ const HomePage = () => (
 
     <Row>
       <Row className="row-inner p-row-2">
-        <Col className="col center" xl={4}>
+        <Col xl={4} className="p-row-2">
           <h3>A familiar IDE environment for your development team</h3>
           <h5>KubeML provides the following kernels:</h5>
           <ul>
@@ -78,7 +78,7 @@ const HomePage = () => (
           </ul>
         </Col>
 
-        <Col className="col" xl={8}>
+        <Col xl={8}>
           <Logo3 style={{ width: "100%", height: 500 }} />
         </Col>
       </Row>
