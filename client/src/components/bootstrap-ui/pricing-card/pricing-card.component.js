@@ -23,11 +23,8 @@ const PricingCard = ({
         <h5>Based on your usage needs</h5>
       </div>
       <ListGroup>
-        <NodeBreakdown
-          type={"Continuous Running Nodes"}
-          nodes={longTermNodes}
-        />
-        <NodeBreakdown type={"On Demand Nodes"} nodes={shortTermNodes} />
+        <NodeBreakdown type="continuous" nodes={longTermNodes} />
+        <NodeBreakdown type="onDemand" nodes={shortTermNodes} />
         <PricingBreakdown
           type={"KubeML"}
           eventNum={1}
@@ -46,13 +43,13 @@ const PricingCard = ({
       </ListGroup>
 
       <Card.Body>
-        <Card.Title>KubeML pricing: </Card.Title>
-        {prices ? <h3>${prices.KubeML_total}</h3> : <h3>$--,----.---</h3>}
+        <Card.Title>KubeML total pricing: </Card.Title>
+        <h3>${prices ? `${prices.KubeML_total}/mo.` : null}</h3>
       </Card.Body>
 
       <Card.Body>
-        <Card.Title>AWS Sagemaker pricing</Card.Title>
-        {prices ? <h3>${prices.SageMaker_total}</h3> : <h3>$--,----.---</h3>}
+        <Card.Title>SageMaker total pricing:</Card.Title>
+        <h3>${prices ? `${prices.SageMaker_total}/mo.` : null}</h3>
       </Card.Body>
     </Card>
   );
@@ -68,10 +65,6 @@ const styles = {
     paddingLeft: 15,
     justifyContent: "center",
     marginBottom: 15,
-  },
-  dropdown: {
-    borderTopWidth: 0,
-    borderBottomWidth: 0,
   },
   cardImage: {
     width: "25%",

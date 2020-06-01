@@ -85,7 +85,7 @@ class PlansAndPricingPage extends Component {
                 label="Enter your organizations daily active users (Researches/Data
                     Scientists/ Developers)"
                 controlId="avgUsers"
-                placeholder="Integer"
+                placeholder="0"
                 name="avgUsers"
                 min={1}
                 step={1}

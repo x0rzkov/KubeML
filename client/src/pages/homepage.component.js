@@ -22,7 +22,7 @@ const HomePage = () => (
 
     <Row style={{ backgroundColor: "#f8f8f8" }}>
       <Row className="row-inner p-row-2">
-        <Col className="my-3" lg={5} xl={6}>
+        <Col className="my-3" xl={6}>
           <h2>
             KubeML is a turn-key solution for running data-science workloads
             efficiently, collaboratively, and anywhere anytime.
@@ -35,7 +35,7 @@ const HomePage = () => (
             cluster
           </p>
         </Col>
-        <Col className="my-3" lg={7} xl={6}>
+        <Col className="my-3" xl={6}>
           <Logo style={{ height: 400, width: "100%" }} />
         </Col>
       </Row>

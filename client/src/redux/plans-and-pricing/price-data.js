@@ -9,7 +9,7 @@ const PRICE_DATA = {
       Clock_Speed: 2.5,
       SageMaker: 0.1165,
       On_Demand: 0.0832,
-      Long_Term: 0.047,
+      Long_Term: 0.052,
     },
     {
       _id: 1,
@@ -20,7 +20,7 @@ const PRICE_DATA = {
       Clock_Speed: 3.1,
       SageMaker: 0.269,
       On_Demand: 0.192,
-      Long_Term: 0.109,
+      Long_Term: 0.121,
     },
     {
       _id: 2,
@@ -30,8 +30,8 @@ const PRICE_DATA = {
       Processor_Name: "Intel Xeon Platinum 8175",
       Clock_Speed: 3.1,
       SageMaker: 0.538,
-      On_Demand: 0.344,
-      Long_Term: 0.219,
+      On_Demand: 0.384,
+      Long_Term: 0.242,
     },
     {
       _id: 3,
@@ -41,8 +41,8 @@ const PRICE_DATA = {
       Processor_Name: "Intel Xeon Platinum 8175",
       Clock_Speed: 3.1,
       SageMaker: 1.075,
-      On_Demand: 0.688,
-      Long_Term: 0.438,
+      On_Demand: 0.768,
+      Long_Term: 0.484,
     },
     {
       _id: 4,
@@ -63,8 +63,8 @@ const PRICE_DATA = {
       Processor_Name: "Intel Xeon Platinum 8175",
       Clock_Speed: 3.1,
       SageMaker: 3.226,
-      On_Demand: 2.064,
-      Long_Term: 1.313,
+      On_Demand: 2.304,
+      Long_Term: 1.452,
     },
     {
       _id: 6,
@@ -85,10 +85,15 @@ const PRICE_DATA = {
       Processor_Name: "Intel Xeon Platinum 8175",
       Clock_Speed: 3.1,
       SageMaker: 6.451,
-      On_Demand: 4.128,
-      Long_Term: 2.627,
+      On_Demand: 4.608,
+      Long_Term: 2.903,
     },
   ],
 };
 
 export default PRICE_DATA;
+
+// SageMaker on average 40% more expensive than base on-demand. K
+// Which means KubeML will save customers 29% on average for on-demand
+
+// LongTerm Nodes are on average 65% cheaper or SageMaker is 224% more expensive

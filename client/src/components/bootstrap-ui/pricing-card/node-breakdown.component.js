@@ -11,7 +11,7 @@ const NodeBreakdown = ({ type, nodes }) => {
         onClick={() => setModalShow(true)}
         style={{ marginRight: 5 }}
       ></i>
-      {type}
+      {type === "continuous" ? "Continuous Running Nodes" : "On Demand Nodes"}
       <Modal
         show={modalShow}
         onHide={() => setModalShow(false)}
@@ -25,7 +25,12 @@ const NodeBreakdown = ({ type, nodes }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>Continuous Running Nodes Pricing</h4>
+          <h4>
+            {type === "continuous"
+              ? "Continuous Running Nodes"
+              : "On Demand Nodes"}{" "}
+            Pricing
+          </h4>
           <Row className="show-grid">
             <Col md={3} style={{ paddingLeft: 0 }}>
               <p>Processor Family</p>
