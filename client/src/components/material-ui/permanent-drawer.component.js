@@ -40,7 +40,7 @@ export default function PermanentDrawerLeft() {
       <div className={classes.toolbar} />
 
       <List style={{ marginTop: -50 }}>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+        {["Account", "My Plan", "Billing"].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -50,16 +50,6 @@ export default function PermanentDrawerLeft() {
         ))}
       </List>
       <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
     </Drawer>
   );
 }

@@ -6,23 +6,19 @@ const ConsolePage = () => (
   <Container fluid style={{ paddingRight: 40, paddingLeft: 300 }}>
     <PermanentDrawerLeft />
     <Card className="my-3">
-      <Card.Header>Featured</Card.Header>
+      <Card.Header>
+        <h5 style={{ paddingTop: 5, fontWeight: "bold" }}>
+          Access your KubeML Cluster
+        </h5>
+      </Card.Header>
       <Card.Body>
-        <Card.Title>Special title treatments</Card.Title>
+        <Card.Title>Create a cluster</Card.Title>
         <Card.Text>
-          With supporting text below as a natural lead-in to additional content.
+          Explore KubeML's tailored cluster options and compare with our top
+          competitors. Click the button below to explore our plans and pricing
+          page
         </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
-    </Card>
-    <Card className="my-3">
-      <Card.Header>Featured</Card.Header>
-      <Card.Body>
-        <Card.Title>Special title treatment</Card.Title>
-        <Card.Text>
-          With supporting text below as a natural lead-in to additional content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <Button variant="primary">Configure Cluster</Button>
       </Card.Body>
     </Card>
   </Container>

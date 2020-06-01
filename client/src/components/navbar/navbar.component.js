@@ -29,7 +29,7 @@ const NavBar = ({ currentUser }) => {
             PLANS/PRICING
           </Link>
           <Link to="/console" className="p-2">
-            CONTACT
+            CONSOLE
           </Link>
           {currentUser ? (
             <div onClick={() => auth.signOut()} className="p-2">

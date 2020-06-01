@@ -11,7 +11,7 @@ const PricingBreakdown = ({
   const [modalShow, setModalShow] = useState(false);
 
   return (
-    <ListGroupItem as="div">
+    <ListGroupItem as="div" style={{ borderLeft: 0, borderRight: 0 }}>
       <i
         className="fas fa-angle-right"
         onClick={() => setModalShow(true)}
