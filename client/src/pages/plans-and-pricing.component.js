@@ -110,6 +110,7 @@ class PlansAndPricingPage extends Component {
                 placeholder="0.0"
                 name="percentLongWorkloads"
                 min={0.01}
+                max={1.0}
                 step={0.01}
                 value={this.state.percentLongWorkloads}
                 handleChange={this.handleChange}
