@@ -7,6 +7,11 @@ if (process.env.NODE_ENV !== "production") require("dotenv").config();
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
+const k8s = require("@kubernetes/client-node");
+const kc = new k8s.KubeConfig();
+kc.loadFromDefault();
+const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
+
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -44,4 +49,21 @@ app.post("/payment", (req, res) => {
       res.status(200).send({ success: stripeRes });
     }
   });
+});
+
+app.post("/kubernetes", (req, res) => {
+  var namespace = {
+    metadata: {
+      name: req.body.name,
+    },
+  };
+
+  k8sApi
+    .createNamespace(namespace)
+    .then((response) => {
+      res.status(200).send({ success: "success" });
+    })
+    .catch((err) => {
+      res.status(500).send({ error: err });
+    });
 });
