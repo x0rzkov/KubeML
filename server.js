@@ -11,6 +11,7 @@ const k8s = require("@kubernetes/client-node");
 const kc = new k8s.KubeConfig();
 kc.loadFromDefault();
 const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
+const { exec } = require("child_process");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -61,6 +62,14 @@ app.post("/kubernetes", (req, res) => {
   k8sApi
     .createNamespace(namespace)
     .then((response) => {
+      exec(
+        `helm install "/Users/harpreetsomel/Desktop/KubeML-Front/KubeML-FrontEnd/helm-enterprise-jupyter" --namespace=${req.body.name} --generate-name`,
+        (error, stdout, stderr) => {
+          console.log(`stdout: ${stdout}`);
+          console.log(`stderr: ${stderr}`);
+          console.log(`error: ${error}`);
+        }
+      );
       res.status(200).send({ success: "success" });
     })
     .catch((err) => {

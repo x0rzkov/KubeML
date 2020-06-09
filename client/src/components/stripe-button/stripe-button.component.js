@@ -9,7 +9,7 @@ const StripeCheckoutButton = ({ price }) => {
   const onToken = async (token) => {
     try {
       // axios will use whatever url we are at and then append 'payment' to it
-      let res = await axios({
+      await axios({
         url: "payment",
         method: "post",
         data: {
@@ -28,7 +28,9 @@ const StripeCheckoutButton = ({ price }) => {
   // this function will be turned into a redux action
   const createNamespace = async () => {
     try {
-      let namespace = Math.floor(100 * Math.random()).toString();
+      let namespace = makeid(7).toLowerCase();
+      console.log("namespace is: ", namespace);
+      console.log(typeof namespace);
       await axios({
         url: "kubernetes",
         method: "post",
@@ -39,6 +41,17 @@ const StripeCheckoutButton = ({ price }) => {
     } catch (err) {
       console.log("error: ", err);
     }
+  };
+
+  const makeid = (length) => {
+    var result = "";
+    var characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
   };
 
   return (
