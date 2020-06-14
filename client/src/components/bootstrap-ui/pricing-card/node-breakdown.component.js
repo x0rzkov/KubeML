@@ -49,25 +49,27 @@ const NodeBreakdown = ({ type, nodes }) => {
             </Col>
           </Row>
           <div>
-            {nodes.map((item) => (
-              <Row className="show-grid" key={item.node.type}>
-                <Col md={3} style={{ paddingLeft: 0 }}>
-                  <p>{item.node.Processor_Name}</p>
-                </Col>
-                <Col md={2}>
-                  <p>{item.node.type}</p>
-                </Col>
-                <Col md={2} style={{ paddingLeft: 25 }}>
-                  <p>{item.node.vCPU}</p>
-                </Col>
-                <Col md={2}>
-                  <p>{item.node.Clock_Speed} Ghz</p>
-                </Col>
-                <Col md={2}>
-                  <p>{item.node.RAM} GB</p>
-                </Col>
-              </Row>
-            ))}
+            {nodes
+              ? nodes.map((item) => (
+                  <Row className="show-grid" key={item.node.type}>
+                    <Col md={3} style={{ paddingLeft: 0 }}>
+                      <p>{item.node.Processor_Name}</p>
+                    </Col>
+                    <Col md={2}>
+                      <p>{item.node.type}</p>
+                    </Col>
+                    <Col md={2} style={{ paddingLeft: 25 }}>
+                      <p>{item.node.vCPU}</p>
+                    </Col>
+                    <Col md={2}>
+                      <p>{item.node.Clock_Speed} Ghz</p>
+                    </Col>
+                    <Col md={2}>
+                      <p>{item.node.RAM} GB</p>
+                    </Col>
+                  </Row>
+                ))
+              : null}
           </div>
         </Modal.Body>
         <Modal.Footer>

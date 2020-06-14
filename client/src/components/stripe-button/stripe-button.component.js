@@ -18,7 +18,7 @@ const StripeCheckoutButton = ({ price }) => {
         },
       });
       alert("Payment successful");
-      createNamespace();
+      // createNamespace();
     } catch (err) {
       console.log("Payment error: ", JSON.parse(err));
       alert("There was an issue with your payment");
@@ -29,8 +29,6 @@ const StripeCheckoutButton = ({ price }) => {
   const createNamespace = async () => {
     try {
       let namespace = makeid(7).toLowerCase();
-      console.log("namespace is: ", namespace);
-      console.log(typeof namespace);
       await axios({
         url: "kubernetes",
         method: "post",

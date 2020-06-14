@@ -50,39 +50,41 @@ const PricingBreakdown = ({
             </Col>
           </Row>
           <div>
-            {longTermNodes.map((item) => (
-              <Row className="show-grid" key={item.node.type}>
-                <Col md={3}>
-                  <p>{item.node.type}</p>
-                </Col>
-                <Col md={2}>
-                  <p>{item.quantity}</p>
-                </Col>
-                <Col md={2}>
-                  <p>
-                    {type === "KubeML"
-                      ? item.node.Long_Term
-                      : item.node.SageMaker}
-                  </p>
-                </Col>
-                <Col md={3}>
-                  <p>31 * {longKernelHrs ? longKernelHrs : 24}</p>
-                </Col>
-                <Col md={2}>
-                  <p>
-                    $
-                    {(
-                      31 *
-                      (longKernelHrs ? longKernelHrs : 24) *
-                      (type === "KubeML"
-                        ? item.node.Long_Term
-                        : item.node.SageMaker) *
-                      item.quantity
-                    ).toFixed(2)}
-                  </p>
-                </Col>
-              </Row>
-            ))}
+            {longTermNodes
+              ? longTermNodes.map((item) => (
+                  <Row className="show-grid" key={item.node.type}>
+                    <Col md={3}>
+                      <p>{item.node.type}</p>
+                    </Col>
+                    <Col md={2}>
+                      <p>{item.quantity}</p>
+                    </Col>
+                    <Col md={2}>
+                      <p>
+                        {type === "KubeML"
+                          ? item.node.Long_Term
+                          : item.node.SageMaker}
+                      </p>
+                    </Col>
+                    <Col md={3}>
+                      <p>31 * {longKernelHrs ? longKernelHrs : 24}</p>
+                    </Col>
+                    <Col md={2}>
+                      <p>
+                        $
+                        {(
+                          31 *
+                          (longKernelHrs ? longKernelHrs : 24) *
+                          (type === "KubeML"
+                            ? item.node.Long_Term
+                            : item.node.SageMaker) *
+                          item.quantity
+                        ).toFixed(2)}
+                      </p>
+                    </Col>
+                  </Row>
+                ))
+              : null}
           </div>
           <h4>On-Demand Nodes Pricing</h4>
           <Row className="show-grid">
@@ -103,39 +105,41 @@ const PricingBreakdown = ({
             </Col>
           </Row>
           <div>
-            {shortTermNodes.map((item) => (
-              <Row className="show-grid" key={item.node.type}>
-                <Col md={3}>
-                  <p>{item.node.type}</p>
-                </Col>
-                <Col md={2}>
-                  <p>{item.quantity}</p>
-                </Col>
-                <Col md={2}>
-                  <p>
-                    {type === "KubeML"
-                      ? item.node.On_Demand
-                      : item.node.SageMaker}
-                  </p>
-                </Col>
-                <Col md={3}>
-                  <p>31 * {shortKernelHrs}</p>
-                </Col>
-                <Col md={2}>
-                  <p>
-                    $
-                    {(
-                      31 *
-                      shortKernelHrs *
-                      (type === "KubeML"
-                        ? item.node.On_Demand
-                        : item.node.SageMaker) *
-                      item.quantity
-                    ).toFixed(2)}
-                  </p>
-                </Col>
-              </Row>
-            ))}
+            {shortTermNodes
+              ? shortTermNodes.map((item) => (
+                  <Row className="show-grid" key={item.node.type}>
+                    <Col md={3}>
+                      <p>{item.node.type}</p>
+                    </Col>
+                    <Col md={2}>
+                      <p>{item.quantity}</p>
+                    </Col>
+                    <Col md={2}>
+                      <p>
+                        {type === "KubeML"
+                          ? item.node.On_Demand
+                          : item.node.SageMaker}
+                      </p>
+                    </Col>
+                    <Col md={3}>
+                      <p>31 * {shortKernelHrs}</p>
+                    </Col>
+                    <Col md={2}>
+                      <p>
+                        $
+                        {(
+                          31 *
+                          shortKernelHrs *
+                          (type === "KubeML"
+                            ? item.node.On_Demand
+                            : item.node.SageMaker) *
+                          item.quantity
+                        ).toFixed(2)}
+                      </p>
+                    </Col>
+                  </Row>
+                ))
+              : null}
           </div>
         </Modal.Body>
         <Modal.Footer>

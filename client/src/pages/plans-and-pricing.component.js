@@ -1,20 +1,18 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
-
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { withRouter } from "react-router-dom";
-
 import CarouselSlide from "../components/bootstrap-ui/carousel/carousel.component";
 import PricingCard from "../components/bootstrap-ui/pricing-card/pricing-card.component";
 import NumberSelect from "../components/bootstrap-ui/form-inputs/number-select.component";
 import NumberInput from "../components/bootstrap-ui/form-inputs/number-input.component";
 import CustomButton from "../components/custom-button/custom-button.component";
-
 import {
   setNewPlanConfig,
   setClientsNodeInfo,
 } from "../redux/plans-and-pricing/plans-and-pricing.actions";
+import { selectNewPlanConfig } from "../redux/plans-and-pricing/plans-and-pricing.selectors";
 import { sizeNodeInstance } from "../utils/plans-and-pricing/plans-and-pricing.utils";
 
 const ramArray = [8, 16, 32, 64, 160, 196];
@@ -25,32 +23,20 @@ class PlansAndPricingPage extends Component {
   constructor(props) {
     super(props);
 
+    const { planDetails } = this.props;
     this.state = {
-      avgUsers: 0,
-      avgKernels: 0,
-      percentLongWorkloads: 0,
-      longKernelHrs: 11,
-      shortKernelHrs: 1,
-      minRAM: 8,
-      longTermNodes: [],
-      shortTermNodes: [],
-      prices: "",
+      avgUsers: planDetails ? planDetails.avgUsers : 0,
+      avgKernels: planDetails ? planDetails.avgKernels : 0,
+      percentLongWorkloads: planDetails ? planDetails.percentLongWorkloads : 0,
+      longKernelHrs: planDetails ? planDetails.longKernelHrs : 0,
+      shortKernelHrs: planDetails ? planDetails.shortKernelHrs : 0,
+      minRAM: planDetails ? planDetails.minRAM : 0,
     };
   }
 
-  handleSubmit = async (event) => {
+  handleSubmit = (event) => {
     event.preventDefault();
     const res = sizeNodeInstance(this.state);
-    this.setState({
-      longTermNodes: res.continuousNodes,
-      shortTermNodes: res.onDemandNodes,
-      prices: res.prices,
-    });
-  };
-
-  handleCheckout = () => {
-    const { setClientsNodeInfo } = this.props;
-    setClientsNodeInfo(this.state.longTermNodes);
     const { setNewPlanConfig } = this.props;
     setNewPlanConfig({
       avgUsers: this.state.avgUsers,
@@ -59,8 +45,16 @@ class PlansAndPricingPage extends Component {
       longKernelHrs: this.state.longKernelHrs,
       shortKernelHrs: this.state.shortKernelHrs,
       minRAM: this.state.minRAM,
-      KubeML_LongTerm: this.state.prices.KubeML_LongTerm,
+      prices: res.prices,
     });
+    const { setClientsNodeInfo } = this.props;
+    setClientsNodeInfo({
+      longTermNodes: res.continuousNodes,
+      shortTermNodes: res.onDemandNodes,
+    });
+  };
+
+  handleCheckout = () => {
     const { history } = this.props;
     history.push("/checkout");
   };
@@ -92,7 +86,6 @@ class PlansAndPricingPage extends Component {
                 value={this.state.avgUsers}
                 handleChange={this.handleChange}
               />
-
               <NumberInput
                 label="Enter average kernels a user utilizes simultaneously for
                   building/training ML models"
@@ -147,12 +140,8 @@ class PlansAndPricingPage extends Component {
               </CustomButton>
             </Form>
           </Col>
-
           <Col lg={3} className="p-row-0">
             <PricingCard
-              prices={this.state.prices}
-              longTermNodes={this.state.longTermNodes}
-              shortTermNodes={this.state.shortTermNodes}
               longKernelHrs={this.state.longKernelHrs}
               shortKernelHrs={this.state.shortKernelHrs}
             />
@@ -165,7 +154,6 @@ class PlansAndPricingPage extends Component {
               marginTop: 75,
               backgroundColor: "#4285f4",
               width: 350,
-              borderRadius: 10,
             }}
           >
             Proceed to Checkout
@@ -177,7 +165,9 @@ class PlansAndPricingPage extends Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector({});
+const mapStateToProps = createStructuredSelector({
+  planDetails: selectNewPlanConfig,
+});
 
 export default withRouter(
   connect(mapStateToProps, { setNewPlanConfig, setClientsNodeInfo })(

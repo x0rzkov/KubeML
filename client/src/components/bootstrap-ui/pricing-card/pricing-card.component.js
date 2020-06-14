@@ -1,14 +1,19 @@
 import React from "react";
 import { Card, ListGroup } from "react-bootstrap";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 import NodeBreakdown from "./node-breakdown.component";
 import PricingBreakdown from "./pricing-breakdown.component";
+import {
+  selectNewPlanConfig,
+  selectNewNodeDetails,
+} from "../../../redux/plans-and-pricing/plans-and-pricing.selectors";
 
 import "./pricing-card.styles.scss";
 
 const PricingCard = ({
-  prices,
-  longTermNodes,
-  shortTermNodes,
+  nodeDetails,
+  planDetails,
   longKernelHrs,
   shortKernelHrs,
 }) => {
@@ -23,20 +28,26 @@ const PricingCard = ({
         <h5>Based on your usage needs</h5>
       </div>
       <ListGroup>
-        <NodeBreakdown type="continuous" nodes={longTermNodes} />
-        <NodeBreakdown type="onDemand" nodes={shortTermNodes} />
+        <NodeBreakdown
+          type="continuous"
+          nodes={nodeDetails ? nodeDetails.longTermNodes : null}
+        />
+        <NodeBreakdown
+          type="onDemand"
+          nodes={nodeDetails ? nodeDetails.shortTermNodes : null}
+        />
         <PricingBreakdown
           type={"KubeML"}
           eventNum={1}
-          longTermNodes={longTermNodes}
-          shortTermNodes={shortTermNodes}
+          longTermNodes={nodeDetails ? nodeDetails.longTermNodes : null}
+          shortTermNodes={nodeDetails ? nodeDetails.shortTermNodes : null}
           shortKernelHrs={shortKernelHrs}
         />
         <PricingBreakdown
           type={"AWS SageMaker"}
           eventNum={2}
-          longTermNodes={longTermNodes}
-          shortTermNodes={shortTermNodes}
+          longTermNodes={nodeDetails ? nodeDetails.longTermNodes : null}
+          shortTermNodes={nodeDetails ? nodeDetails.shortTermNodes : null}
           longKernelHrs={longKernelHrs}
           shortKernelHrs={shortKernelHrs}
         />
@@ -44,18 +55,27 @@ const PricingCard = ({
 
       <Card.Body>
         <Card.Title>KubeML total pricing: </Card.Title>
-        <h3>${prices ? `${prices.KubeML_total}/mo.` : null}</h3>
+        <h3>
+          ${planDetails ? `${planDetails.prices.KubeML_total}/mo.` : null}
+        </h3>
       </Card.Body>
 
       <Card.Body>
         <Card.Title>SageMaker total pricing:</Card.Title>
-        <h3>${prices ? `${prices.SageMaker_total}/mo.` : null}</h3>
+        <h3>
+          ${planDetails ? `${planDetails.prices.SageMaker_total}/mo.` : null}
+        </h3>
       </Card.Body>
     </Card>
   );
 };
 
-export default PricingCard;
+const mapStateToProps = createStructuredSelector({
+  planDetails: selectNewPlanConfig,
+  nodeDetails: selectNewNodeDetails,
+});
+
+export default connect(mapStateToProps)(PricingCard);
 
 const styles = {
   h5: {
