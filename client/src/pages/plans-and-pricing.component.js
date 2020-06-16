@@ -28,9 +28,9 @@ class PlansAndPricingPage extends Component {
       avgUsers: planDetails ? planDetails.avgUsers : 0,
       avgKernels: planDetails ? planDetails.avgKernels : 0,
       percentLongWorkloads: planDetails ? planDetails.percentLongWorkloads : 0,
-      longKernelHrs: planDetails ? planDetails.longKernelHrs : 0,
-      shortKernelHrs: planDetails ? planDetails.shortKernelHrs : 0,
-      minRAM: planDetails ? planDetails.minRAM : 0,
+      longKernelHrs: planDetails ? planDetails.longKernelHrs : 11,
+      shortKernelHrs: planDetails ? planDetails.shortKernelHrs : 1,
+      minRAM: planDetails ? planDetails.minRAM : 8,
     };
   }
 

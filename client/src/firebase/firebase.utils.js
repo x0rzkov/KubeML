@@ -17,9 +17,7 @@ firebase.initializeApp(config);
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
-
   const userRef = firestore.doc(`users/${userAuth.uid}`);
-
   const snapShot = await userRef.get();
 
   if (!snapShot.exists) {
@@ -38,6 +36,25 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   }
 
   return userRef;
+};
+
+export const createUserClusterInfo = async (nodeDetails, planDetails, user) => {
+  const planRef = firestore.doc(`plans/${user.id}`);
+  const snapShot = await planRef.get();
+
+  if (!snapShot.exists) {
+    const { longTermNodes } = nodeDetails;
+    try {
+      await planRef.set({
+        nodes: longTermNodes,
+        planInfo: planDetails,
+      });
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  }
+
+  return planRef;
 };
 
 export const auth = firebase.auth();

@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import axios from "axios";
 import CheckoutItem from "../components/checkout-item/checkout-item.component";
 import CustomButton from "../components/custom-button/custom-button.component";
 import StripeCheckoutButton from "../components/stripe-button/stripe-button.component";
@@ -10,6 +11,7 @@ import {
   selectNewPlanConfig,
   selectNewNodeDetails,
 } from "../redux/plans-and-pricing/plans-and-pricing.selectors";
+import { createUserClusterInfo } from "../firebase/firebase.utils";
 
 const CheckoutPage = ({ nodeDetails, planDetails, currentUser, history }) => {
   const handlePlanPress = () => {
@@ -18,6 +20,53 @@ const CheckoutPage = ({ nodeDetails, planDetails, currentUser, history }) => {
 
   const handleSignInPress = () => {
     history.push("/signin");
+  };
+
+  const onToken = async (token) => {
+    try {
+      await axios({
+        url: "payment",
+        method: "post",
+        data: {
+          amount: planDetails.prices.KubeML_LongTerm * 100,
+          token,
+        },
+      });
+      alert("Payment successful");
+      // await createUserClusterInfo(nodeDetails, planDetails, currentUser);
+      createNamespace();
+    } catch (err) {
+      console.log("Payment error: ", JSON.parse(err));
+      alert("There was an issue with your payment");
+    }
+  };
+
+  // this function will be turned into a redux action
+  const createNamespace = async () => {
+    try {
+      let namespace = makeid(7).toLowerCase();
+      const res = await axios({
+        url: "kubernetes",
+        method: "post",
+        data: {
+          name: namespace,
+        },
+      });
+      console.log(res);
+    } catch (err) {
+      console.log("error: ", err);
+    }
+  };
+
+  const makeid = (length) => {
+    var result = "";
+    var characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
   };
 
   return (
@@ -73,6 +122,7 @@ const CheckoutPage = ({ nodeDetails, planDetails, currentUser, history }) => {
             currentUser ? (
               <StripeCheckoutButton
                 price={planDetails.prices.KubeML_LongTerm}
+                onToken={onToken}
               />
             ) : (
               <CustomButton

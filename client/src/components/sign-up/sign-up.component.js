@@ -30,11 +30,12 @@ class SignUp extends React.Component {
     }
 
     try {
+      console.log("handleSubmit triggered");
       const { user } = await auth.createUserWithEmailAndPassword(
         email,
         password
       );
-
+      console.log("first promise func finished: ", user);
       await createUserProfileDocument(user, { displayName });
 
       this.setState({
