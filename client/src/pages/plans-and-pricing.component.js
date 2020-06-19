@@ -9,10 +9,10 @@ import NumberSelect from "../components/bootstrap-ui/form-inputs/number-select.c
 import NumberInput from "../components/bootstrap-ui/form-inputs/number-input.component";
 import CustomButton from "../components/custom-button/custom-button.component";
 import {
-  setNewPlanConfig,
+  setPlanConfig,
   setClientsNodeInfo,
 } from "../redux/plans-and-pricing/plans-and-pricing.actions";
-import { selectNewPlanConfig } from "../redux/plans-and-pricing/plans-and-pricing.selectors";
+import { selectPlanConfig } from "../redux/plans-and-pricing/plans-and-pricing.selectors";
 import { sizeNodeInstance } from "../utils/plans-and-pricing/plans-and-pricing.utils";
 
 const ramArray = [8, 16, 32, 64, 160, 196];
@@ -37,8 +37,8 @@ class PlansAndPricingPage extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const res = sizeNodeInstance(this.state);
-    const { setNewPlanConfig } = this.props;
-    setNewPlanConfig({
+    const { setPlanConfig } = this.props;
+    setPlanConfig({
       avgUsers: this.state.avgUsers,
       avgKernels: this.state.avgKernels,
       percentLongWorkloads: this.state.percentLongWorkloads,
@@ -166,11 +166,11 @@ class PlansAndPricingPage extends Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  planDetails: selectNewPlanConfig,
+  planDetails: selectPlanConfig,
 });
 
 export default withRouter(
-  connect(mapStateToProps, { setNewPlanConfig, setClientsNodeInfo })(
+  connect(mapStateToProps, { setPlanConfig, setClientsNodeInfo })(
     PlansAndPricingPage
   )
 );

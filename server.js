@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const util = require("util");
 const path = require("path"); // native module so don't need to npm install
 
-// -------------------------------------> FIREBASE
+// -----------------> FIREBASE <----------------------------
 var firebase = require("firebase");
 
 const config = {
@@ -19,10 +19,8 @@ const config = {
 };
 
 firebase.initializeApp(config);
-
 const firestore = firebase.firestore();
-// ------------------------------------->
-
+// ---------------------------------------------------------
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
@@ -31,7 +29,6 @@ const k8s = require("@kubernetes/client-node");
 const kc = new k8s.KubeConfig();
 kc.loadFromDefault();
 const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
-// const exec = require("child_process");
 const exec = util.promisify(require("child_process").exec);
 
 const app = express();
@@ -55,28 +52,44 @@ app.listen(port, (error) => {
   console.log("Server running on port " + port);
 });
 
-app.post("/payment", (req, res) => {
+///------------------> Payment Route <------------------------
+app.post("/payment", async (req, res) => {
   const body = {
     source: req.body.token.id,
     amount: req.body.amount,
     currency: "usd",
   };
 
-  stripe.charges.create(body, (stripeErr, stripeRes) => {
+  const { user, amount } = req.body;
+  const planRef = firestore.doc(`plans/${user.id}`);
+
+  try {
+    const { stripeErr, stripeRes } = await stripe.charges.create(body);
     if (stripeErr) {
       res.status(500).send({ error: stripeErr });
     } else {
+      await planRef.set({
+        longTermPrice: amount,
+        clusterInitializing: true,
+        clusterURL: null,
+      });
       res.status(200).send({ success: stripeRes });
     }
-  });
+  } catch (error) {
+    console.log("error: ", error);
+  }
 });
 
+///-------------------> Kubernetes route <------------------
 app.post("/kubernetes", async (req, res) => {
   var namespace = {
     metadata: {
       name: req.body.name,
     },
   };
+
+  const { user } = req.body;
+  const planRef = firestore.doc(`plans/${user.id}`);
 
   try {
     await k8sApi.createNamespace(namespace);
@@ -87,8 +100,12 @@ app.post("/kubernetes", async (req, res) => {
       const { stdout, stderr } = await exec(
         `kubectl get svc -n ${req.body.name} proxy-public -o=jsonpath='{.status.loadBalancer.ingress[0].hostname}'`
       );
+      await planRef.update({
+        clusterInitializing: false,
+        clusterURL: stdout,
+      });
       res.status(200).send({ success: stdout });
-    }, 3000);
+    }, 5000);
   } catch (error) {
     console.log("error: ", error);
     res.status(500).send({ error: error });

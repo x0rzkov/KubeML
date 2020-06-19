@@ -5,8 +5,8 @@ import { createStructuredSelector } from "reselect";
 import NodeBreakdown from "./node-breakdown.component";
 import PricingBreakdown from "./pricing-breakdown.component";
 import {
-  selectNewPlanConfig,
-  selectNewNodeDetails,
+  selectPlanConfig,
+  selectNodeDetails,
 } from "../../../redux/plans-and-pricing/plans-and-pricing.selectors";
 
 import "./pricing-card.styles.scss";
@@ -71,8 +71,8 @@ const PricingCard = ({
 };
 
 const mapStateToProps = createStructuredSelector({
-  planDetails: selectNewPlanConfig,
-  nodeDetails: selectNewNodeDetails,
+  planDetails: selectPlanConfig,
+  nodeDetails: selectNodeDetails,
 });
 
 export default connect(mapStateToProps)(PricingCard);

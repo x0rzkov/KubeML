@@ -9,13 +9,15 @@ const INITIAL_STATE = {
 };
 
 const alertReducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+
+  switch (type) {
     case SET_ALERT:
       return {
         ...state,
-        show: action.payload.show,
-        variant: action.payload.variant,
-        message: action.payload.message,
+        show: payload.show,
+        variant: payload.variant,
+        message: payload.message,
       };
     case REMOVE_ALERT:
       return {

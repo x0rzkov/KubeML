@@ -8,12 +8,22 @@ import CustomButton from "../components/custom-button/custom-button.component";
 import StripeCheckoutButton from "../components/stripe-button/stripe-button.component";
 import { selectCurrentUser } from "../redux/user/user.selectors";
 import {
-  selectNewPlanConfig,
-  selectNewNodeDetails,
+  setClientMonthlyTotal,
+  setClusterURL,
+} from "../redux/plans-and-pricing/plans-and-pricing.actions";
+import {
+  selectPlanConfig,
+  selectNodeDetails,
 } from "../redux/plans-and-pricing/plans-and-pricing.selectors";
-import { createUserClusterInfo } from "../firebase/firebase.utils";
 
-const CheckoutPage = ({ nodeDetails, planDetails, currentUser, history }) => {
+const CheckoutPage = ({
+  nodeDetails,
+  planDetails,
+  currentUser,
+  history,
+  setClientMonthlyTotal,
+  setClusterURL,
+}) => {
   const handlePlanPress = () => {
     history.push("/plans-and-pricing");
   };
@@ -29,11 +39,12 @@ const CheckoutPage = ({ nodeDetails, planDetails, currentUser, history }) => {
         method: "post",
         data: {
           amount: planDetails.prices.KubeML_LongTerm * 100,
+          user: currentUser,
           token,
         },
       });
+      setClientMonthlyTotal(planDetails.prices.KubeML_LongTerm);
       alert("Payment successful");
-      // await createUserClusterInfo(nodeDetails, planDetails, currentUser);
       createNamespace();
     } catch (err) {
       console.log("Payment error: ", JSON.parse(err));
@@ -50,8 +61,10 @@ const CheckoutPage = ({ nodeDetails, planDetails, currentUser, history }) => {
         method: "post",
         data: {
           name: namespace,
+          user: currentUser,
         },
       });
+      setClusterURL(res);
       console.log(res);
     } catch (err) {
       console.log("error: ", err);
@@ -149,12 +162,15 @@ const CheckoutPage = ({ nodeDetails, planDetails, currentUser, history }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  planDetails: selectNewPlanConfig,
-  nodeDetails: selectNewNodeDetails,
+  planDetails: selectPlanConfig,
+  nodeDetails: selectNodeDetails,
   currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps)(CheckoutPage);
+export default connect(mapStateToProps, {
+  setClientMonthlyTotal,
+  setClusterURL,
+})(CheckoutPage);
 
 const styles = {
   rowTwo: {
