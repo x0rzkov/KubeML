@@ -6,10 +6,19 @@ import { createStructuredSelector } from "reselect";
 
 import { auth } from "../../firebase/firebase.utils";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
-
+import { clearPlanDetails } from "../../redux/plans-and-pricing/plans-and-pricing.actions";
 import { ReactComponent as Logo } from "../../assets/3d.svg";
 
-const NavBar = ({ currentUser }) => {
+const NavBar = ({ currentUser, clearPlanDetails }) => {
+  const handleSignOut = async () => {
+    try {
+      await auth.signOut();
+      clearPlanDetails();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Navbar
       collapseOnSelect
@@ -32,7 +41,7 @@ const NavBar = ({ currentUser }) => {
             CONSOLE
           </Link>
           {currentUser ? (
-            <div onClick={() => auth.signOut()} className="p-2">
+            <div onClick={() => handleSignOut()} className="p-2">
               SIGN OUT
             </div>
           ) : (
@@ -50,7 +59,7 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps)(NavBar);
+export default connect(mapStateToProps, { clearPlanDetails })(NavBar);
 
 const styles = {
   logo: {

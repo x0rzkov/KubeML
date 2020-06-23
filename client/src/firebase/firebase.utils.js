@@ -34,8 +34,18 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
       console.log("error creating user", error.message);
     }
   }
-
   return userRef;
+};
+
+export const getUserPlanDetails = async (userAuth) => {
+  if (!userAuth) return;
+  const planRef = firestore.doc(`plans/${userAuth.uid}`);
+  const snapShot = await planRef.get();
+
+  if (!snapShot.exists) {
+    return;
+  }
+  return planRef;
 };
 
 export const createUserClusterInfo = async (nodeDetails, planDetails, user) => {

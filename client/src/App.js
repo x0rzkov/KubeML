@@ -2,21 +2,26 @@ import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-
 import NavBar from "./components/navbar/navbar.component";
 import Footer from "./components/footer/footer.component";
 import AlertPopUp from "./components/bootstrap-ui/alert/alert.component";
-
 import HomePage from "./pages/homepage.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up.component";
 import PlansAndPricingPage from "./pages/plans-and-pricing.component";
 import ConsolePage from "./pages/console.component";
 import CheckoutPage from "./pages/checkout.component";
+import {
+  setClientMonthlyTotal,
+  setClusterURL,
+} from "./redux/plans-and-pricing/plans-and-pricing.actions";
 
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import {
+  auth,
+  createUserProfileDocument,
+  getUserPlanDetails,
+} from "./firebase/firebase.utils";
 
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
@@ -25,20 +30,26 @@ class App extends Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const { setCurrentUser, setClusterURL, setClientMonthlyTotal } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
-
         userRef.onSnapshot((snapShot) => {
           setCurrentUser({
             id: snapShot.id,
             ...snapShot.data(),
           });
         });
+        const planRef = await getUserPlanDetails(userAuth);
+        if (planRef) {
+          planRef.onSnapshot((snapShot) => {
+            const { clusterURL, longTermPrice } = snapShot.data();
+            setClusterURL(clusterURL);
+            setClientMonthlyTotal(longTermPrice);
+          });
+        }
       }
-
       setCurrentUser(userAuth);
     });
   }
@@ -95,6 +106,8 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  setClusterURL: (url) => dispatch(setClusterURL(url)),
+  setClientMonthlyTotal: (total) => dispatch(setClientMonthlyTotal(total)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

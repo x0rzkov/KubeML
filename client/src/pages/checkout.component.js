@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Alert } from "react-bootstrap";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import axios from "axios";
@@ -14,11 +14,13 @@ import {
 import {
   selectPlanConfig,
   selectNodeDetails,
+  selectMonthlyTotal,
 } from "../redux/plans-and-pricing/plans-and-pricing.selectors";
 
 const CheckoutPage = ({
   nodeDetails,
   planDetails,
+  monthlyTotal,
   currentUser,
   history,
   setClientMonthlyTotal,
@@ -30,6 +32,10 @@ const CheckoutPage = ({
 
   const handleSignInPress = () => {
     history.push("/signin");
+  };
+
+  const handleConsolePress = () => {
+    history.push("/console");
   };
 
   const onToken = async (token) => {
@@ -52,7 +58,6 @@ const CheckoutPage = ({
     }
   };
 
-  // this function will be turned into a redux action
   const createNamespace = async () => {
     try {
       let namespace = makeid(7).toLowerCase();
@@ -131,32 +136,50 @@ const CheckoutPage = ({
       </Row>
       <Row>
         <Col className="align-center">
-          {nodeDetails ? (
-            currentUser ? (
-              <StripeCheckoutButton
-                price={planDetails.prices.KubeML_LongTerm}
-                onToken={onToken}
-              />
-            ) : (
-              <CustomButton
-                handlePress={handleSignInPress}
-                style={styles.button}
-              >
-                SIGN IN TO CHECKOUT
-              </CustomButton>
-            )
-          ) : (
+          {!nodeDetails && (
             <CustomButton handlePress={handlePlanPress} style={styles.button}>
               CONFIGURE A PLAN
             </CustomButton>
           )}
+          {nodeDetails && !currentUser && (
+            <CustomButton handlePress={handleSignInPress} style={styles.button}>
+              SIGN IN TO CHECKOUT
+            </CustomButton>
+          )}
+          {nodeDetails && currentUser && !monthlyTotal && (
+            <StripeCheckoutButton
+              price={planDetails.prices.KubeML_LongTerm}
+              onToken={onToken}
+            />
+          )}
+          {monthlyTotal && nodeDetails && currentUser && (
+            <Row>
+              <Col className="align-center">
+                <CustomButton
+                  handlePress={handleConsolePress}
+                  style={styles.button}
+                >
+                  VIEW YOUR CLUSTER
+                </CustomButton>
+                <Alert variant="warning" style={styles.alert}>
+                  <h5>Thank you for your purchase</h5>
+                  <p>
+                    Please contact the KubeML team if you wish to modify your
+                    purchased plan.
+                  </p>
+                </Alert>
+              </Col>
+            </Row>
+          )}
         </Col>
       </Row>
-      <Row className="my-col-2">
-        *Please use the following test credit card for payments*
-        <br />
-        4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
-      </Row>
+      {nodeDetails && currentUser && !monthlyTotal && (
+        <Row className="my-col-2">
+          *Please use the following test credit card for payments*
+          <br />
+          4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
+        </Row>
+      )}
     </Container>
   );
 };
@@ -165,6 +188,7 @@ const mapStateToProps = createStructuredSelector({
   planDetails: selectPlanConfig,
   nodeDetails: selectNodeDetails,
   currentUser: selectCurrentUser,
+  monthlyTotal: selectMonthlyTotal,
 });
 
 export default connect(mapStateToProps, {
@@ -190,5 +214,10 @@ const styles = {
   button: {
     backgroundColor: "#4285f4",
     width: 300,
+  },
+  alert: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
   },
 };

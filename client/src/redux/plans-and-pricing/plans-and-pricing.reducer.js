@@ -5,6 +5,7 @@ const {
   SET_CLIENT_NODE_INFO,
   SET_CLIENT_MONTHLY_TOTAL,
   SET_CLIENT_CLUSTER_URL,
+  CLEAR_PLAN_DETAILS,
 } = PlansAndPricingTypes;
 
 const INITIAL_STATE = {
@@ -39,6 +40,15 @@ const plansAndPricingReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         clusterUrl: payload,
+        clusterInitializing: false,
+      };
+    case CLEAR_PLAN_DETAILS:
+      return {
+        ...state,
+        newPlanConfig: null,
+        clientsRequiredNodes: null,
+        monthlyTotal: null,
+        clusterUrl: null,
         clusterInitializing: false,
       };
     default:

@@ -5,6 +5,7 @@ const {
   SET_CLIENT_NODE_INFO,
   SET_CLIENT_CLUSTER_URL,
   SET_CLIENT_MONTHLY_TOTAL,
+  CLEAR_PLAN_DETAILS,
 } = PlansAndPricingTypes;
 
 export const setPlanConfig = (planDetails) => async (dispatch) => {
@@ -45,6 +46,16 @@ export const setClusterURL = (url) => async (dispatch) => {
     dispatch({
       type: SET_CLIENT_CLUSTER_URL,
       payload: url,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const clearPlanDetails = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: CLEAR_PLAN_DETAILS,
     });
   } catch (err) {
     console.log(err);
