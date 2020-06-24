@@ -162,8 +162,14 @@ img {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+.py-row-0 {
+  padding: 0rem 0rem;
+}
 .py-row-1 {
   padding: 1rem 0rem;
+}
+.py-row-1-0 {
+  padding: 1rem 0rem 0rem 0rem;
 }
 .py-row-2 {
   padding: 2rem 0rem;

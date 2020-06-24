@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Alert } from "react-bootstrap";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -26,6 +26,9 @@ const CheckoutPage = ({
   setClientMonthlyTotal,
   setClusterURL,
 }) => {
+  const [showTopAlert, setShowTopAlert] = useState(true);
+  const [showBottomAlert, setShowBottomAlert] = useState(true);
+
   const handlePlanPress = () => {
     history.push("/plans-and-pricing");
   };
@@ -90,14 +93,33 @@ const CheckoutPage = ({
   return (
     <Container>
       <Row>
-        <Col className="py-row-1">
-          <h4 style={{ marginBottom: 5 }}>
-            Review Instances and Launch Platform
-          </h4>
+        <Col className="py-row-1-0">
+          <h4>Review Instances and Launch Platform</h4>
           <p style={{ fontSize: 16 }}>
             KubeML will charge you a monthly subsciption for continuous running
-            nodes which are always available for hosting workloads
+            nodes (which are sized based on your organizations average usage).
           </p>
+        </Col>
+      </Row>
+      <Row>
+        <Col className="py-row-0" style={{ backgroundColor: "#00FFFF" }}>
+          {showTopAlert && (
+            <Alert
+              variant="info"
+              style={styles.alertTop}
+              onClose={() => setShowTopAlert(false)}
+              dismissible
+            >
+              <p style={{ marginTop: 0, marginBottom: 0, fontWeight: "bold" }}>
+                View Pricing Details
+              </p>
+              <p style={{ marginTop: 0, marginBottom: 5 }}>
+                The plans page shows a pricing breakdown of both KubeML and
+                competitor services. The console page shows on-demand usage,
+                which bills at the end of the cycle
+              </p>
+            </Alert>
+          )}
         </Col>
       </Row>
       <Row style={styles.rowTwo}>
@@ -131,11 +153,12 @@ const CheckoutPage = ({
         <Col className="my-col-2">
           <h5>
             TOTAL: ${planDetails ? planDetails.prices.KubeML_LongTerm : null}
+            /mo.
           </h5>
         </Col>
       </Row>
       <Row>
-        <Col className="align-center">
+        <Col className="align-center" style={{ marginTop: 25 }}>
           {!nodeDetails && (
             <CustomButton handlePress={handlePlanPress} style={styles.button}>
               CONFIGURE A PLAN
@@ -153,26 +176,35 @@ const CheckoutPage = ({
             />
           )}
           {monthlyTotal && nodeDetails && currentUser && (
-            <Row>
-              <Col className="align-center">
-                <CustomButton
-                  handlePress={handleConsolePress}
-                  style={styles.button}
-                >
-                  VIEW YOUR CLUSTER
-                </CustomButton>
-                <Alert variant="warning" style={styles.alert}>
-                  <h5>Thank you for your purchase</h5>
-                  <p>
-                    Please contact the KubeML team if you wish to modify your
-                    purchased plan.
-                  </p>
-                </Alert>
-              </Col>
-            </Row>
+            <CustomButton
+              handlePress={handleConsolePress}
+              style={styles.button}
+            >
+              VIEW YOUR CLUSTER
+            </CustomButton>
           )}
         </Col>
       </Row>
+      {monthlyTotal && nodeDetails && currentUser && showBottomAlert && (
+        <Row>
+          <Col style={{ marginTop: 15 }}>
+            <Alert
+              variant="warning"
+              style={styles.alertBottom}
+              onClose={() => setShowBottomAlert(false)}
+              dismissible
+            >
+              <p>
+                Thank you for choosing KubeML as your platform of choice for
+                building and training machine learning workloads. To modify your
+                cluster size or change preferences, please contact the KubeML
+                team! Your existing cluster will always be accessible via the
+                url shown on the console page
+              </p>
+            </Alert>
+          </Col>
+        </Row>
+      )}
       {nodeDetails && currentUser && !monthlyTotal && (
         <Row className="my-col-2">
           *Please use the following test credit card for payments*
@@ -199,14 +231,14 @@ export default connect(mapStateToProps, {
 const styles = {
   rowTwo: {
     justifyContent: "space-between",
-    marginTop: 20,
+    marginTop: 25,
     fontSize: 18,
     borderColor: "lightgray",
     borderBottomWidth: 1,
     borderBottomStyle: "solid",
   },
   thead: {
-    marginTop: 10,
+    marginTop: 25,
     display: "flex",
     justifyContent: "flex-start",
     paddingLeft: 25,
@@ -215,9 +247,14 @@ const styles = {
     backgroundColor: "#4285f4",
     width: 300,
   },
-  alert: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "column",
+  alertTop: {
+    height: 70,
+    paddingTop: 10,
+    marginTop: 0,
+    marginBottom: 0,
+  },
+  alertBottom: {
+    height: 80,
+    backgroundColor: "#FFFF99",
   },
 };
