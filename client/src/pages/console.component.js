@@ -1,17 +1,35 @@
 import React from "react";
 import PermanentDrawerLeft from "../components/material-ui/permanent-drawer.component";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
-import { Card, Button, Container, Row, Col } from "react-bootstrap";
+import { Card, Container, Row, Col } from "react-bootstrap";
+import CustomButton from "../components/custom-button/custom-button.component";
+import { selectCurrentUser } from "../redux/user/user.selectors";
 import {
   selectMonthlyTotal,
   selectClusterURL,
 } from "../redux/plans-and-pricing/plans-and-pricing.selectors";
 
-const ConsolePage = ({ monthlyTotal, clusterUrl }) => {
+const ConsolePage = ({ monthlyTotal, clusterUrl, currentUser }) => {
+  const handlePlanPress = (e) => {
+    e.preventDefault();
+    window.location.href = `https://${clusterUrl}`;
+  };
+
   return (
-    <Container fluid style={{ paddingRight: 40, paddingLeft: 300 }}>
+    <Container
+      fluid
+      style={{ paddingRight: 40, paddingLeft: 300, backgroundColor: "#f2f3f3" }}
+    >
       <PermanentDrawerLeft />
+      <Row>
+        <Col style={{ marginTop: 15 }}>
+          <h4 style={{ fontWeight: "bold" }}>
+            Welcome {currentUser.displayName}
+          </h4>
+        </Col>
+      </Row>
       <Row style={{ marginBottom: 15 }}>
         <Col>
           <Card className="my-3">
@@ -27,15 +45,9 @@ const ConsolePage = ({ monthlyTotal, clusterUrl }) => {
                   Click on the button below to access KubeML's admin panel.
                 </Card.Text>
 
-                <Button
-                  variant="primary"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    window.location.href = `https://${clusterUrl}`;
-                  }}
-                >
+                <CustomButton variant="primary" handlePress={handlePlanPress}>
                   {clusterUrl}
-                </Button>
+                </CustomButton>
               </Card.Body>
             ) : (
               <Card.Body>
@@ -45,7 +57,9 @@ const ConsolePage = ({ monthlyTotal, clusterUrl }) => {
                   top competitors. Click the button below to explore our plans
                   and pricing page
                 </Card.Text>
-                <Button variant="primary">Configure Plans</Button>
+                <Link to="/plans-and-pricing">
+                  <CustomButton>Configure Plans</CustomButton>
+                </Link>
               </Card.Body>
             )}
           </Card>
@@ -65,7 +79,7 @@ const ConsolePage = ({ monthlyTotal, clusterUrl }) => {
                 Your monthly total for Continuous running nodes. This is a fixed
                 monthly price
               </Card.Text>
-              <h5>{{ monthlyTotal } / 100}</h5>
+              <h5>{monthlyTotal ? { monthlyTotal } / 100 : "$"} </h5>
             </Card.Body>
             <Card.Body>
               <Card.Title>On-demand nodes:</Card.Title>
@@ -73,7 +87,7 @@ const ConsolePage = ({ monthlyTotal, clusterUrl }) => {
                 Your on-demand usage will be updated daily! Contact KubeML for
                 more information.
               </Card.Text>
-              <h5>$x,xxx.xx</h5>
+              <h5>$</h5>
             </Card.Body>
           </Card>
         </Col>
@@ -85,6 +99,7 @@ const ConsolePage = ({ monthlyTotal, clusterUrl }) => {
 const mapStateToProps = createStructuredSelector({
   monthlyTotal: selectMonthlyTotal,
   clusterUrl: selectClusterURL,
+  currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps)(ConsolePage);

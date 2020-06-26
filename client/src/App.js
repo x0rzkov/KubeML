@@ -36,9 +36,11 @@ class App extends Component {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
         userRef.onSnapshot((snapShot) => {
+          console.log("yo ", snapShot.id);
           setCurrentUser({
             id: snapShot.id,
-            ...snapShot.data(),
+            displayName: snapShot.data().displayName,
+            email: snapShot.data().email,
           });
         });
         const planRef = await getUserPlanDetails(userAuth);
@@ -50,7 +52,9 @@ class App extends Component {
           });
         }
       }
-      setCurrentUser(userAuth);
+      if (!userAuth) {
+        setCurrentUser(userAuth);
+      }
     });
   }
 
@@ -68,9 +72,9 @@ class App extends Component {
           <Route
             exact
             path="/signin"
-            render={() =>
+            render={(routeProps) =>
               this.props.currentUser ? (
-                <Redirect to="/console" />
+                <Redirect to="/console" {...routeProps} />
               ) : (
                 <SignInAndSignUpPage />
               )

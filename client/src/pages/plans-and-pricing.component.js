@@ -66,100 +66,102 @@ class PlansAndPricingPage extends Component {
 
   render() {
     return (
-      <Container>
-        <Row>
-          <CarouselSlide />
-        </Row>
-        <Row className="py-row-2">
-          <Col lg={9} className="p-row-right">
-            <h2>Let the KubeML pricing tool calculate for you!</h2>
-            <br></br>
-            <Form onSubmit={this.handleSubmit}>
-              <NumberInput
-                label="Enter your organizations daily active users (Researches/Data
+      <Container fluid style={{ backgroundColor: "#f2f3f3" }}>
+        <Container style={{ backgroundColor: "#FFFFFF" }}>
+          <Row>
+            <CarouselSlide />
+          </Row>
+          <Row className="py-row-2">
+            <Col lg={9} className="p-row-right">
+              <h2>Let the KubeML pricing tool calculate for you!</h2>
+              <br></br>
+              <Form onSubmit={this.handleSubmit}>
+                <NumberInput
+                  label="Enter your organizations daily active users (Researches/Data
                     Scientists/ Developers)"
-                controlId="avgUsers"
-                placeholder="0"
-                name="avgUsers"
-                min={1}
-                step={1}
-                value={this.state.avgUsers}
-                handleChange={this.handleChange}
-              />
-              <NumberInput
-                label="Enter average kernels a user utilizes simultaneously for
+                  controlId="avgUsers"
+                  placeholder="0"
+                  name="avgUsers"
+                  min={1}
+                  step={1}
+                  value={this.state.avgUsers}
+                  handleChange={this.handleChange}
+                />
+                <NumberInput
+                  label="Enter average kernels a user utilizes simultaneously for
                   building/training ML models"
-                controlId="avgKernels"
-                placeholder="0.0"
-                name="avgKernels"
-                min={1}
-                step={0.1}
-                value={this.state.avgKernels}
-                handleChange={this.handleChange}
-              />
-              <NumberInput
-                label=" Enter percentage of kernels running for 10+ hrs/day"
-                controlId="percentLongWorkloads"
-                placeholder="0.0"
-                name="percentLongWorkloads"
-                min={0.01}
-                max={1.0}
-                step={0.01}
-                value={this.state.percentLongWorkloads}
-                handleChange={this.handleChange}
-              />
-              <NumberSelect
-                label="Enter average runtime (hrs) for kernels running more than
+                  controlId="avgKernels"
+                  placeholder="0.0"
+                  name="avgKernels"
+                  min={1}
+                  step={0.1}
+                  value={this.state.avgKernels}
+                  handleChange={this.handleChange}
+                />
+                <NumberInput
+                  label=" Enter percentage of kernels running for 10+ hrs/day"
+                  controlId="percentLongWorkloads"
+                  placeholder="0.0"
+                  name="percentLongWorkloads"
+                  min={0.01}
+                  max={1.0}
+                  step={0.01}
+                  value={this.state.percentLongWorkloads}
+                  handleChange={this.handleChange}
+                />
+                <NumberSelect
+                  label="Enter average runtime (hrs) for kernels running more than
                   10hrs/day"
-                controlId="longKernelHrs"
-                numArray={longhoursArray}
-                name="longKernelHrs"
-                value={this.state.longKernelHrs}
-                handleChange={this.handleChange}
-              />
-              <NumberSelect
-                label="Enter average runtime (hrs) for kernels running less than
+                  controlId="longKernelHrs"
+                  numArray={longhoursArray}
+                  name="longKernelHrs"
+                  value={this.state.longKernelHrs}
+                  handleChange={this.handleChange}
+                />
+                <NumberSelect
+                  label="Enter average runtime (hrs) for kernels running less than
                   10hrs/day"
-                controlId="shortKernelHrs"
-                numArray={hoursArray}
-                name="shortKernelHrs"
-                value={this.state.shortKernelHrs}
-                handleChange={this.handleChange}
-              />
-              <NumberSelect
-                label="Enter minimum RAM (GB) desired per kernel"
-                controlId="minRAM"
-                numArray={ramArray}
-                name="minRAM"
-                value={this.state.minRAM}
-                handleChange={this.handleChange}
-              />
+                  controlId="shortKernelHrs"
+                  numArray={hoursArray}
+                  name="shortKernelHrs"
+                  value={this.state.shortKernelHrs}
+                  handleChange={this.handleChange}
+                />
+                <NumberSelect
+                  label="Enter minimum RAM (GB) desired per kernel"
+                  controlId="minRAM"
+                  numArray={ramArray}
+                  name="minRAM"
+                  value={this.state.minRAM}
+                  handleChange={this.handleChange}
+                />
 
-              <CustomButton type="submit" style={{ marginTop: 40 }}>
-                Check Price
-              </CustomButton>
-            </Form>
-          </Col>
-          <Col lg={3} className="p-row-0">
-            <PricingCard
-              longKernelHrs={this.state.longKernelHrs}
-              shortKernelHrs={this.state.shortKernelHrs}
-            />
-          </Col>
-        </Row>
-        <div className="row">
-          <CustomButton
-            handlePress={this.handleCheckout}
-            style={{
-              marginTop: 75,
-              backgroundColor: "#4285f4",
-              width: 350,
-            }}
-          >
-            Proceed to Checkout
-          </CustomButton>
-        </div>
-        <br></br>
+                <CustomButton type="submit" style={{ marginTop: 40 }}>
+                  Check Price
+                </CustomButton>
+              </Form>
+            </Col>
+            <Col lg={3} className="p-row-0">
+              <PricingCard
+                longKernelHrs={this.state.longKernelHrs}
+                shortKernelHrs={this.state.shortKernelHrs}
+              />
+            </Col>
+          </Row>
+          <div className="row">
+            <CustomButton
+              handlePress={this.handleCheckout}
+              style={{
+                marginTop: 75,
+                backgroundColor: "#4285f4",
+                width: 350,
+              }}
+            >
+              Proceed to Checkout
+            </CustomButton>
+          </div>
+          <br></br>
+        </Container>
       </Container>
     );
   }
