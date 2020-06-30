@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  kubeml-kubernetes-backend:
+    build: ./kubeml-kubernetes-backend
+    environment:
+      FIREBASE_API_KEY: AIzaSyBD87B8drIK2NNLr-5e4PMYMEDQmKDP8pw
+      FIREBASE_AUTH_DOMAIN: kube-ml.firebaseapp.com
+      FIREBASE_DATABASE_URL: https://kube-ml.firebaseio.com
+      FIREBASE_PROJECT_ID: kube-ml
+      FIREBASE_STORAGE_BUCKET: kube-ml.appspot.com
+      FIREBASE_MESSAGING_SENDER_ID: 550937035835
+      FIREBASE_APP_ID: 1:550937035835:web:7f023a1d494c948592481e
+      FIREBASE_MEASUREMENT_ID: G-MVRXP6G97S
+      PORT: 5050
+    image: kubeml/kubeml-kubernetes-backend
+    ports:
+      - 5050:5050
+    restart: always
+    volumes:
+      - ~/.kube/config:/home/node/.kube/config

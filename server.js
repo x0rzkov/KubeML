@@ -61,17 +61,15 @@ app.post("/payment", async (req, res) => {
   };
 
   const { user, amount } = req.body;
-  const planRef = firestore.doc(`plans/${user.id}`);
+  const userRef = firestore.doc(`users/${user.id}`);
 
   try {
     const { stripeErr, stripeRes } = await stripe.charges.create(body);
     if (stripeErr) {
       res.status(500).send({ error: stripeErr });
     } else {
-      await planRef.set({
+      await userRef.update({
         longTermPrice: amount,
-        clusterInitializing: true,
-        clusterURL: null,
       });
       res.status(200).send({ success: stripeRes });
     }
@@ -89,25 +87,29 @@ app.post("/kubernetes", async (req, res) => {
   };
 
   const { user } = req.body;
-  const planRef = firestore.doc(`plans/${user.id}`);
+  const userRef = firestore.doc(`users/${user.id}`);
 
   try {
     await k8sApi.createNamespace(namespace);
     await exec(
-      `helm install "/Users/harpreetsomel/Desktop/KubeML-Front/KubeML-FrontEnd/helm-enterprise-jupyter" --namespace=${req.body.name} --generate-name`
+      `helm install "/Users/harpreetsomel/Desktop/KubeML-Front/KubeML-FrontEnd/kubeml-kubernetes-backend/helm-enterprise-jupyter" --namespace=${req.body.name} --generate-name`
     );
     setTimeout(async () => {
       const { stdout, stderr } = await exec(
         `kubectl get svc -n ${req.body.name} proxy-public -o=jsonpath='{.status.loadBalancer.ingress[0].hostname}'`
       );
-      await planRef.update({
-        clusterInitializing: false,
+      await userRef.update({
+        clusterFailed: false,
         clusterURL: stdout,
       });
-      res.status(200).send({ success: stdout });
-    }, 5000);
+      res.status(200).json({ url: stdout });
+    }, 4000);
   } catch (error) {
-    console.log("error: ", error);
+    await userRef.update({
+      clusterFailed: true,
+      clusterURL: null,
+    });
+    console.log("error in /kubernetes: ", error);
     res.status(500).send({ error: error });
   }
 });

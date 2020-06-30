@@ -3,8 +3,6 @@ import { PlansAndPricingTypes } from "./plans-and-pricing.action-types";
 const {
   SET_CLIENT_CONFIG_DETAILS,
   SET_CLIENT_NODE_INFO,
-  SET_CLIENT_CLUSTER_URL,
-  SET_CLIENT_MONTHLY_TOTAL,
   CLEAR_PLAN_DETAILS,
 } = PlansAndPricingTypes;
 
@@ -24,28 +22,6 @@ export const setClientsNodeInfo = (nodesArray) => async (dispatch) => {
     dispatch({
       type: SET_CLIENT_NODE_INFO,
       payload: nodesArray,
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const setClientMonthlyTotal = (price) => async (dispatch) => {
-  try {
-    dispatch({
-      type: SET_CLIENT_MONTHLY_TOTAL,
-      payload: price,
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const setClusterURL = (url) => async (dispatch) => {
-  try {
-    dispatch({
-      type: SET_CLIENT_CLUSTER_URL,
-      payload: url,
     });
   } catch (err) {
     console.log(err);

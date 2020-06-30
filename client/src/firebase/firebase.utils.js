@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
-
+// ---------------------------------------------------------------------
 const config = {
   apiKey: "AIzaSyBD87B8drIK2NNLr-5e4PMYMEDQmKDP8pw",
   authDomain: "kube-ml.firebaseapp.com",
@@ -12,9 +12,10 @@ const config = {
   appId: "1:550937035835:web:7f023a1d494c948592481e",
   measurementId: "G-MVRXP6G97S",
 };
-
 firebase.initializeApp(config);
+// ----------------------------------------------------------------------
 
+// Function called by App.js when user signs in
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
   const userRef = firestore.doc(`users/${userAuth.uid}`);
@@ -28,6 +29,9 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         displayName,
         email,
         createdAt,
+        clusterFailed: false, // set to true if Jupyter helm initialization fails
+        clusterURL: null,
+        longTermPrice: null,
         ...additionalData,
       });
     } catch (error) {
@@ -37,36 +41,22 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
-export const getUserPlanDetails = async (userAuth) => {
-  if (!userAuth) return;
-  const planRef = firestore.doc(`plans/${userAuth.uid}`);
-  const snapShot = await planRef.get();
-
-  if (!snapShot.exists) {
+// Function called by CheckoutPage & ConsolePage on mounting
+export const fetchUserData = async (user) => {
+  if (!user) {
     return;
   }
-  return planRef;
-};
+  const userRef = firestore.doc(`users/${user.id}`);
+  const snapShot = await userRef.get();
 
-export const createUserClusterInfo = async (nodeDetails, planDetails, user) => {
-  const planRef = firestore.doc(`plans/${user.id}`);
-  const snapShot = await planRef.get();
-
-  if (!snapShot.exists) {
-    const { longTermNodes } = nodeDetails;
-    try {
-      await planRef.set({
-        nodes: longTermNodes,
-        planInfo: planDetails,
-      });
-    } catch (error) {
-      console.log("error: ", error);
-    }
+  try {
+    return snapShot.data();
+  } catch (error) {
+    console.log("error: ", error);
   }
-
-  return planRef;
 };
 
+//-----------------------------------------------------------------------------
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 

@@ -1,93 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Alert } from "react-bootstrap";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import axios from "axios";
 import CheckoutItem from "../components/checkout-item/checkout-item.component";
 import CustomButton from "../components/custom-button/custom-button.component";
 import StripeCheckoutButton from "../components/stripe-button/stripe-button.component";
+import { fetchUserData } from "../firebase/firebase.utils";
 import { selectCurrentUser } from "../redux/user/user.selectors";
-import {
-  setClientMonthlyTotal,
-  setClusterURL,
-} from "../redux/plans-and-pricing/plans-and-pricing.actions";
 import {
   selectPlanConfig,
   selectNodeDetails,
-  selectMonthlyTotal,
 } from "../redux/plans-and-pricing/plans-and-pricing.selectors";
 
-const CheckoutPage = ({
-  nodeDetails,
-  planDetails,
-  monthlyTotal,
-  currentUser,
-  history,
-  setClientMonthlyTotal,
-  setClusterURL,
-}) => {
+const CheckoutPage = ({ nodeDetails, planDetails, currentUser, history }) => {
+  //Initial State
   const [showTopAlert, setShowTopAlert] = useState(true);
   const [showBottomAlert, setShowBottomAlert] = useState(true);
-
-  const handlePlanPress = () => {
-    history.push("/plans-and-pricing");
-  };
-
-  const handleSignInPress = () => {
-    history.push("/signin");
-  };
-
-  const handleConsolePress = () => {
-    history.push("/console");
-  };
-
-  const onToken = async (token) => {
-    try {
-      await axios({
-        url: "payment",
-        method: "post",
-        data: {
-          amount: planDetails.prices.KubeML_LongTerm * 100,
-          user: currentUser,
-          token,
-        },
-      });
-      setClientMonthlyTotal(planDetails.prices.KubeML_LongTerm);
-      alert("Payment successful");
-      createNamespace();
-    } catch (err) {
-      console.log("Payment error: ", JSON.parse(err));
-      alert("There was an issue with your payment");
+  const [longTermPrice, setLongTermPrice] = useState(null);
+  // Event Handlers
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchUserData(currentUser);
+      setLongTermPrice(data.longTermPrice);
     }
-  };
+    if (currentUser) fetchData();
+  }, [currentUser]);
 
-  const createNamespace = async () => {
-    try {
-      let namespace = makeid(7).toLowerCase();
-      const res = await axios({
-        url: "kubernetes",
-        method: "post",
-        data: {
-          name: namespace,
-          user: currentUser,
-        },
-      });
-      setClusterURL(res);
-      console.log(res);
-    } catch (err) {
-      console.log("error: ", err);
-    }
-  };
-
-  const makeid = (length) => {
-    var result = "";
-    var characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
+  const buttonPress = (route) => {
+    history.push(route);
   };
 
   return (
@@ -158,34 +98,50 @@ const CheckoutPage = ({
         </Col>
       </Row>
       <Row>
-        <Col className="align-center" style={{ marginTop: 25 }}>
-          {!nodeDetails && (
-            <CustomButton handlePress={handlePlanPress} style={styles.button}>
-              CONFIGURE A PLAN
-            </CustomButton>
-          )}
-          {nodeDetails && !currentUser && (
-            <CustomButton handlePress={handleSignInPress} style={styles.button}>
-              SIGN IN TO CHECKOUT
-            </CustomButton>
-          )}
-          {nodeDetails && currentUser && !monthlyTotal && (
-            <StripeCheckoutButton
-              price={planDetails.prices.KubeML_LongTerm}
-              onToken={onToken}
-            />
-          )}
-          {monthlyTotal && nodeDetails && currentUser && (
+        {longTermPrice ? (
+          <Col className="align-center" style={{ marginTop: 25 }}>
             <CustomButton
-              handlePress={handleConsolePress}
+              handlePress={() => buttonPress("/console")}
               style={styles.button}
             >
               VIEW YOUR CLUSTER
             </CustomButton>
-          )}
-        </Col>
+          </Col>
+        ) : (
+          <Col className="align-center" style={{ marginTop: 25 }}>
+            {!nodeDetails && (
+              <CustomButton
+                handlePress={() => buttonPress("/plans-and-pricing")}
+                style={styles.button}
+              >
+                CONFIGURE A PLAN
+              </CustomButton>
+            )}
+            {nodeDetails &&
+              (!currentUser ? (
+                <CustomButton
+                  handlePress={() => buttonPress("/signin")}
+                  style={styles.button}
+                >
+                  SIGN IN TO CHECKOUT
+                </CustomButton>
+              ) : (
+                <Col className="align-center">
+                  <StripeCheckoutButton
+                    price={planDetails.prices.KubeML_LongTerm}
+                    user={currentUser}
+                  />
+                  <p className="my-col-2">
+                    *Please use the following test credit card for payments*
+                    <br />
+                    4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
+                  </p>
+                </Col>
+              ))}
+          </Col>
+        )}
       </Row>
-      {monthlyTotal && nodeDetails && currentUser && showBottomAlert && (
+      {longTermPrice && showBottomAlert && (
         <Row>
           <Col style={{ marginTop: 15 }}>
             <Alert
@@ -205,13 +161,6 @@ const CheckoutPage = ({
           </Col>
         </Row>
       )}
-      {nodeDetails && currentUser && !monthlyTotal && (
-        <Row className="my-col-2">
-          *Please use the following test credit card for payments*
-          <br />
-          4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
-        </Row>
-      )}
     </Container>
   );
 };
@@ -220,13 +169,9 @@ const mapStateToProps = createStructuredSelector({
   planDetails: selectPlanConfig,
   nodeDetails: selectNodeDetails,
   currentUser: selectCurrentUser,
-  monthlyTotal: selectMonthlyTotal,
 });
 
-export default connect(mapStateToProps, {
-  setClientMonthlyTotal,
-  setClusterURL,
-})(CheckoutPage);
+export default connect(mapStateToProps)(CheckoutPage);
 
 const styles = {
   rowTwo: {
