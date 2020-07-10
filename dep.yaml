@@ -1,0 +1,100 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kompose.cmd: kompose convert --out dep.yaml
+      kompose.version: 1.21.0 ()
+    creationTimestamp: null
+    labels:
+      io.kompose.service: kubeml-kubernetes-backend
+    name: kubeml-kubernetes-backend
+  spec:
+    ports:
+    - name: "5050"
+      port: 5050
+      targetPort: 5050
+    selector:
+      io.kompose.service: kubeml-kubernetes-backend
+  status:
+    loadBalancer: {}
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      kompose.cmd: kompose convert --out dep.yaml
+      kompose.version: 1.21.0 ()
+    creationTimestamp: null
+    labels:
+      io.kompose.service: kubeml-kubernetes-backend
+    name: kubeml-kubernetes-backend
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        io.kompose.service: kubeml-kubernetes-backend
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        annotations:
+          kompose.cmd: kompose convert --out dep.yaml
+          kompose.version: 1.21.0 ()
+        creationTimestamp: null
+        labels:
+          io.kompose.service: kubeml-kubernetes-backend
+      spec:
+        containers:
+        - env:
+          - name: FIREBASE_API_KEY
+            value: AIzaSyBD87B8drIK2NNLr-5e4PMYMEDQmKDP8pw
+          - name: FIREBASE_APP_ID
+            value: 1:550937035835:web:7f023a1d494c948592481e
+          - name: FIREBASE_AUTH_DOMAIN
+            value: kube-ml.firebaseapp.com
+          - name: FIREBASE_DATABASE_URL
+            value: https://kube-ml.firebaseio.com
+          - name: FIREBASE_MEASUREMENT_ID
+            value: G-MVRXP6G97S
+          - name: FIREBASE_MESSAGING_SENDER_ID
+            value: "550937035835"
+          - name: FIREBASE_PROJECT_ID
+            value: kube-ml
+          - name: FIREBASE_STORAGE_BUCKET
+            value: kube-ml.appspot.com
+          - name: PORT
+            value: "5050"
+          image: kubemlregistry/kubeml-kubernetes-backend:1.1.0
+          imagePullPolicy: ""
+          name: kubeml-kubernetes-backend
+          ports:
+          - containerPort: 5050
+          resources: {}
+          volumeMounts:
+          - mountPath: /home/node/.kube/config
+            name: kubeml-kubernetes-backend-claim0
+        restartPolicy: Always
+        serviceAccountName: ""
+        volumes:
+        - name: kubeml-kubernetes-backend-claim0
+          persistentVolumeClaim:
+            claimName: kubeml-kubernetes-backend-claim0
+  status: {}
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: kubeml-kubernetes-backend-claim0
+    name: kubeml-kubernetes-backend-claim0
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Mi
+  status: {}
+kind: List
+metadata: {}
+

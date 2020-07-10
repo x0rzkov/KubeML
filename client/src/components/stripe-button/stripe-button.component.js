@@ -13,7 +13,7 @@ const StripeCheckoutButton = ({ price, user }) => {
         method: "post",
         data: {
           amount: priceForStripe,
-          user,
+          userId: user.id,
           token,
         },
       });
@@ -29,11 +29,11 @@ const StripeCheckoutButton = ({ price, user }) => {
     try {
       let namespace = user.id.toLowerCase();
       await axios({
-        url: "kubernetes",
+        url: "http://localhost:5050/jupyterhub/install",
         method: "post",
         data: {
           name: namespace,
-          user,
+          userId: user.id,
         },
       });
     } catch (err) {

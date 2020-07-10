@@ -66,6 +66,7 @@ app.post("/payment", async (req, res) => {
   try {
     const { stripeErr, stripeRes } = await stripe.charges.create(body);
     if (stripeErr) {
+      console.log("server error");
       res.status(500).send({ error: stripeErr });
     } else {
       await userRef.update({

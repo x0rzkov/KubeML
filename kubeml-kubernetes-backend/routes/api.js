@@ -27,6 +27,14 @@ const config = {
 
 firebase.initializeApp(config);
 const firestore = firebase.firestore();
+
+// ----------------------> HEALTH ROUTE <----------------------------------
+router.get("/health", (req, res) => {
+  res.json({
+    healthy: true,
+  });
+});
+
 // ----------------------> HELM INSTALL ROUTE <-----------------------------
 router.post(
   "/jupyterhub/install",
