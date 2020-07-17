@@ -8,8 +8,14 @@ import { store, persistor } from "./redux/store";
 
 import "./index.css";
 import App from "./App";
+import WebFont from "webfontloader";
 
-axios.defaults.baseURL = "http://localhost:1234/api";
+WebFont.load({
+  google: {
+    families: ["Roboto:300,400,700", "Raleway:300,400,700", "sans-serif"],
+  },
+});
+axios.defaults.baseURL = "https://api-gateway.kube-ml.io/api";
 
 ReactDOM.render(
   <Provider store={store}>

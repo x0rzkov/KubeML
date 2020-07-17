@@ -29,7 +29,7 @@ firebase.initializeApp(config);
 const firestore = firebase.firestore();
 
 // ----------------------> HEALTH ROUTE <----------------------------------
-router.get("/health", (req, res) => {
+router.get("/jupyterhub/health", (req, res) => {
   res.json({
     healthy: true,
   });

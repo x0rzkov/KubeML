@@ -20,33 +20,27 @@ const NavBar = ({ currentUser, clearPlanDetails }) => {
   };
 
   return (
-    <Navbar
-      collapseOnSelect
-      expand="lg"
-      bg="dark"
-      variant="dark"
-      style={{ paddingTop: 10, paddingBottom: 10 }}
-    >
-      <Link to="/" className="mx-1">
+    <Navbar collapseOnSelect expand="lg" variant="dark" style={styles.nav}>
+      <Link to="/">
         <Logo style={styles.logo} />
-        <Navbar.Brand>KubeML</Navbar.Brand>
+        <Navbar.Brand style={styles.brand}>KubeML</Navbar.Brand>
       </Link>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ml-auto m-right-3" style={{ alignItems: "center" }}>
-          <Link to="/plans-and-pricing" className="p-2">
-            PLANS/PRICING
+          <Link to="/plans-and-pricing" className="p-2 nav-links">
+            Plans/Pricing
           </Link>
-          <Link to="/console" className="p-2">
-            CONSOLE
+          <Link to="/console" className="p-2 nav-links">
+            Console
           </Link>
           {currentUser ? (
-            <div onClick={() => handleSignOut()} className="p-2">
-              SIGN OUT
+            <div onClick={() => handleSignOut()} className="p-2 nav-links">
+              Sign Out
             </div>
           ) : (
-            <Link to="/signin" className="p-2">
-              SIGN IN
+            <Link to="/signin" className="p-2 nav-links">
+              Sign In
             </Link>
           )}
         </Nav>
@@ -62,10 +56,23 @@ const mapStateToProps = createStructuredSelector({
 export default connect(mapStateToProps, { clearPlanDetails })(NavBar);
 
 const styles = {
+  nav: {
+    paddingTop: 15,
+    paddingBottom: 0,
+    backgroundColor: "#20232a",
+    paddingLeft: 36,
+  },
   logo: {
-    height: 30,
-    width: 30,
-    marginBottom: 5,
+    height: 36,
+    width: 36,
+    marginBottom: 10,
     marginRight: 5,
+  },
+  brand: {
+    fontSize: 28,
+    fontWeight: 700,
+    fontFamily: "Raleway",
+    paddingTop: 0,
+    paddingBottom: 0,
   },
 };
