@@ -1,9 +1,11 @@
 import React from "react";
-
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
 import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
+import { setAlert } from "../../redux/alert/alert.actions";
 
 import "./sign-up.styles.scss";
 
@@ -23,6 +25,7 @@ class SignUp extends React.Component {
     event.preventDefault();
 
     const { displayName, email, password, confirmPassword } = this.state;
+    const { setAlert } = this.props;
 
     if (password !== confirmPassword) {
       alert("passwords don't match");
@@ -42,8 +45,18 @@ class SignUp extends React.Component {
         password: "",
         confirmPassword: "",
       });
+      setAlert({
+        variant: "success",
+        show: true,
+        message: "Successful sign in!",
+      });
     } catch (error) {
       console.error(error);
+      setAlert({
+        variant: "success",
+        show: true,
+        message: "Unsuccessful sign up! Please try again",
+      });
     }
   };
 
@@ -99,4 +112,6 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+const mapStateToProps = createStructuredSelector({});
+
+export default connect(mapStateToProps, { setAlert })(SignUp);

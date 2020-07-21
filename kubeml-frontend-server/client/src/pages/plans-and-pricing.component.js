@@ -67,13 +67,16 @@ class PlansAndPricingPage extends Component {
   render() {
     return (
       <Container fluid style={{ backgroundColor: "#f2f3f3" }}>
-        <Container style={{ backgroundColor: "#FFFFFF" }}>
+        <Container
+          style={{ backgroundColor: "#FFFFFF" }}
+          className="card-shadow"
+        >
           <Row>
             <CarouselSlide />
           </Row>
           <Row className="py-row-2">
             <Col lg={9} className="p-row-right">
-              <h2>Let the KubeML pricing tool calculate for you!</h2>
+              <h3>Let the KubeML pricing tool calculate for you</h3>
               <br></br>
               <Form onSubmit={this.handleSubmit}>
                 <NumberInput

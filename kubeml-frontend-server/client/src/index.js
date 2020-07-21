@@ -12,7 +12,7 @@ import WebFont from "webfontloader";
 
 WebFont.load({
   google: {
-    families: ["Roboto:300,400,700", "Raleway:300,400,700", "sans-serif"],
+    families: ["Roboto:300,400,700", "Raleway:300,400,500,700", "sans-serif"],
   },
 });
 axios.defaults.baseURL = "https://api-gateway.kube-ml.io/api";

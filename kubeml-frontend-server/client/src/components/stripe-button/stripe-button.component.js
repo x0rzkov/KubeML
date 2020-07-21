@@ -1,6 +1,7 @@
 import React from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
+import CustomButton from "../custom-button/custom-button.component";
 
 const StripeCheckoutButton = ({ price, user }) => {
   const priceForStripe = price * 100;
@@ -45,14 +46,15 @@ const StripeCheckoutButton = ({ price, user }) => {
       label="Pay Now"
       name="KubeML Inc."
       billingAddress
-      image="https://svgshare.com/i/CUz.svg"
       description={`Your total is $${price}`}
       amount={priceForStripe}
       panelLabel="Pay Now"
       token={onToken}
       stripeKey={publishableKey}
-      style={{ width: 200 }}
-    />
+      style={{ width: 200, height: 32 }}
+    >
+      <CustomButton>Stripe Checkout</CustomButton>
+    </StripeCheckout>
   );
 };
 

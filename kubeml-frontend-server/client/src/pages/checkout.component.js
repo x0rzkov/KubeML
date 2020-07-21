@@ -110,21 +110,74 @@ const CheckoutPage = ({ nodeDetails, planDetails, currentUser, history }) => {
         ) : (
           <Col className="align-center" style={{ marginTop: 25 }}>
             {!nodeDetails && (
-              <CustomButton
-                handlePress={() => buttonPress("/plans-and-pricing")}
-                style={styles.button}
-              >
-                CONFIGURE A PLAN
-              </CustomButton>
+              <Row>
+                <CustomButton
+                  handlePress={() => buttonPress("/plans-and-pricing")}
+                  style={styles.button}
+                >
+                  CONFIGURE A PLAN
+                </CustomButton>
+                {showBottomAlert && (
+                  <Alert
+                    variant="warning"
+                    style={styles.alertTwo}
+                    onClose={() => setShowBottomAlert(false)}
+                    dismissible
+                  >
+                    <p
+                      style={{
+                        marginTop: 0,
+                        marginBottom: 0,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Configure plan details
+                    </p>
+                    <p style={{ marginTop: 0, marginBottom: 5 }}>
+                      Head over to the Plans/Pricing page and enter your
+                      organization's usage details! Hit the 'check price' button
+                      to see your pricing and cost savings. Head back to the
+                      checkout page after checking price for a free 30 minute
+                      trial of your cluster
+                    </p>
+                  </Alert>
+                )}
+              </Row>
             )}
             {nodeDetails &&
               (!currentUser ? (
-                <CustomButton
-                  handlePress={() => buttonPress("/signin")}
-                  style={styles.button}
-                >
-                  SIGN IN TO CHECKOUT
-                </CustomButton>
+                <Row>
+                  <CustomButton
+                    handlePress={() => buttonPress("/signin")}
+                    style={styles.button}
+                  >
+                    SIGN IN TO CHECKOUT
+                  </CustomButton>
+                  {showBottomAlert && (
+                    <Alert
+                      variant="info"
+                      onClose={() => setShowBottomAlert(false)}
+                      style={styles.alertThree}
+                      dismissible
+                    >
+                      <p
+                        style={{
+                          marginTop: 0,
+                          marginBottom: 0,
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Sign In
+                      </p>
+                      <p style={{ marginTop: 0, marginBottom: 5 }}>
+                        Please sign-in/register an account to experience your
+                        free trial for 30 minutes of a KubeML cluster. KubeML
+                        will not sell your information for any marketing
+                        purposes
+                      </p>
+                    </Alert>
+                  )}
+                </Row>
               ) : (
                 <Col className="align-center">
                   <StripeCheckoutButton
@@ -134,8 +187,31 @@ const CheckoutPage = ({ nodeDetails, planDetails, currentUser, history }) => {
                   <p className="my-col-2">
                     *Please use the following test credit card for payments*
                     <br />
-                    4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
+                    4242 4242 4242 4242 - Exp: 01/25 - CVV: 123
                   </p>
+                  {showBottomAlert && (
+                    <Alert
+                      variant="info"
+                      style={styles.alertThree}
+                      onClose={() => setShowBottomAlert(false)}
+                      dismissible
+                    >
+                      <p
+                        style={{
+                          marginTop: 0,
+                          marginBottom: 0,
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Start free 30 minute trial
+                      </p>
+                      <p style={{ marginTop: 0, marginBottom: 5 }}>
+                        Please use the above sample credit card information to
+                        process a transaction and start your free 30 minute
+                        KubeML trial.
+                      </p>
+                    </Alert>
+                  )}
                 </Col>
               ))}
           </Col>
@@ -145,17 +221,17 @@ const CheckoutPage = ({ nodeDetails, planDetails, currentUser, history }) => {
         <Row>
           <Col style={{ marginTop: 15 }}>
             <Alert
-              variant="warning"
+              variant="success"
               style={styles.alertBottom}
               onClose={() => setShowBottomAlert(false)}
               dismissible
             >
               <p>
-                Thank you for choosing KubeML as your platform of choice for
-                building and training machine learning workloads. To modify your
-                cluster size or change preferences, please contact the KubeML
-                team! Your existing cluster will always be accessible via the
-                url shown on the console page
+                Thank you for starting your free KubeML 30 minute trial! We are
+                initializing a url for you to access Jupyterhub and try out the
+                IDE environment along with launching our various kernel
+                offerings. Please allow up to a few minutes for the cluster to
+                initialize. The console page will display the URL
               </p>
             </Alert>
           </Col>
@@ -197,9 +273,23 @@ const styles = {
     paddingTop: 10,
     marginTop: 0,
     marginBottom: 0,
+    width: "100%",
+  },
+  alertTwo: {
+    height: 85,
+    paddingTop: 10,
+    marginTop: 20,
+    marginBottom: 0,
+    backgroundColor: "#FFFF99",
+  },
+  alertThree: {
+    height: 70,
+    paddingTop: 10,
+    marginTop: 20,
+    marginBottom: 0,
+    backgroundColor: "#FFFF99",
   },
   alertBottom: {
     height: 80,
-    backgroundColor: "#FFFF99",
   },
 };

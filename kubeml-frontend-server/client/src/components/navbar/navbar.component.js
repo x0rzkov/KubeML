@@ -20,7 +20,13 @@ const NavBar = ({ currentUser, clearPlanDetails }) => {
   };
 
   return (
-    <Navbar collapseOnSelect expand="lg" variant="dark" style={styles.nav}>
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      variant="dark"
+      style={styles.nav}
+      className="navbar-main"
+    >
       <Link to="/">
         <Logo style={styles.logo} />
         <Navbar.Brand style={styles.brand}>KubeML</Navbar.Brand>

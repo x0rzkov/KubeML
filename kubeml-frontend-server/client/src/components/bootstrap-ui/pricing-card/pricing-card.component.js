@@ -24,10 +24,10 @@ const PricingCard = ({
         src={require("../../../assets/3d.svg")}
         style={styles.cardImage}
       />
-      <div style={styles.h5}>
-        <h5>Based on your usage needs</h5>
+      <div style={styles.header}>
+        <p style={styles.headerText}>Based on your usage needs: </p>
       </div>
-      <ListGroup>
+      <ListGroup style={{ borderTop: "none", borderBottom: "none" }}>
         <NodeBreakdown
           type="continuous"
           nodes={nodeDetails ? nodeDetails.longTermNodes : null}
@@ -78,16 +78,17 @@ const mapStateToProps = createStructuredSelector({
 export default connect(mapStateToProps)(PricingCard);
 
 const styles = {
-  h5: {
-    display: "flex",
-    alignItems: "center",
-    paddingTop: 15,
+  header: {
     paddingLeft: 15,
-    justifyContent: "center",
-    marginBottom: 15,
+    paddingTop: 10,
+  },
+  headerText: {
+    fontSize: 20,
+    fontWeight: 500,
+    marginBottom: 0,
   },
   cardImage: {
-    width: "25%",
+    width: "15%",
     alignSelf: "center",
     marginTop: 10,
   },

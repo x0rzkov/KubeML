@@ -13,9 +13,17 @@ const AlertPopUp = ({ alertDetails, removeAlert }) => {
         variant={alertDetails.variant}
         onClose={removeAlert}
         dismissible
-        style={{ display: "flex", marginTop: 0, justifyContent: "center" }}
+        style={{
+          display: "flex",
+          marginTop: 0,
+          justifyContent: "center",
+          marginBottom: 0,
+          height: 50,
+        }}
       >
-        <Alert.Heading>{alertDetails.message}</Alert.Heading>
+        <Alert.Heading style={{ fontSize: 20 }}>
+          {alertDetails.message}
+        </Alert.Heading>
       </Alert>
     );
   } else {

@@ -23,11 +23,18 @@ class SignIn extends React.Component {
     event.preventDefault();
 
     const { email, password } = this.state;
+    const { setAlert } = this.props;
     try {
       await auth.signInWithEmailAndPassword(email, password);
       this.setState({ email: "", password: "" });
-    } catch (error) {
-      console.log(error);
+      setAlert({
+        variant: "success",
+        show: true,
+        message: "Successful sign in!",
+      });
+    } catch (err) {
+      console.log(err);
+      setAlert({ variant: "danger", show: true, message: err.message });
     }
   };
 
@@ -35,6 +42,11 @@ class SignIn extends React.Component {
     const { setAlert } = this.props;
     try {
       await signInWithGoogle();
+      setAlert({
+        variant: "success",
+        show: true,
+        message: "Successful sign in!",
+      });
     } catch (err) {
       setAlert({ variant: "danger", show: true, message: err.message });
     }
@@ -69,7 +81,7 @@ class SignIn extends React.Component {
             required
           />
           <div className="buttons">
-            <CustomButton type="submit"> Sign in </CustomButton>
+            <CustomButton type="submit">Sign in</CustomButton>
             <CustomButton onClick={this.handleGoogleSignIn} isGoogleSignIn>
               Sign in with Google
             </CustomButton>

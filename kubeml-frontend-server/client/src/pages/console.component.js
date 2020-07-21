@@ -32,22 +32,27 @@ const ConsolePage = ({ currentUser }) => {
   return (
     <Container
       fluid
-      style={{ paddingRight: 40, paddingLeft: 300, backgroundColor: "#f2f3f3" }}
+      style={{
+        paddingRight: 40,
+        paddingLeft: 300,
+        backgroundColor: "#f2f3f3",
+        paddingBottom: 300,
+      }}
     >
       <PermanentDrawerLeft />
       <Row>
         <Col style={{ marginTop: 15 }}>
-          <h4 style={{ fontWeight: "bold" }}>
+          <h5 style={{ fontWeight: "bold" }}>
             Welcome {currentUser.displayName}
-          </h4>
+          </h5>
         </Col>
       </Row>
       <Row style={{ marginBottom: 15 }}>
         <Col>
           {!isLoaded && <Spinner animation="border" variant="secondary" />}
           {isLoaded && (
-            <Card className="my-3">
-              <Card.Header>
+            <Card className="card-shadow my-3">
+              <Card.Header style={{ backgroundColor: "#fafafa" }}>
                 <h5 style={{ paddingTop: 5, fontWeight: "bold" }}>
                   Access your KubeML Cluster
                 </h5>
@@ -82,8 +87,8 @@ const ConsolePage = ({ currentUser }) => {
       </Row>
       <Row>
         <Col>
-          <Card className="my-3">
-            <Card.Header>
+          <Card className="card-shadow my-3">
+            <Card.Header style={{ backgroundColor: "#fafafa" }}>
               <h5 style={{ paddingTop: 5, fontWeight: "bold" }}>
                 View your billing details
               </h5>

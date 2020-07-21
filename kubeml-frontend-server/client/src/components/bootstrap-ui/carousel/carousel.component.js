@@ -1,8 +1,8 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
 
-import { ReactComponent as Logo } from "../../../assets/background3-1.svg";
-import { ReactComponent as Logo2 } from "../../../assets/background1.svg";
+import { ReactComponent as Logo } from "../../../assets/first-slide.svg";
+import { ReactComponent as Logo2 } from "../../../assets/second-slide.svg";
 
 const CarouselSlide = () => {
   return (
