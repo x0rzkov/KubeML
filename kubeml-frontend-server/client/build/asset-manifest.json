@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.cef73e29.chunk.css",
+    "main.js": "/static/js/main.f24cfed3.chunk.js",
+    "main.js.map": "/static/js/main.f24cfed3.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.ed6e40b8.js",
+    "runtime-main.js.map": "/static/js/runtime-main.ed6e40b8.js.map",
+    "static/css/2.af3c1da9.chunk.css": "/static/css/2.af3c1da9.chunk.css",
+    "static/js/2.faffcc42.chunk.js": "/static/js/2.faffcc42.chunk.js",
+    "static/js/2.faffcc42.chunk.js.map": "/static/js/2.faffcc42.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.9517d71ff136d0bd165c35db5cab2fd4.js": "/precache-manifest.9517d71ff136d0bd165c35db5cab2fd4.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.af3c1da9.chunk.css.map": "/static/css/2.af3c1da9.chunk.css.map",
+    "static/css/main.cef73e29.chunk.css.map": "/static/css/main.cef73e29.chunk.css.map",
+    "static/js/2.faffcc42.chunk.js.LICENSE.txt": "/static/js/2.faffcc42.chunk.js.LICENSE.txt",
+    "static/media/3d.svg": "/static/media/3d.9bfa9354.svg",
+    "static/media/Jupyter-Notebook.505f2f91.svg": "/static/media/Jupyter-Notebook.505f2f91.svg",
+    "static/media/JupyterHub.8217d268.svg": "/static/media/JupyterHub.8217d268.svg",
+    "static/media/Scalability.72763024.svg": "/static/media/Scalability.72763024.svg",
+    "static/media/diagram-one.dcc6f07f.svg": "/static/media/diagram-one.dcc6f07f.svg",
+    "static/media/first-slide.14678449.svg": "/static/media/first-slide.14678449.svg",
+    "static/media/App.css": "/static/media/landing.8b0d4e3e.png",
+    "static/media/second-slide.5c825e10.svg": "/static/media/second-slide.5c825e10.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ed6e40b8.js",
+    "static/css/2.af3c1da9.chunk.css",
+    "static/js/2.faffcc42.chunk.js",
+    "static/css/main.cef73e29.chunk.css",
+    "static/js/main.f24cfed3.chunk.js"
+  ]
+}

@@ -1,0 +1,3 @@
+#!/bin/bash 
+
+kubectl get ns -o go-template --template '{{range .items}}{{.metadata.name}} {{.metadata.creationTimestamp}}{{"\n"}}{{end}}' | awk '$2 <= "'$(date -d'now-30 minutes' -Ins --utc | sed 's/+0000/Z/')'" { print $1 }' | grep kubeml- | xargs --no-run-if-empty kubectl delete ns
