@@ -8,19 +8,19 @@ KubeML is a PaaS that directly competes with AWS SageMaker for building, trainin
 <p align="center">
   <img src="./assets/KubeML-kernels.jpeg" width="850" title="Kernels">
 </p>
-
+<br/>
 <p align="center">
   <img src="./assets/Kubeml-kernel.jpeg" width="850" title="Kernels">
 </p>
-
+<br/>
 <p align="center">
   <img src="./assets/SageMaker.png" width="850" title="Kernels">
 </p>
-
+<br/>
 <p align="center">
-  <img src="./assets/sagemaker kernel.jpeg" width="850" title="Kernels">
+  <img src="./assets/sagemaker-kernel.jpeg" width="850" title="Kernels">
 </p>
-
+<br/>
 ## Advantages
 
 KubeML is significantly cheaper than AWS SageMaker (40% cheaper for on-demand usage, 65% cheaper for long-term usage).
@@ -30,7 +30,7 @@ KubeML is significantly cheaper than AWS SageMaker (40% cheaper for on-demand us
 </p>
 
 <p align="center">
-  <img src="./assets/Sagemaker Pricing" width="850" title="Kernels">
+  <img src="./assets/Sagemaker-Pricing" width="850" title="Kernels">
 </p>
 
 ## How it works
