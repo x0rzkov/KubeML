@@ -57,13 +57,15 @@ router.post(
     try {
       await k8sApi.createNamespace(k8sNamespace);
       await exec(
-        `helm install "${helmChartURL}" --namespace="${k8sNamespace.metadata.name}" --generate-name`
+        // `helm install "${helmChartURL}" --namespace="${k8sNamespace.metadata.name}" --generate-name`
+
+        `helm install "${helmChartURL}" --generate-name  --set proxy.secretToken="$(openssl rand -hex 32)",ingress2.hosts={demo-${k8sNamespace.metadata.name}.kube-ml.io} --namespace="${k8sNamespace.metadata.name}"`
       );
       let count = 0;
       const urlInterval = setInterval(async () => {
         count++;
         const { stdout, stderr } = await exec(
-          `kubectl get svc -n ${k8sNamespace.metadata.name} proxy-public -o=jsonpath='{.status.loadBalancer.ingress[0].hostname}'`
+          `kubectl get ingress -n ${k8sNamespace.metadata.name} jupyterhub -o=jsonpath='{.spec.rules[0].host}'`
         );
         if (validator.isURL(stdout)) {
           clearInterval(urlInterval);
