@@ -4,7 +4,11 @@
 
 KubeML is a PaaS that directly competes with AWS SageMaker for building, training, and testing machine-learning models. KubeML provisions cloud infrastructure based on client needs and launches a Jupyter Enterprise deployment. Client's access JupyterHub for launching multiple kernels. KubeML deploys the identical, open-source Jupyter IDE environment as AWS SageMaker without the price mark-up.
 
-![alt text](./assets/jhub-kernels.jpeg?raw=true)
+<!-- ![alt text](./assets/jhub-kernels.jpeg?raw=true) -->
+<p align="center">
+  <img src="./assets/jhub-kernels.jpeg" width="350" title="Kernels">
+
+</p>
 
 ## Advantages
 
