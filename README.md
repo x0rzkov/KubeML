@@ -34,16 +34,16 @@ KubeML is significantly cheaper than AWS SageMaker (40% cheaper for on-demand us
 
 <h4 align="center">AWS ec2 onDemand Pricing</h4>
 <p align="center">
-  <img src="./assets/m4-ec2-onDemand.png" width="750" title="Kernels">
+  <img src="./assets/m4-ec2-onDemand.png" width="650" title="Kernels">
 </p>
 
 <p align="center">
-  <img src="./assets/m5-ec2-pricing-onDemand.png" width="750" title="Kernels">
+  <img src="./assets/m5-ec2-pricing-onDemand.png" width="650" title="Kernels">
 </p>
 
 <h4 align="center">AWS SageMaker Pricing</h4>
 <p align="center">
-  <img src="./assets/AWS-sagemaker-pricing.png" width="750" title="Kernels">
+  <img src="./assets/AWS-sagemaker-pricing.png" width="500" title="Kernels">
 </p>
 
 ## How it works
