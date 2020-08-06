@@ -40,7 +40,7 @@ Pricing Example for m5.2xlarge:
 
 <h4 align="center">AWS ec2 onDemand Pricing</h4>
 <p align="center">
-  <img src="./assets/onDemand.png" width="500" title="Kernels" />
+  <img src="./assets/onDemand.png" width="475" title="Kernels" /> <img src="./assets/AWS-sagemaker-pricing.png" width="300" title="Kernels">
 </p>
 
 <h4 align="center">AWS SageMaker Pricing</h4>
