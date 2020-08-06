@@ -33,9 +33,10 @@ KubeML is a PaaS that directly competes with AWS SageMaker for building, trainin
 Based on your organization's usage scenario, KubeML sizes ec2 reserved instances and/or on-Demand instances. KubeML is cheaper than SageMaker in both on-Demand and reserved instances. AWS marks up SageMaker ec2 instances 40% higher vs on-Demand and 222% vs reserved instances.
 
 Pricing Example for m5.2xlarge:
-SageMaker: $0.538/hr
-KubeML-onDemand: $0.384/hr
-KubeML-reserved: \$0.242/hr
+
+- SageMaker: \$0.538/hr
+- KubeML-onDemand: \$0.384/hr
+- KubeML-reserved: \$0.242/hr
 
 <h4 align="center">AWS ec2 onDemand Pricing</h4>
 <p align="center">
@@ -48,8 +49,10 @@ KubeML-reserved: \$0.242/hr
 
 <h4 align="center">AWS SageMaker Pricing</h4>
 <p align="center">
-  <img src="./assets/AWS-sagemaker-pricing.png" width="400" title="Kernels">
+  <img src="./assets/AWS-sagemaker-pricing.png" width="400" height="450" title="Kernels">
 </p>
+
+<br/>
 
 ## How it works
 
