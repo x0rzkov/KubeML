@@ -40,7 +40,7 @@ Pricing Example for m5.2xlarge:
 
 <h4 align="center">AWS ec2 onDemand vs SageMaker Pricing</h4>
 <p align="center">
-  <img src="./assets/onDemand.png" width="530" title="Kernels" /> <img src="./assets/AWS-sagemaker-pricing.png" width="265" title="Kernels">
+  <img src="./assets/onDemand.png" width="540" title="Kernels" /> <img src="./assets/AWS-sagemaker-pricing.png" width="260" title="Kernels">
 </p>
 
 <br/>
@@ -50,7 +50,7 @@ Pricing Example for m5.2xlarge:
 AWS SageMaker forces each user to launch an individual ec2 instance for hosting the user's Jupyterhub Notebook instance and any kernels the user launches. KubeML handles the responsibility of sizing ec2 instances for your entire organization. KubeML leverages Kubernetes to deploy each user's Jupyterhub Notebook instance and their individual kernels across all worker nodes in the cluster.
 
 <p align="center">
-  <img src="./assets/diagram-one.jpg" width="600" title="Kernels">
+  <img src="./assets/diagram-one.jpg" width="575" title="Kernels">
 </p>
 
 <br/>
@@ -60,6 +60,6 @@ AWS SageMaker forces each user to launch an individual ec2 instance for hosting 
 Visit Kube-ml.io and sign-up to access a free 30 minute trial of KubeML's Jupyter Notebooks deployment.
 
 <p align="center">
-  <img src="./assets/recording-1.gif" width="650" title="Kernels">
+  <img src="./assets/recording-1.gif" width="700" title="Kernels">
 </p>
 ```
