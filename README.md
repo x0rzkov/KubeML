@@ -38,14 +38,9 @@ Pricing Example for m5.2xlarge:
 - KubeML-onDemand: \$0.384/hr
 - KubeML-reserved: \$0.242/hr
 
-<h4 align="center">AWS ec2 onDemand Pricing</h4>
+<h4 align="center">AWS ec2 onDemand vs SageMaker Pricing</h4>
 <p align="center">
-  <img src="./assets/onDemand.png" width="510" title="Kernels" /> <img src="./assets/AWS-sagemaker-pricing.png" width="275" title="Kernels">
-</p>
-
-<h4 align="center">AWS SageMaker Pricing</h4>
-<p align="center">
-  <img src="./assets/AWS-sagemaker-pricing.png" height="450" title="Kernels">
+  <img src="./assets/onDemand.png" width="530" title="Kernels" /> <img src="./assets/AWS-sagemaker-pricing.png" width="265" title="Kernels">
 </p>
 
 <br/>
