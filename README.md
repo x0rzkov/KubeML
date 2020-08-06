@@ -8,22 +8,22 @@ KubeML is a PaaS that directly competes with AWS SageMaker for building, trainin
 
 <h4 align="center">KubeML Jupyterhub Notebook</h4>
 <p align="center">
-  <img src="./assets/KubeML-kernels.jpeg" width="675" title="Kernels">
+  <img src="./assets/KubeML-kernels.jpeg" width="650" title="Kernels">
 </p>
 
 <h4 align="center">AWS SageMaker Jupyterhub Notebook</h4>
 <p align="center">
-  <img src="./assets/SageMaker.png" width="675" title="Kernels">
+  <img src="./assets/SageMaker.png" width="650" title="Kernels">
 </p>
 
 <h4 align="center">KubeML Python3 Kernel</h4>
 <p align="center">
-  <img src="./assets/Kubeml-kernel.jpeg" width="675" title="Kernels">
+  <img src="./assets/Kubeml-kernel.jpeg" width="650" title="Kernels">
 </p>
 
 <h4 align="center">SageMaker Python3 kernel</h4>
 <p align="center">
-  <img src="./assets/sagemaker-kernel.png" width="675" title="Kernels">
+  <img src="./assets/sagemaker-kernel.png" width="650" title="Kernels">
 </p>
 
 <br/>
@@ -40,32 +40,34 @@ Pricing Example for m5.2xlarge:
 
 <h4 align="center">AWS ec2 onDemand Pricing</h4>
 <p align="center">
-  <img src="./assets/m4-ec2-onDemand.png" width="550" title="Kernels">
+  <img src="./assets/m4-ec2-onDemand.png" width="500" title="Kernels">
 </p>
 
 <p align="center">
-  <img src="./assets/m5-ec2-pricing-onDemand.png" width="550" title="Kernels">
+  <img src="./assets/m5-ec2-pricing-onDemand.png" width="500" title="Kernels">
 </p>
 
 <h4 align="center">AWS SageMaker Pricing</h4>
 <p align="center">
-  <img src="./assets/AWS-sagemaker-pricing.png" width="400" height="450" title="Kernels">
+  <img src="./assets/AWS-sagemaker-pricing.png" height="450" title="Kernels">
 </p>
 
 <br/>
 
 ## How it works
 
-KubeML leverages Kubernetes to efficiently distribute user notebook instances and user kernels across cloud infrastructure.
+AWS SageMaker forces each user to launch an individual ec2 instance for hosting the user's Jupyterhub Notebook instance and any kernels the user launches. KubeML handles the responsibility of sizing ec2 instances for your entire organization. KubeML leverages Kubernetes to deploy each user's Jupyterhub Notebook instance and their individual kernels across all worker nodes in the cluster.
 
 <p align="center">
-  <img src="./assets/diagram-one.jpg" width="850" title="Kernels">
+  <img src="./assets/diagram-one.jpg" width="750" title="Kernels">
 </p>
+
+<br/>
 
 ## Current Features
 
-KubeML is currently only offering 30 minute trials
+Visit Kube-ml.io and sign-up to access a free 30 minute trial of KubeML's Jupyter Notebooks deployment.
 
 <p align="center">
-  <img src="./assets/recording-1.gif" width="850" title="Kernels">
+  <img src="./assets/recording-1.gif" width="750" title="Kernels">
 </p>
