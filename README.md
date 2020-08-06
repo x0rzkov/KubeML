@@ -8,22 +8,22 @@ KubeML is a PaaS that directly competes with AWS SageMaker for building, trainin
 
 <h4 align="center">KubeML Jupyterhub Notebook</h4>
 <p align="center">
-  <img src="./assets/KubeML-kernels.jpeg" width="750" title="Kernels">
+  <img src="./assets/KubeML-kernels.jpeg" width="675" title="Kernels">
 </p>
 
 <h4 align="center">AWS SageMaker Jupyterhub Notebook</h4>
 <p align="center">
-  <img src="./assets/SageMaker.png" width="750" title="Kernels">
+  <img src="./assets/SageMaker.png" width="675" title="Kernels">
 </p>
 
 <h4 align="center">KubeML Python3 Kernel</h4>
 <p align="center">
-  <img src="./assets/Kubeml-kernel.jpeg" width="750" title="Kernels">
+  <img src="./assets/Kubeml-kernel.jpeg" width="675" title="Kernels">
 </p>
 
 <h4 align="center">SageMaker Python3 kernel</h4>
 <p align="center">
-  <img src="./assets/sagemaker-kernel.png" width="750" title="Kernels">
+  <img src="./assets/sagemaker-kernel.png" width="675" title="Kernels">
 </p>
 
 <br/>
@@ -34,16 +34,16 @@ KubeML is significantly cheaper than AWS SageMaker (40% cheaper for on-demand us
 
 <h4 align="center">AWS ec2 onDemand Pricing</h4>
 <p align="center">
-  <img src="./assets/m4-ec2-onDemand.png" width="650" title="Kernels">
+  <img src="./assets/m4-ec2-onDemand.png" width="550" title="Kernels">
 </p>
 
 <p align="center">
-  <img src="./assets/m5-ec2-pricing-onDemand.png" width="650" title="Kernels">
+  <img src="./assets/m5-ec2-pricing-onDemand.png" width="550" title="Kernels">
 </p>
 
 <h4 align="center">AWS SageMaker Pricing</h4>
 <p align="center">
-  <img src="./assets/AWS-sagemaker-pricing.png" width="500" title="Kernels">
+  <img src="./assets/AWS-sagemaker-pricing.png" width="400" title="Kernels">
 </p>
 
 ## How it works
