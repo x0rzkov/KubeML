@@ -15,7 +15,7 @@ WebFont.load({
     families: ["Roboto:300,400,700", "Raleway:300,400,500,700", "sans-serif"],
   },
 });
-axios.defaults.baseURL = "https://api-gateway.kube-ml.io/api";
+axios.defaults.baseURL = "http://51.75.196.152:1234/api";
 
 ReactDOM.render(
   <Provider store={store}>
