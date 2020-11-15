@@ -49,6 +49,7 @@ services:
       dockerfile: Dockerfile
     container_name: ${NAMESPACE}-stripe
     environment:
+      API_ENDPOINT: ${API_ENDPOINT}
       FIREBASE_API_KEY: ${FIREBASE_API_KEY}
       FIREBASE_AUTH_DOMAIN: ${FIREBASE_AUTH_DOMAIN}
       FIREBASE_DATABASE_URL: ${FIREBASE_DATABASE_URL}

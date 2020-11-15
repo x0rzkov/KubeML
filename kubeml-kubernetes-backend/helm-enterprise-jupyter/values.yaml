@@ -285,7 +285,8 @@ ingress2:
   pathSuffix: ""
   tls:
     - hosts:
-        - "*.kube-ml.io"
+      - "*.naxly.io"
+      - "*.seoz.io"
 
 cull:
   enabled: true

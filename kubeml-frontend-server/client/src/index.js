@@ -15,7 +15,7 @@ WebFont.load({
     families: ["Roboto:300,400,700", "Raleway:300,400,500,700", "sans-serif"],
   },
 });
-axios.defaults.baseURL = "http://51.75.196.152:1234/api";
+axios.defaults.baseURL =  process.env.API_ENDPOINT || "http://localhost/api"; // || 6060;"http://51.75.196.152:1234/api";
 
 ReactDOM.render(
   <Provider store={store}>

@@ -12,6 +12,8 @@ const exec = util.promisify(require("child_process").exec);
 
 const helmChartURL = path.join(__dirname, "/../helm-enterprise-jupyter");
 
+const domain = process.env.DOMAIN
+
 // ---------------------> FIREBASE <----------------------------------------
 const firebase = require("firebase");
 const config = {
@@ -58,8 +60,7 @@ router.post(
       await k8sApi.createNamespace(k8sNamespace);
       await exec(
         // `helm install "${helmChartURL}" --namespace="${k8sNamespace.metadata.name}" --generate-name`
-
-        `helm install "${helmChartURL}" --generate-name  --set proxy.secretToken="$(openssl rand -hex 32)",ingress2.hosts={demo-${k8sNamespace.metadata.name}.kube-ml.io} --namespace="${k8sNamespace.metadata.name}"`
+        `helm install "${helmChartURL}" --generate-name  --set proxy.secretToken="$(openssl rand -hex 32)",ingress2.hosts={demo-${k8sNamespace.metadata.name}.naxly.io} --namespace="${k8sNamespace.metadata.name}"`
       );
       let count = 0;
       const urlInterval = setInterval(async () => {
