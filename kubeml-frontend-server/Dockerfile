@@ -6,10 +6,14 @@ COPY . .
 
 RUN npm install
 
+RUN cd client && \
+ 	npm install && \
+    npm run-script build
+
 EXPOSE 6060
 
 USER node
 
-ENTRYPOINT ["node"]
 
+ENTRYPOINT ["node"]
 CMD ["index.js"]
