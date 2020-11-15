@@ -1,0 +1,17 @@
+---
+version: "3.8"
+services:
+
+  kube-ml:
+    image: lucmichalski/kube-ml:alpine-latest
+    container_name: ${NAMESPACE}-core
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+    - .:/opt/seoz-naxly
+    environment:
+    - STRIPE_SECRET_KEY=""
+    - NODE_ENV="production"
+    ports:
+    - 5000:5000
