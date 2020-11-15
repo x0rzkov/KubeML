@@ -8,6 +8,11 @@ RUN yarn install
 
 COPY . .
 
-RUN yarn build
+RUN cd client && \
+    npx browserslist --update-db && \
+    yarn install
 
-CMD ["npm", "run-scripts", "dev"]
+RUN npx browserslist --update-db && \
+    yarn build
+
+CMD ["npm", "run-script", "dev"]
