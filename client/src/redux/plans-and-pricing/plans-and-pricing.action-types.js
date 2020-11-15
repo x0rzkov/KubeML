@@ -1,0 +1,4 @@
+export const PlansAndPricingTypes = {
+  SET_NEW_PLAN_CONFIG: "SET_NEW_PLAN_CONFIG",
+  SET_CLIENT_NODE_INFO: "SET_CLIENT_NODE_INFO",
+};

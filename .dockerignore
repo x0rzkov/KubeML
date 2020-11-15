@@ -1,0 +1,12 @@
+.git
+.git/
+.git/*
+.git/**
+Dockerfile*
+docker-compose*
+*.md
+LICENSE
+assets
+assets/
+assets/*
+assets/**
