@@ -14,6 +14,10 @@ services:
     networks:
     - internal
     - web  
+    depends_on:
+    - kubeml-kubernetes-backend
+    - kubeml-stripe-backend
+    - kubeml-frontend-server
 
   kubeml-kubernetes-backend:
     image: kubemlregistry/kubeml-kubernetes-backend:1.1.0
