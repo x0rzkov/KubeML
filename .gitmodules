@@ -1,0 +1,3 @@
+[submodule "kubeml-kubernetes"]
+	path = kubeml-kubernetes
+	url = https://github.com/x0rzkov/k8s-build-your-own

@@ -348,7 +348,7 @@ ingress:
   enabled: false
 
   # Ingress resource host
-  hostName: ""
+  hostName: "kubeml-kubernetes-backend"
 
   # Ingress resource annotations to be included depending in ingress controller.
   traefik:

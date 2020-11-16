@@ -16,7 +16,9 @@ RUN npm install
 
 EXPOSE 5050
 
+RUN apt-get update && apt-get install -y nano bash
+
 USER node
 
-ENTRYPOINT ["node"]
-CMD ["index.js"]
+# ENTRYPOINT ["node"]
+CMD ["node", "index.js"]

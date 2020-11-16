@@ -32,6 +32,7 @@ services:
     ports:
     - 5050:5050
     environment:      
+      DOMAIN: ${DOMAIN}
       FIREBASE_API_KEY: ${FIREBASE_API_KEY}
       FIREBASE_AUTH_DOMAIN: ${FIREBASE_AUTH_DOMAIN}
       FIREBASE_DATABASE_URL: ${FIREBASE_DATABASE_URL}
