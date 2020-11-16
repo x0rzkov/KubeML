@@ -25,10 +25,13 @@ services:
     build: 
       context: ./kubeml-kubernetes-backend
       dockerfile: Dockerfile
+      args:
+      - KUBERNETES_VERSION=1.18.0
+      - HELM_VERSION=3
     container_name: ${NAMESPACE}-kubernetes
     ports:
     - 5050:5050
-    environment:
+    environment:      
       FIREBASE_API_KEY: ${FIREBASE_API_KEY}
       FIREBASE_AUTH_DOMAIN: ${FIREBASE_AUTH_DOMAIN}
       FIREBASE_DATABASE_URL: ${FIREBASE_DATABASE_URL}
