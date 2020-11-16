@@ -20,19 +20,7 @@ services:
     - kubeml-stripe-backend
     - kubeml-frontend-server
 
-  kubeml-kubernetes:
-    image: lucmichalski/kubeml-kubernetes-backend:1.1.0
-    build: 
-      context: ./kubeml-kubernetes
-      dockerfile: dockerfile
-    container_name: ${NAMESPACE}-kubernetes
-    # ports:
-    # - 5050:5050
-    networks:
-    - internal
-    restart: unless-stopped
-    hostname: kubeml-kubernetes
-
+  # docker exec -it  kubernetes-master bash
   kubernetes-master:
     image: lucmichalski/kubeml-kubernetes-master:latest
     container_name: kubernetes-master
