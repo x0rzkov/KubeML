@@ -5,6 +5,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 // ---------------------> FIREBASE <----------------------------------------
 const firebase = require("firebase");
+
 const config = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
@@ -15,6 +16,8 @@ const config = {
   appId: process.env.FIREBASE_APP_ID,
   measurementId: process.env.FIREBASE_MEASUREMENT_ID,
 };
+
+console.log('firebase.config', config)
 
 firebase.initializeApp(config);
 const firestore = firebase.firestore();

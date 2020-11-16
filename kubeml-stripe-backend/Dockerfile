@@ -11,5 +11,4 @@ EXPOSE 8080
 USER node
 
 ENTRYPOINT ["node"]
-
 CMD ["index.js"]
