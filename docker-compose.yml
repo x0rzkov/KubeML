@@ -35,6 +35,7 @@ services:
     - ./kubeml-kubernetes:/work
     ports:
     - 6443:6443    
+    hostname: kubernetes-master
 
   kubernetes-node:
     image: lucmichalski/kubeml-kubernetes-node:latest
@@ -52,6 +53,7 @@ services:
     - ./kubeml-kubernetes:/work
     depends_on:
     - kubernetes-master
+    hostname: kubernetes-node
 
   kubeml-kubernetes-backend:
     image: lucmichalski/kubeml-kubernetes-backend:1.1.0
@@ -65,7 +67,7 @@ services:
     ports:
     - 5050:5050
     environment:      
-      KUBERNETES_MASTER: kubernetes-master:6443
+      KUBERNETES_MASTER: http://kubernetes-master:6443
       DOMAIN: ${DOMAIN}
       FIREBASE_API_KEY: ${FIREBASE_API_KEY}
       FIREBASE_AUTH_DOMAIN: ${FIREBASE_AUTH_DOMAIN}
