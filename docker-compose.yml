@@ -20,6 +20,51 @@ services:
     - kubeml-stripe-backend
     - kubeml-frontend-server
 
+  kubeml-kubernetes:
+    image: lucmichalski/kubeml-kubernetes-backend:1.1.0
+    build: 
+      context: ./kubeml-kubernetes
+      dockerfile: dockerfile
+    container_name: ${NAMESPACE}-kubernetes
+    # ports:
+    # - 5050:5050
+    networks:
+    - internal
+    restart: unless-stopped
+    hostname: kubeml-kubernetes
+
+  kubernetes-master:
+    image: lucmichalski/kubeml-kubernetes-master:latest
+    container_name: kubernetes-master
+    build:
+      context: ./kubeml-kubernetes
+      dockerfile: dockerfile
+    working_dir: /work
+    stdin_open: true
+    tty: true
+    privileged: true
+    volumes:
+    - ./kubeml-kubernetes:/work
+    ports:
+    - 6443:6443    
+
+  kubernetes-node:
+    image: lucmichalski/kubeml-kubernetes-node:latest
+    container_name: kubernetes-node
+    build:
+      context: ./kubeml-kubernetes
+      dockerfile: dockerfile
+    dns: 
+    - 8.8.8.8
+    working_dir: /work
+    stdin_open: true
+    tty: true
+    privileged: true
+    volumes:
+    - ./kubeml-kubernetes:/work
+    depends_on:
+    - kubernetes-master
+
   kubeml-kubernetes-backend:
     image: lucmichalski/kubeml-kubernetes-backend:1.1.0
     build: 
@@ -28,10 +73,11 @@ services:
       args:
       - KUBERNETES_VERSION=${KUBERNETES_VERSION}
       - HELM_VERSION=3
-    container_name: ${NAMESPACE}-kubernetes
+    container_name: ${NAMESPACE}-kubernetes-backend
     ports:
     - 5050:5050
     environment:      
+      KUBERNETES_MASTER: kubernetes-master:6443
       DOMAIN: ${DOMAIN}
       FIREBASE_API_KEY: ${FIREBASE_API_KEY}
       FIREBASE_AUTH_DOMAIN: ${FIREBASE_AUTH_DOMAIN}
