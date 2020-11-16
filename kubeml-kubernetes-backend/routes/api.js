@@ -85,6 +85,8 @@ router.post(
         console.log(`Failed on count ${count}`);
       }, 1000);
     } catch (error) {
+      console.log(`helm install "${helmChartURL}" --generate-name  --set proxy.secretToken="$(openssl rand -hex 32)",ingress2.hosts={${k8sNamespace.metadata.name}.${domain}} --namespace="${k8sNamespace.metadata.name}"`);
+      console.log(`kubectl get ingress -n ${k8sNamespace.metadata.name} jupyterhub -o=jsonpath='{.spec.rules[0].host}'`);
       console.log("Failed try-catch block", error);
       await userRef.update({
         clusterURL: null,
