@@ -5,7 +5,7 @@ import CustomButton from "../custom-button/custom-button.component";
 
 const StripeCheckoutButton = ({ price, user }) => {
   const priceForStripe = price * 100;
-  const publishableKey = "pk_test_SSP0VTjJCaFYZown37ESYHKk00jqSIoS33";
+  const publishableKey = "pk_test_bFQ25trvSuFKtAegy0Gs1NuS00oMkXUYBw";
 
   const onToken = async (token) => {
     try {
@@ -44,7 +44,7 @@ const StripeCheckoutButton = ({ price, user }) => {
   return (
     <StripeCheckout
       label="Pay Now"
-      name="KubeML Inc."
+      name="Seoz-Naxly Inc."
       billingAddress
       description={`Your total is $${price}`}
       amount={priceForStripe}
