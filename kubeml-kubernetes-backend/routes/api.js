@@ -5,6 +5,7 @@ const util = require("util");
 const path = require("path");
 const validator = require("validator");
 const k8s = require("@kubernetes/client-node");
+
 const kc = new k8s.KubeConfig();
 kc.loadFromDefault();
 const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
@@ -29,6 +30,25 @@ const config = {
 
 firebase.initializeApp(config);
 const firestore = firebase.firestore();
+
+// Create your first application tokens here: https://api.ovh.com/createToken/?GET=/me
+var ovh = require('ovh')({
+  // endpoint: 'ovh-eu',
+  appKey: process.env.OVH_APP_KEY,
+  appSecret: process.env.OVH_APP_SECRET,
+  consumerKey: process.env.OVH_CONSUMER_KEY
+});
+
+// ----------------------> OVH-ME ROUTE <----------------------------------
+router.get("/ovh/status", (req, res) => {
+  ovh.request('GET', '/me', function (err, me) {
+    console.log(err || 'Welcome ' + me.firstname);
+    res.status(200).json({
+      me: me,
+      error: err,
+    });
+  });
+});
 
 // ----------------------> HEALTH ROUTE <----------------------------------
 router.get("/jupyterhub/health", (req, res) => {
@@ -56,6 +76,35 @@ router.post(
       success: true,
       status: `${k8sNamespace.metadata.name} initialization started`,
     });
+
+    // Create a DNS record for this userID
+    // var: ${k8sNamespace.metadata.name}.${domain}
+    // if (params[2] === 'CNAME' && !params[3].toString().match(/\.$/)) {
+    //   console.error('Wrong CNAME value, must end with .', params[2]);
+    //   process.exit(1);
+    // }
+    var params = []
+    params[0] = "naxly.io"
+    params[1] = k8sNamespace.metadata.name
+    params[2] = "CNAME"
+    params[3] = "naxly.io."
+
+    ovh.request('GET', '/domain/zone/' + params[0] + '/record?subDomain=' + params[1], function (err, r) {
+        console.log(err || 'Result:' + r);
+        if (r.length === 1) {
+          console.error('Record already exists in zone', params[0], params[1]);
+        } else {
+          ovh.request('POST', '/domain/zone/' + params[0] + '/record', {
+            fieldType: params[2],
+            target: params[3],
+            subDomain: params[1],
+          }, function(err, r) {
+            console.log(err || 'Result:' + r + 'OK, created record', params[1], params[2], params[3]);
+            console.log(r)
+          });
+        }
+    });    
+
     try {
       await k8sApi.createNamespace(k8sNamespace);
       await exec(

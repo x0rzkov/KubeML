@@ -1,3 +1,6 @@
 [submodule "kubeml-kubernetes"]
 	path = kubeml-kubernetes
 	url = https://github.com/x0rzkov/k8s-build-your-own
+[submodule "kubernetes-sandbox"]
+	path = kubernetes-sandbox
+	url = https://github.com/x0rzkov/kubernetes-sandbox

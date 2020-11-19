@@ -15,6 +15,8 @@ services:
     networks:
     - internal
     - web  
+    volumes:
+    - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
     depends_on:
     - kubeml-kubernetes-backend
     - kubeml-stripe-backend
@@ -22,28 +24,37 @@ services:
 
   # docker exec -it  kubernetes-master bash
   kubernetes-master:
-    image: lucmichalski/kubeml-kubernetes-master:latest
+    image: lucmichalski/kubeml-kubernetes-master:latest-ubuntu
     container_name: kubernetes-master
     build:
       context: ./kubeml-kubernetes
       dockerfile: dockerfile
+    # dns:
+    # - 8.8.8.8
     working_dir: /work
     stdin_open: true
     tty: true
     privileged: true
     volumes:
     - ./kubeml-kubernetes:/work
-    ports:
-    - 6443:6443    
+    #- /var/run/docker.sock:/run/docker.sock
+    #ports:
+    #- 6443:6443    
+    links:
+    - kubernetes-node:kubernetes-node
+    networks:
+    - internal
     hostname: kubernetes-master
+    # entrypoint: /bin/bash
+    # entrypoint: ["/usr/local/bin/entrypoint", "/sbin/init"]
 
   kubernetes-node:
-    image: lucmichalski/kubeml-kubernetes-node:latest
+    image: lucmichalski/kubeml-kubernetes-node:latest-ubuntu
     container_name: kubernetes-node
     build:
       context: ./kubeml-kubernetes
       dockerfile: dockerfile
-    dns: 
+    dns:
     - 8.8.8.8
     working_dir: /work
     stdin_open: true
@@ -51,8 +62,11 @@ services:
     privileged: true
     volumes:
     - ./kubeml-kubernetes:/work
-    depends_on:
-    - kubernetes-master
+    #- /var/run/docker.sock:/run/docker.sock
+    # depends_on:
+    # - kubernetes-master
+    networks:
+    - internal
     hostname: kubernetes-node
 
   kubeml-kubernetes-backend:
@@ -77,10 +91,18 @@ services:
       FIREBASE_MESSAGING_SENDER_ID: ${FIREBASE_MESSAGING_SENDER_ID}
       FIREBASE_APP_ID: ${FIREBASE_APP_ID}
       FIREBASE_MEASUREMENT_ID: ${FIREBASE_MEASUREMENT_ID}
+      OVH_APP_KEY: ${OVH_APP_KEY}
+      OVH_APP_SECRET: ${OVH_APP_SECRET}
+      OVH_CONSUMER_KEY: ${OVH_CONSUMER_KEY}
+    volumes:
+    - ./kubeml-kubernetes-backend/routes:/usr/src/app/routes
     networks:
     - internal
     restart: unless-stopped
     hostname: kubeml-kubernetes-backend
+    depends_on:
+    - kubernetes-master
+    - kubernetes-node
 
   kubeml-stripe-backend:
     image: lucmichalski/kubeml-stripe-backend:1.1.0

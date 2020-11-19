@@ -3,6 +3,8 @@ FROM node:12.18.1-stretch
 ARG KUBERNETES_VERSION
 ARG HELM_VERSION
 
+RUN apt-get update && apt-get install -y nano bash
+
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v${KUBERNETES_VERSION}/bin/linux/amd64/kubectl && \
     chmod +x ./kubectl && \
     mv ./kubectl /usr/local/bin/kubectl && \
@@ -10,14 +12,12 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v${KUBERN
     
 WORKDIR /usr/src/app
 
-COPY . .
-
+COPY package.json .
 RUN npm install
 
+COPY . .
+
 EXPOSE 5050
-
-RUN apt-get update && apt-get install -y nano bash
-
 USER node
 
 # ENTRYPOINT ["node"]
